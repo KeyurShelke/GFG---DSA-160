@@ -1,0 +1,51 @@
+Table of Content
+
+[Naive Approach] - Using Sorting
+[Better Approach] - Two Pass Search
+[Expected Approach] - One Pass Search
+
+
+1)[Naive Approach] -  Using Sorting
+
+The idea is to sort the array in non-decreasing order. Now, we know that the largest element will
+be at index n - 1. So, starting from index (n - 2), traverse the remaining array in reverse order. 
+As soon as we encounter an element which is not equal to the largest element, return it as the 
+second largest element in the array. If all the elements are equal to the largest element, return -1.
+
+Time Complexity: O(n*log(n)),
+
+as sorting the array takes O(n*log(n)) time and traversing the array
+can take O(n) time in the worst case, 
+
+so total time complexity = (n*log(n) + n) = O(n*log(n)).
+Auxiliary space: O(1), as no extra space is required.
+
+---
+
+2] [Better Approach] - Two Pass Search
+
+The approach is to traverse the array twice. In the first traversal,
+ find the maximum element. In the second traversal, find the maximum 
+ element ignoring the one we found in the first traversal.
+
+Time Complexity: O(2*n) = O(n), as we are traversing the array two
+times.
+Auxiliary space: O(1), as no extra space is required.
+
+---
+
+3] - [Expected Approach] - One Pass Search
+
+The idea is to keep track of the largest and second largest element 
+while traversing the array. Initialize largest and secondLargest with
+ -1. Now, for any index i,
+
+If arr[i] > largest, update secondLargest with largest and largest with
+ arr[i].
+Else If arr[i] < largest and arr[i] > secondLargest, update 
+secondLargest with arr[i].
+
+Time Complexity: O(n), as we are traversing the array only once.
+Auxiliary space: O(1)
+
+---
