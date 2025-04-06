@@ -1,0 +1,52 @@
+Table of Content
+
+[Naive Approach] Using Temporary Array - O(n) Time and O(n) Space
+[Better Approach] Two Traversals
+[Expected Approach] One Traversal
+[Another Approach] Using Library Methods
+
+---
+
+1) [Naive Approach] Using Temporary Array - O(n) Time and O(n) Space
+
+The idea is to create a temporary array of same size as the input array arr[].
+
+First, copy all non-zero elements from arr[] to the temporary array.
+Then, fill all the remaining positions in temporary array with 0.
+Finally, copy all the elements from temporary array to arr[].
+
+-
+
+2) [Better Approach] Two Traversals
+The idea is to move all the zeros by traversing the array twice.
+
+First Traversal: Shift non-zero elements
+
+Traverse the array and maintain the count of non-zero elements. This count is initialized with 0 
+and keeps track of where the next non-zero element should be placed in the array.
+If the element is non-zero, place it at arr[count] and increment count by 1.
+After traversing all the elements, all non-zero elements will be shifted to the front while
+ maintaining their original order.
+Second Traversal: Fill remaining positions with zeros
+
+After the first traversal, all non-zero elements will be at the start of the array and count will
+ store the index where the first zero should be placed.
+Iterate from count to the end of array and fill all indices with 0.
+
+Time Complexity: O(n), as we are traversing the array only twice.
+Auxiliary Space: O(1)
+
+
+
+-
+
+3) [Expected Approach] One Traversal
+
+The idea is similar to the previous approach where we took a pointer, say count to track where 
+the next non-zero element should be placed. However, on encountering a non-zero element, instead 
+of directly placing the non-zero element at arr[count], we will swap the non-zero element with 
+arr[count]. This will ensure that if there is any zero present at arr[count], it is pushed towards
+ the end of array and is not overwritten.
+
+ Time Complexity: O(n), as we are traversing the array only once.
+Auxiliary Space: O(1)
