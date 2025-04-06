@@ -1,0 +1,82 @@
+Table of Content
+
+[Naive Approach] Generating All - O(n!*n*log(n!)) Time and Space
+[Expected Approach] Generating Only Next - O(n) Time and O(1) Space
+Using C++ in-built function
+
+--
+
+1) [Naive Approach] Generating All Permutations - 
+O(n!*n*log(n!)) 
+Time and O(n!) Space
+
+The very basic idea that comes to our mind is that we would first 
+generate all possible permutations of a given array and sort them. 
+Once sorted, we locate the current permutation within this list. 
+The next permutation is simply the next arrangement in the sorted 
+order. If the current arrangement is the last in the list then display
+ the first permutation (smallest permutation).
+
+Note: This approach will work only when there are no duplicated in 
+the input array. Please refer the expected approach to handle duplicates.
+
+Time Complexity: O(n!*n*log(n!)), n represents the number of elements 
+present in the input sequence represent all possible permutation.
+Auxiliary Space: O(n!), for storing the permutations
+
+--
+
+2) [Expected Approach] Generating Only Next - 
+O(n) Time and O(1) Space
+
+Let's try some examples to see if we can recognize some patterns. 
+
+[1, 2, 3, 4, 5]: next is [1, 2, 3, 5, 4]
+Observation: 4 moves and 5 comes in place of it
+
+[1, 2, 3, 5, 4]: next is [1, 2, 4, 3, 5]
+Observation: 3 moves, 4 comes in place of it. 3 comes before 5 
+(mainly 3 and 5 are in sorted order)
+
+[1, 2, 3, 6, 5, 4]: next is [1, 2, 4, 3, 5, 6]
+Observation: 3 moves, 4 comes in place of it. [3, 5 and 6 are placed 
+in sorted order]
+
+[3, 2, 1]: next is [1, 2, 3]
+Observation: All elements are reverse sorted. Result is whole array 
+sorted.
+
+[1, 2, 3, 6, 4, 5]: next is [1, 2, 3, 6, 5, 4]
+Observation: 4 moves and 5 comes in place of it
+
+Observations of Next permutation: 
+
+To get the next permutation we change the number in a position which 
+is as right as possible.
+The first number to be moved is the rightmost number smaller than its 
+next.
+The number to come in-place is the rightmost greater number on right 
+side of the pivot.
+Each permutation (except the very first) has an increasing suffix. 
+Now if we change the pattern from the pivot point (where the increasing 
+suffix breaks) to its next possible lexicographic representation we 
+will get the next greater permutation.
+
+Follow the steps below to implement the above observation:
+
+Iterate over the given array from end and find the first index (pivot) 
+which doesn't follow property of non-increasing suffix, 
+(i.e,  arr[i] < arr[i + 1]).
+If pivot index does not exist, then the given sequence in the array is 
+the largest as possible. So, reverse the complete array. For example, 
+for [3, 2, 1], the output would be [1, 2, 3]
+Otherwise, Iterate the array from the end and find for the successor 
+(rightmost greater element) of pivot in suffix.
+Swap the pivot and successor
+Minimize the suffix part by reversing the array from pivot + 1 till n.
+
+Time Complexity: O(n), where n is the size of the given array.
+Auxiliary Space: O(1), The algorithm performs in-place operations
+ (modifying the array directly) without using extra space proportional
+  to the input size.
+
