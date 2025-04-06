@@ -1,0 +1,28 @@
+Maximum Circular Subarray Sum
+
+Given a circular array arr[] of size n, find the maximum possible sum of a 
+non-empty subarray.
+
+Examples: 
+
+Input: arr[] = {8, -8, 9, -9, 10, -11, 12}
+Output: 22
+Explanation: Circular Subarray {12, 8, -8, 9, -9, 10} has the maximum sum, 
+which is 22.
+
+Input: arr[] = {10, -3, -4, 7, 6, 5, -4, -1}
+Output: 23 
+Explanation: Circular Subarray {7, 6, 5, -4, -1, 10} has the maximum sum, 
+which is 23.
+
+Input: arr[] = {-1, 40, -14, 7, 6, 5, -4, -1}
+Output: 52
+Explanation: Circular Subarray {7, 6, 5, -4, -1, -1, 40} has the maximum sum, 
+which is 52.
+
+Table of Content
+
+[Naive Approach] Considering all possible subarrays – O(n^2) Time and O(1) 
+Space
+[Better Approach] Using Prefix and Suffix Sum – O(n) Time and O(n) Space
+[Expected Approach] Using Kadane's Algorithm – O(n) Time and O(1) Space

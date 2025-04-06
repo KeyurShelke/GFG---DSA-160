@@ -1,0 +1,43 @@
+Table of Content
+
+[Naive Approach] Considering all possible subarrays – 
+O(n^2) Time and O(1) Space
+[Better Approach] Using Prefix and Suffix Sum – O(n) Time and O(n) Space
+[Expected Approach] Using Kadane's Algorithm – O(n) Time and O(1) Space
+
+
+1) [Naive Approach] Considering all possible subarrays –
+ O(n^2) Time and O(1) Space
+
+A simple approach is to consider every element as the beginning of the 
+subarray, and calculate the maximum possible sum, which includes both 
+circular and linear subarrays starting from that element.
+
+2)[Better Approach] Using Prefix and Suffix Sum – O(n) Time and O(n) Space
+In a circular array, the maximum subarray sum can be either the maximum 
+normal sum, which is the highest sum of a non-circular array, or the maximum
+ circular sum, which includes elements from both the start and the end of 
+ the array. The normal sum can be efficiently calculated using Kadane's 
+ algorithm. And, the circular sum is calculated by combining prefix sum and 
+ suffix sum.
+
+First, we will compute the maxSuffix array, where maxSuffix[i] stores the 
+maximum suffix sum starting from any index >= i.
+Then, as we iterate through the input array, we combine the prefix sum up to 
+index i with the maxSuffix value at index i + 1 (to avoid double-counting the 
+ith element) to calculate circular sum and take the maximum for all values of 
+i.
+
+3)[Expected Approach] Using Kadane's Algorithm – 
+O(n) Time and O(1) Space
+This approach is similar to the previous one, but the key difference is that 
+we're using Kadane's algorithm to find the circular subarray sum as well. 
+The maximum sum of a circular subarray can be defined as the total sum of the 
+array minus the sum of a subarray in the middle. So, to maximize the circular 
+subarray sum, we need to minimize the subarray sum.
+
+Maximum Circular Subarray Sum = Total Sum - Minimum Subarray Sum.
+If the minimum subarray sum equals the total sum of the array, we return 
+the normal maximum subarray sum, because if all elements are negative, the 
+circular sum would be zero, but the answer will be negative only
+
