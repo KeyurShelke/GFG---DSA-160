@@ -1,0 +1,58 @@
+Table of Content
+
+[Naive Approach] Using Recursion - Exponential Time
+[Better Approach] Local Minima and Maxima - O(n) Time and O(1) Space
+[Expected Approach] Accumulate Profit - O(n) Time and O(1) Space
+
+--
+
+1) [Naive Approach] Using Recursion - Exponential Time
+We consider every valid pair (A pair of indexes i and j such that 
+price[i] < price[j] and j > i), we get the profit of the pair as 
+(price[j] - price[i]) and add recursively compute profits for i-1 
+and j+1. Finally we return the maximum of all profits obtained by 
+all valid pairs.
+
+2) [Better Approach] Local Minima and Maxima - O(n) Time and O(1) Space
+When the prices are going down, we do not do anything and let the 
+prices go down. When the prices reach a local minimum value 
+(a value after which the prices go up), we buy the stock. When the 
+prices are going up, we let the prices go up and once the prices 
+reach a local maxima, we sell the stock.
+
+The idea is to traverse the array from left to right and do following.
+
+Find local minima and then a local maxima.
+Compute the difference between two and add to the result.
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
+
+-- 
+
+3) [Expected Approach] Accumulate Profit - O(n) Time and O(1) Space
+This is mainly an optimization over the previous solution. Instead of 
+selling at local maxima, we keep selling while the prices are going up. 
+This way we accumulate the same profit and avoid some condition checks 
+required for computing local minima and maxima.
+
+Traverse price[] from i = 1 to price.size() - 1
+
+res = 0
+if price[i] > price[i - 1]
+res = res + price[i] - price[i - 1]
+
+Time Complexity: O(n)
+Auxiliary Space: O(1)
+
+--
+
+Related Problems
+Stock Buy and Sell - k Transactions Allowed
+Stock Buy and Sell - 2 Transactions Allowed
+Stock Buy and Sell - 1 Transaction Allowed
+Stock Buy and Sell - With Transaction Fee
+Please refer Stock Buy and Sell Complete Tutorial for complete list
+
+
+
