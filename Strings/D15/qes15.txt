@@ -1,0 +1,11 @@
+Add two binary strings
+
+Given two binary strings s1 and s2, the task is to return their sum.The input strings may contain leading zeros but the output string should not have any leading zeros.
+
+Example: 
+
+Input: s1 = "1101", s2 = "111"
+Output: "10100"
+Explanation:
+Input: s1 = "00100", s2 = "010"
+Output: "110"

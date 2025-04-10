@@ -1,0 +1,18 @@
+Bit-by-bit addition with carry - O(n + m) Time and O(1) Space
+
+The idea is to first trim the leading zeros in the input strings. Now, start from the last 
+characters of the strings and compute the digit sum one by one. If the sum becomes more than 
+1, then store carry for the next digits. Also consider this carry while calculating the digit 
+sum. After calculating the sum, if an additional carry is generated, prepend a '1' of the 
+result.
+
+Output
+10100
+Time Complexity: O(n + m), for traversing the strings.
+Auxiliary Space: O(n), for result array as strings are immutable in most of language and 
+O(1) in C++ where strings are mutable.
+
+Related Articles:
+
+Add two numbers without using arithmetic operators
+Subtract two numbers without using arithmetic operators
