@@ -1,0 +1,30 @@
+[Naive Approach] Checking all prefixes - O(n^2) Time and O(1) Space
+The idea is based on the observation that we need to find the longest prefix from given 
+string which is also a palindrome. Then minimum front characters to be added to make given 
+string palindrome will be the remaining characters.
+
+Start by checking if the entire string is a palindrome. If it is, then we don’t need to add any 
+letters. If the entire string isn’t a palindrome, we then check the next longest prefix, which 
+is the string without its last letter. We keep checking shorter prefixes until we find the 
+longest one that is a palindrome. As soon as we find a prefix which is also a palindrome, 
+we return the number of remaining characters as the minimum number of characters to be added 
+to the front to make the string palindrome.
+
+[Expected Approach] Using lps array of KMP Algorithm - O(n) Time and O(n) Space
+The observation is that the longest palindromic prefix becomes longest palindromic suffix of its reverse.
+
+For string = aacecaaaa
+Reverse string = aaaacecaa
+longest palindromic prefix = aacecaa
+
+Now to find this prefix the idea is to use lps array of KMP algorithm, as each index of lps 
+array represents the longest proper prefix which is also a suffix. First we concatenate the 
+given string s with a special character '$' and with the reverse of given string s', then we 
+will get lps array for this concatenated string( s + '$' + s').
+
+We only need the last value of this lps[] array because it gives us the longest suffix of the 
+reversed string that matches the prefix of the original string i.e., these many characters 
+already satisfy the palindrome property. Finally minimum number of characters needed to make 
+the string a palindrome is the length of the input string minus the last entry of our lps array. 
+
+How does the last value of lps[] array gives us the length of longest palindromic prefix?
