@@ -1,0 +1,12 @@
+Given two strings txt and pat, the task is to return all indices of occurrences of pat within txt.
+
+Examples:
+
+Input: txt = "abcab", pat = "ab"
+Output: [0, 3]
+Explanation: The string "ab" occurs twice in txt, first occurrence starts from index 0 and 
+second from index 3.
+
+Input: txt=  "aabaacaadaabaaba", pat =  "aaba"
+Output: [0, 9, 12]
+Explanation:
