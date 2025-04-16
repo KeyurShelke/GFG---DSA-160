@@ -1,0 +1,14 @@
+1) [Naive Approach] Generating all rotations - O(n^2) Time and O(1) Space
+The idea is to generate all possible rotations of the first string and check if any of these 
+rotations match the second string. If any rotation matches, the two strings are rotations of 
+each other, otherwise they are not.
+
+2) [Expected Approach] Using KMP Algorithm - O(n) Time and O(n) Space
+The idea is that when a string is concatenated with itself, all possible rotations of the 
+string will naturally appear as substrings within this concatenated string. To determine if 
+another string is a rotation of the first, we can use KMP Algorithm to check if the second 
+string exists as a substring in the concatenated form of the first string.
+
+3) [Alternate Approach] Using Built-in Method
+This approach is similar to the previous approach, but here we are using built-in methods to 
+find a pattern string inside other string.
