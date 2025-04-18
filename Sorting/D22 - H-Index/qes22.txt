@@ -1,0 +1,25 @@
+H-Index
+
+Given an array citations[] of size n such that citations[i] is the number of citations a researcher received for ith 
+paper, the task is to find the H-index. H-index(H) is the largest value such that the researcher has published at least 
+H papers that have been cited at least H times.
+
+'H' stands for Hirsch index as it was proposed by the J.E. Hirsch in 2005. The H-index is defined as the author-level 
+metric that attempts to measure both the productivity and the citation impact of the publication of the scientist or 
+the scholar.
+
+Examples:
+
+Input: citations[] = [5, 0, 2, 0, 2]
+Output: 2
+Explanation: There are at least 2 papers (5, 2, 2) with at least 2 citations.
+
+Input: citations[] = [6, 0, 3, 5, 3]
+Output: 3
+Explanation: There are at least 3 papers (6, 5, 3, 3) with at
+least 3 citations.
+
+Table of Content
+
+[Naive Approach] Using Comparison-based Sorting - O(n*logn) Time and O(1) Space
+[Expected Approach] Using Counting Sort - O(n) Time and O(n) Space

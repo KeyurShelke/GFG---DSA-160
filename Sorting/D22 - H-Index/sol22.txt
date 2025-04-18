@@ -1,0 +1,15 @@
+[Naive Approach] Using Comparison-based Sorting - O(n*logn) Time and O(1) Space
+A simple solution is to first sort the array in descending order. Initialize idx = 0 to find the H-Index and iterate 
+through the papers from left to right and if citations[idx] > idx, then all the papers from 0 to idx have at least 
+(idx + 1) citations. So, keep on incrementing idx till citations[idx] > idx. Finally, if we reach the end of array 
+or citations[idx] <= idx, return idx.
+
+[Expected Approach] Using Counting Sort - O(n) Time and O(n) Space
+The idea is similar to Counting Sort and maintain an array of size n + 1, say freq[] to count the frequency of
+ citations of each paper. So, freq[i] will store the number of papers having i citations. To handle the case when 
+ number of citations > n, we can simply replace them with n. This is because the value of H-Index can be at most n as 
+ we have total n papers only.
+
+After counting the frequency of citations, start from last index n and for each index i, keep track of the count of 
+papers having at least i citations. If at any index i, the count of papers having at least i citations becomes >= i, 
+then we can simply return i as the H-Index. We started from the last index n because we want to maximize the H-Index.
