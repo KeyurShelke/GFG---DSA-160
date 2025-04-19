@@ -1,0 +1,17 @@
+Table of Content
+
+[Naive Approach] Using Two Nested Loops - O(n^2) Time and O(1) Space
+[Expected Approach] Using Merge Sort - O(n*log n) Time and O(n) Space
+
+[Naive Approach] Using Two Nested Loops - O(n^2) Time and O(1) Space
+Traverse through the array, and for every index, find the number of smaller elements on its right side in the array. 
+This can be done using a nested loop. Sum up the inversion counts for all indices in the array and return the sum.
+
+[Expected Approach] Using Merge Step of Merge Sort - O(n*log n) Time and O(n) Space
+We can use merge sort to count the inversions in an array. First, we divide the array into two halves: left half and 
+right half. Next, we recursively count the inversions in both halves. While merging the two halves back together, 
+we also count how many elements from the left half array are greater than elements from the right half array, as 
+these represent cross inversions (i.e., element from the left half of the array is greater than an element from the 
+right half during the merging process in the merge sort algorithm). Finally, we sum the inversions from the left half, 
+right half, and the cross inversions to get the total number of inversions in the array. This approach efficiently 
+counts inversions while sorting the array.

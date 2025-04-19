@@ -1,0 +1,18 @@
+Count Inversions of an Array
+
+Given an integer array arr[] of size n, find the inversion count in the array. Two array elements arr[i] and arr[j] 
+form an inversion if arr[i] > arr[j] and i < j.
+
+Note: Inversion Count for an array indicates that how far (or close) the array is from being sorted. If the array is
+ already sorted, then the inversion count is 0, but if the array is sorted in reverse order, the inversion count is 
+ maximum. 
+
+Examples: 
+
+Input: arr[] = {4, 3, 2, 1}
+Output: 6
+
+Table of Content
+
+[Naive Approach] Using Two Nested Loops - O(n^2) Time and O(1) Space
+[Expected Approach] Using Merge Sort - O(n*log n) Time and O(n) Space
