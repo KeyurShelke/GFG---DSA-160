@@ -1,0 +1,18 @@
+Table of Content
+
+[Naive Approach] Insertion and Merging - O(n*log n) Time and O(1) Space
+[Expected Approach] Contiguous Interval Merging - O(n) Time and O(n) Space
+
+[Naive Approach] Insertion and Merging - O(n*log n) Time and O(1) Space
+The approach is to append the new interval to the given array of intervals and then handle 
+the overlapping of intervals. So, we will use the same approach as Merge Overlapping Intervals 
+to merge the overlapping intervals after insertion.
+
+[Expected Approach] Contiguous Interval Merging - O(n) Time and O(n) Space
+When we add a new interval, it may overlap with some contiguous intervals in the array. 
+The overlapping intervals can be found in a contiguous subarray because the intervals array 
+is already sorted. To remove overlapping we find these overlapping interval's subarray and 
+merge them with new interval, to form a single merged interval.
+
+Now to maintain the order sorted, we first add the lower intervals, then this merged interval, 
+and finally the remaining intervals in the result.
