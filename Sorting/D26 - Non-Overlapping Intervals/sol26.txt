@@ -1,0 +1,22 @@
+Table of Content
+
+Sorting by the Starting Values - O(n*log n) Time and O(1) Space
+Sorting by the Ending Values - O(n*log n) Time and O(1) Space
+
+
+Sorting by the Starting Values - O(n*log n) Time and O(1) Space
+The idea is to use a greedy approach to select the interval to be removed, 
+such that removal count is minimized. First we sort the intervals by their 
+starting values. Then traverse through the interval array and check if any 
+interval has a starting point smaller than the ending point of the previous 
+interval (ie. there is an overlap). Incase overlapping occurs remove the 
+interval with greater ending point.
+
+Sorting by the Ending Values - O(n*log n) Time and O(1) Space
+To understand this approach, think of it as trying to keep intervals short 
+so we have more space for other intervals, without overlap. By sorting 
+intervals by their end times, we can easily check if the next interval 
+overlaps with the previous one. If there’s an overlap, we remove the 
+interval with the later end time, so it doesn’t block the next intervals 
+from fitting in. This way, we end up with the minimum number of removals 
+needed to make all intervals non-overlapping.
