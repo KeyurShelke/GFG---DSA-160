@@ -1,0 +1,73 @@
+Table of Content
+
+Using Insert of Insertion Sort
+Using n-th smallest element
+By Swap and Sort
+Using Gap method
+
+
+Using Insert of Insertion Sort
+The idea is to traverse b[] from the end in reverse order and compare each element with the last 
+(largest) element of a[]. For any index i, if b[i] is smaller than the last element of a[], 
+replace b[i] with the last element of a[] and use insert step of insertion sort to find the correct 
+place of b[i] in a[].
+How do we keep a[] sorted? Every time we add any element from b[] to a[], we find the correct index 
+using insert step of insertion sort.
+How do we keep b[] sorted? This is ensured by the fact that we traverse b[] from end and insert only 
+when current element of b[] is smaller.
+
+Time Complexity: O(m * n), where n and m are sizes of a[] and b[] respectively.
+Auxiliary Space: O(1)
+
+
+Using n-th smallest element
+We can use the fact that nth smallest elementin the sorted combined array acts as a pivot dividing 
+the elements among a[] and b[]. Initially, this nth smallest element can lie in either arrays so 
+instead of finding it, we can find the first index idx in a[], such that the elements after this 
+index were larger than the pivot.
+
+Elements of a[] placed after index idx should be replaced with smaller elements from b[]. Now all 
+elements were in the correct arrays and we can apply sorting to both arrays to maintain the order.
+
+Merge-two-sorted-arrays-without-extra-space-using-nth-smallest-element-2.webp
+
+Time Complexity: O(log(m) + m*log(m) + n*log(n)), where n and m are sizes of a[] and b[] respectively.
+Auxiliary Space: O(1)
+
+Further Optimization: We can optimize the first step to O(log(min(m, n))) by picking the smaller array for binary search.
+
+
+
+By Swap and Sort
+Actually we can use the previous approach without finding the pivot index. We just need to swap the 
+rightmost element in a[] with leftmost element in b[], then second rightmost element in a[] with second leftmost element in b[] and so on. This will continue until the selected element from a[] is larger than selected element from b[].
+
+When we reach at the pivot index this condition fails automatically and we will stop here. Now sort
+ both the arrays to maintain the order.
+
+ Time Complexity: O((m+n) + m*log(m) + n*log(n)), where n and m are sizes of a[] and b[] respectively.
+Auxiliary Space: O(1)
+
+
+
+Using Gap method
+The idea is to assume the two arrays as a single continuous array of size n + m andsort it using gap 
+method of shell sort. Here we need to adjust the indices according to whether it lies in a[] or b[]. 
+And if indices lies in b[] then adjust the indices by subtracting n from it.
+
+Assume the two arrays as a single continuous array of size n + m and find the gap value, 
+gap = ceil((n + m)/2 )
+Until the gap doesn't become zero, perform the following operations:
+Take two pointers left and right and place them at index 0 and (left + gap) index respectively.
+Run a while loop until right is less than len (n + m).
+Their are 3 different cases inside this while loop.
+When both the left and right pointers are in the a[]. Then compare the a[left] and a[right]. 
+If a[left] > a[right], then swap the a[left] and a[right].
+When the left pointer is in a[] and right pointer is in b[] and if a[left] > b[right-m], then swap 
+the a[left] and b[right-m].
+When both the left and right pointers are in the b[] and if a[left] > b[right-m], then swap the 
+a[left] and b[right-m].
+If the right pointer reaches the end i.e. m + n, decrement the gap value by ceil(gap/2).
+
+Time Complexity: O(m+n)*O(log(m+n)), the outer loop runs from m+n to 1 and its everytime divided by 2. So, outer loop complexity is O(log(m+n)). The inner loop time complexity is O(m+n).
+Auxiliary Space : O(1)
