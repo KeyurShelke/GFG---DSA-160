@@ -1,0 +1,25 @@
+Table of Content
+
+[Naive Approach] Linear Search - O(n) Time and O(1) Space
+[Expected Approach] Binary Search - O(log n) Time and O(1) Space
+
+
+[Naive Approach] Linear Search - O(n) Time and O(1) Space
+A simple solution is to use linear search to traverse the complete array and find a minimum. 
+
+[Expected Approach] Binary Search - O(log n) Time and O(1) Space
+We can optimize the minimum element searching by using Binary Search where we find the mid element and 
+then decide whether to stop or to go to left half or right half:
+
+If arr[mid] > arr[high], it means arr[low ... mid] is sorted and we need to search in the right half. 
+So we change low = mid + 1.
+If arr[mid] <= arr[high], it means arr[mid ... high] is sorted and we need to search in the left half. 
+So we change high = mid. (Note: Current mid might be the minimum element).
+How do we terminate the search? One way could be to check if the mid is smaller than both of its 
+adjacent, then we return mid. This would require a lot of condition checks like if adjacent indexes 
+are valid or not and then comparing mid with both. We use an interesting fact here: If 
+arr[low] < arr[high], then the current subarray is sorted, So we return arr[low].
+
+
+
+
