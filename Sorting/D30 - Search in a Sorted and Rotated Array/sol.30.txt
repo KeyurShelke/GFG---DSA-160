@@ -1,0 +1,25 @@
+Table of Content
+
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+[Expected Approach 1] Using Binary Search Twice - O(log n) Time and O(1) Space
+[Expected Approach 2] Using Single Binary Search - O(log n) Time and O(1) Space
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+A simple approach is to iterate through the array and check for each element, if it matches the 
+target then return the index, otherwise return -1. To know more about the implementation, 
+please refer Introduction to Linear Search Algorithm.
+
+[Expected Approach 1] Using Binary Search Twice - O(log n) Time and O(1) Space
+The idea is to use binary search twice:
+
+1. Find the pivot point (or index of the min element) : 
+For example, the min in [4, 5, 6, 7, 0, 1, 2] is 0 at index 4. Refer Minimum in a Sorted and Rotated Array to find the index of the minimum element.
+
+2. Binary Search in the Sorted Subarray: Once we find the pivot, we can easily divide the given array into two sorted subarrays using the index of the minimum element. For example, the index of the minimum element in [4, 5, 6, 7, 0, 1, 2] is 4, so the two sorted subarrays are [4, 5, 6, 7] and [1, 2]. Following are the cases that arise
+
+If the minimum element = key, then return index of the minimum element.
+If index of minimum element is 0, then the whole array is sorted, we call 
+binary search for the whole array.
+If index of minimum element > 0, then instead of calling binary search for both 
+sides, we can save one binary search by comparing the given key with the first element 
+on left side. If key is greater than equal to the first element, we do binary 
+search in the first subarray else in the second.
