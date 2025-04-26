@@ -1,0 +1,16 @@
+Table of Content
+
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+[Expected Approach] Using Binary Search - O(logn) Time and O(1) Space
+
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+The idea is to traverse the array and for each element, check if it is equal to the target. 
+If it is, increment the counter.
+
+[Expected Approach] Using Binary Search - O(logn) Time and O(1) Space
+Since the array is already sorted, we can use binary search to find the occurrences of a given target. 
+First, we find the index of the first occurrence (Lower Bound) of target and then the index of the 
+first element greater than the target (Upper Bound). The difference between these two indices will 
+give the total number of occurrences of the target.
+
+
