@@ -1,0 +1,37 @@
+Table of Content
+
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+[Expected Approach] Using Binary Search - O(logn) Time and O(1) Space
+
+
+[Naive Approach] Using Linear Search - O(n) Time and O(1) Space
+The simplest approach is to iterate through the array and check if an element is greater 
+than its neighbors. If it is, then it's a peak element.
+
+
+[Expected Approach] Using Binary Search - O(logn) Time and O(1) Space
+If we observe carefully, we can say that:
+
+If an element is smaller than it's next element then it is guaranteed that at least one 
+peak element will exist on the right side of this element.
+Conversely if an element is smaller than it's previous element then it is guaranteed that 
+at least one peak element will exist on the left side of this element.
+Therefore, we can use binary search to find the peak element.
+
+Why it is guaranteed that peak element will definitely exist on the right side of an 
+element, if its next element is greater than it?
+
+If we keep moving in the right side of this element, as long as the elements are 
+increasing, we will eventually reach an element that is either:
+
+The last element of the array, which will be a peak as it is greater than or equal to its 
+previous element.
+An element where the sequence is no longer increasing, i.e., arr[i] > arr[i + 1], which 
+would be a peak element.
+For the same reasons, if an element is lesser than its previous element, then it is 
+guaranteed that at least one peak element will exist on the left side of that element.
+
+Find-peak-element-using-Binary-Search-1.webp
+
+
+
