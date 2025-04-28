@@ -1,0 +1,58 @@
+Table of Content
+
+Using Sorting - O((m + n) * log(m + n)) Time and O(m + n) Space
+Using Priority Queue - O((m + n + k) * log(m + n)) Time and O(m + n) Space
+Using Merge Step of Merge Sort - O(m + n) Time and O(m + n) Space
+Using Optimized Merge of Merge Sort - O(k) Time and O(1) Space
+Using Binary Search - O(log(min(n, m)) Time and O(1) Space
+
+
+Using Sorting - O((m + n) * log(m + n)) Time and O(m + n) Space
+The idea is to create a new array by merging elements from both arrays 
+(a[] and b[]), then sort the new array, and finally return the kth 
+smallest element from the sorted array.
+
+Using Priority Queue - O((m + n + k) * log(m + n)) Time and O(m + n) Space
+The idea is to build a min heap to store all the elements of both the arrays 
+in sorted order, and then extract the first k elements to get the kth 
+smallest element of the merge array.
+
+Using Merge Step of Merge Sort - O(m + n) Time and O(m + n) Space
+The basic idea here is to merge the given two arrays into a single sorted array and then simply return the element at the kth position. This approach is straightforward because it directly uses the merging process of two sorted arrays, similar to the merge step in the merge sort algorithm.
+
+Step-by-step approach:
+
+We initialize three pointers: two pointers to traverse each array and one to 
+keep track of the position in the merged array.
+By comparing the elements pointed to by the two array pointers, we place 
+the smaller element into the merged array and move the respective pointer 
+forward.
+This continues until one of the arrays is fully traversed.
+If any elements remain in either array, they are directly appended to the 
+merged array.
+Finally, the k-th element of this merged array is returned.
+
+Using Optimized Merge of Merge Sort - O(k) Time and O(1) Space
+This approach optimizes the space complexity of the above approach by avoiding the creation of an 
+additional array. Instead, we use two pointers to traverse the input arrays and count the elements
+ until we reach the kth element. This method is more efficient in terms of space since it only uses 
+ a constant amount of extra memory.
+
+We start with two pointers at the beginning of each array and another counter to keep track of the 
+number of elements processed. By comparing the current elements of both arrays, the smaller one is 
+considered as part of the merged sequence, and the pointer for that array would be incremented by 1. 
+This process continues until we have processed k elements. The kth element encountered in this process 
+is the result.
+
+Using Binary Search - O(log(min(n, m)) Time and O(1) Space
+The approach is similar to the Binary Search approach of Median of two sorted arrays of different sizes.
+
+Consider the first array is smaller. If first array is greater, then swap the arrays to make sure that the first array is smaller.
+
+We mainly maintain two sets in this algorithm by doing binary search in the smaller array. Let mid1 
+be the partition of the smaller array. The first set contains elements from 0 to (mid1 – 1) from 
+smaller array and mid2 = (k – mid1) elements from the greater array to make sure that the first set 
+has exactly k elements. The second set contains remaining elements.
+Our target is to find a point in both arrays such that all elements in the first set are smaller than 
+all elements in the other set (set that contains elements from right side). For this we validate the 
+partitions using the same way as we did in Median of two sorted arrays of different sizes.
