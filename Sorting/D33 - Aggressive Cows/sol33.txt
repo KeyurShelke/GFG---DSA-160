@@ -1,0 +1,35 @@
+Table of Content
+
+[Naive Approach] By iterating over all possible distances
+[Expected Approach] Using Binary Search
+
+[Naive Approach] By iterating over all possible distances
+The idea is to iterate over all possible distances starting from 1 up to the difference between 
+the farthest stalls. First, we sort the array to ensure the stalls are in the correct sequence. 
+Then, for each distance, we try to place the cows greedily - placing the first cow in the first 
+stall and the next ones only if the gap from the last placed cow is at least the current distance.
+ If all cows can be placed for a certain distance, we update our result. The process continues 
+ until all distances are checked.
+
+ Time Complexity: O(n*(MAX - MIN)), where n is the size of the array, MAX is the maximum element 
+ n the array and MIN is minimum element in the array.
+Auxiliary Space: O(1).
+
+
+[Expected Approach] Using Binary Search
+The minimum distance between the cows has a monotonic property.
+
+If we can place all the cows with a minimum distance d, then we can also place them with any 
+smaller distance than d. The reason is by reducing the minimum gap, we can place more number of 
+cows as lower gaps allow us to place cows even more closer.
+If we can't place all the cows with a minimum distance d, then we can't place them with any larger 
+distance than d. The reason is if the gap is already too large to place the cows, then larger gap 
+will also not work.
+Therefore, we can use binary search to find the maximum possible minimum distance, and to check 
+the for any distance, we place the first cow in the first stall and the next ones only if the 
+gap from the last placed cow is at least that distance. If all cows can be placed for a certain 
+distance, then it is a feasible distance.
+
+Time Complexity: O(n * log(MAX - MIN)) - where n is the size of the array, MAX is the maximum 
+element in the array and MIN is minimum element in the array.
+Auxiliary Space: O(1)
