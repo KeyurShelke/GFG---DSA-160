@@ -1,0 +1,38 @@
+Table of Content
+
+[Naive Approach] By Iterating Over All Possible Page Limits
+[Expected Approach] Using Binary Search
+
+
+[Naive Approach] By Iterating Over All Possible Page Limits
+The idea is to iterate over all possible page limits, or maximum pages that can be allocated 
+to a student.
+
+The minimum possible page limit is the highest page count among all books, as the book with the 
+most pages must be assigned to some student.
+The maximum possible page limit is the sum of pages of all books, It is in the case when all books 
+are given to a single student.
+To find the number of students that will be allocated books for a page limit, we start assigning 
+books to the first student until the page limit is reached, then we move to the next student and 
+so on. As soon as we find the first page limit with which we can allocate books to all k students,
+we will return it.
+
+Time Complexity: O(n*(Sum(arr) - MAX)), where n is the total number of books, sum(arr) is the total number of pages in all the books and MAX is maximum number of pages in any book.
+Auxiliary Space: O(1)
+
+
+[Expected Approach] Using Binary Search
+The maximum number of pages(page limit) that a student can be allocated has a monotonic property:
+
+If, at a page limit p, books cannot be allocated to all k students, then we need to reduce the 
+page limit to ensure more students receive books.
+If, at a page limit p, we can allocate books to more than k students, then we need to increase 
+the page limit so that fewer students are allocated books.
+Therefore, we can apply binary search to minimize the maximum pages a student can be allocated. 
+To check the number of students that can be allotted books for any page limit, we start 
+assigning books to the first student until the page limit is reached, then move to the next 
+student.
+
+Time Complexity: O(n*log(Sum(arr) - MAX)), where n is the total number of books, sum(arr) is 
+the total number of pages in all the books and MAX is maximum number of pages in any book.
+Auxiliary Space: O(1)
