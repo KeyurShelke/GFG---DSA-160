@@ -1,0 +1,31 @@
+Table of Content
+
+[Naive Approach] Using Simulation by Visited Matrix - O(m*n) Time and O(m*n) Space
+[Expected Approach] Using Boundary Traversal - O(m*n) Time and O(1) Space
+
+[Naive Approach] Using Simulation by Visited Matrix - O(m*n) Time and O(m*n) Space
+The idea is to simulate the spiral traversal by marking the cells that have already been visited. We can use a direction array to keep track of the movement 
+(right, down, left, up) and change direction when we hit the boundary or a visited cell.
+
+Initialize a 2D array vis[][] to keep track of visited cells.
+Use direction arrays dr and dc to represent right, down, left, and up movements.
+Start from the top-left cell and follow the direction arrays to visit each cell.
+Change direction when encountering a boundary or a visited cell.
+Continue until all cells are visited.
+
+Time Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix respectively.
+Auxiliary Space: O(m*n), for the visited matrix and the result vector.
+
+[Expected Approach] Using Boundary Traversal - O(m*n) Time and O(1) Space
+We can print the matrix in a spiral order by dividing it into loops or boundaries. We print the elements of the outer boundary first, then move inward to print 
+the elements of the inner boundaries.
+
+Define the boundaries of the matrix with variables top, bottom, left, and right.
+Print the top row from left to right and increment top.
+Print the right column from top to bottom and decrement right.
+Check if boundaries have crossed; if not, print the bottom row from right to left and decrement bottom.
+Print the left column from bottom to top and increment left.
+Repeat until all boundaries are crossed.
+
+Time Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix respectively.
+Auxiliary Space: O(1)
