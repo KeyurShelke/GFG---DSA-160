@@ -1,0 +1,28 @@
+Search in a row wise and column wise sorted matrix
+
+Given a matrix mat[][] and an integer x, the task is to check if x is present in mat[][] or not. Every row and column of the matrix is sorted in increasing order.
+
+Examples: 
+
+Input: x = 62, mat[][] = [[3, 30, 38],
+[20, 52, 54],
+[35, 60, 69]]
+Output: false
+Explanation: 62 is not present in the matrix.
+
+Input: x = 55, mat[][] = [[18, 21, 27],
+[38, 55, 67]]
+Output: true
+Explanation: mat[1][1] is equal to 55.
+
+Input: x = 35, mat[][] = [[3, 30, 38],
+[20, 52, 54],
+[35, 60, 69]]
+Output: true
+Explanation: mat[2][0] is equal to 35.
+
+Table of Content
+
+[Naive Approach] Comparing with all elements - O(n*m) Time and O(1) Space
+[Better Approach] Binary Search - O(n*logm) Time and O(1) Space:
+[Expected Approach] Eliminating rows or columns - O(n + m) Time and O(1) Space:
