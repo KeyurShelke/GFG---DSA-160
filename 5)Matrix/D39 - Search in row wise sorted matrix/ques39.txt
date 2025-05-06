@@ -1,0 +1,27 @@
+Search in row wise sorted matrix
+
+Given a row-wise sorted matrix mat[][] and an integer x, the task is to check if x is present in mat[][] or not. Note that there is no ordering among column elements.
+
+Examples:
+
+Input: x = 9, mat[][] = [[3, 4, 9],
+[2, 5, 6],
+[9, 25, 27]]
+Output: true
+Explanation: mat[0][2] is equal to 9.
+
+Input: x = 56, mat[][] = [[19, 22, 27, 38, 55, 67]]
+Output: false
+Explanation: 56 is not present in mat[][].
+
+[Naive Approach] Comparing with all elements – O(n*m) Time and O(1) Space
+The simple idea is to traverse the complete matrix and search for the target element. If the target element is found, return true. Otherwise, return false. 
+Please refer to Searching Algorithms for 2D Arrays (Matrix) to know more about the implementation.
+
+[Expected Approach] Using Binary Search - O(n * log(m)) Time and O(1) Space
+The idea is simple, we traverse through the matrix and apply binary search on each row to find the element.
+
+
+Time Complexity: O(n*logm), where n is the number of rows and m is the number of columns.
+Auxiliary Space: O(1)
+
