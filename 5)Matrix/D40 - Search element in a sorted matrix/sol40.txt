@@ -1,0 +1,23 @@
+[Naive Approach] Comparing with all elements – O(n*m) Time and O(1) Space
+In this approach, we will iterate through the entire matrix mat[][] and compare each element with x. If an element matches the x, we will return true. Otherwise, 
+at the end of the traversal, we will return false. Please refer to Searching Algorithms for 2D Arrays (Matrix) to know more about the implementation.
+
+[Better Approach] Using Binary Search Twice - O(logn + logm) Time and O(1) Space
+First, we locate the row where the target x might be by using binary search, and then we apply binary search again within that row.
+
+To find the correct row, we perform binary search on the first elements of the middle row.
+Start with low = 0 and high = n - 1.
+
+If x is smaller than the first element of the middle row (a[mid][0]), then x will be smaller than all elements in rows >= mid, so update high = mid - 1.
+If x is greater than the first element of the middle row (a[mid][0]), then x will be greater than all elements in rows < mid, so store the current mid row and 
+pdate low = mid + 1.
+Once we have found the correct row, we can apply binary search within that row to search for the target element x.
+
+[Expected Approach] Using Binary Search Once - O(log(n*m)) and O(1) Space
+The idea is to consider the given matrix as 1D array and apply only one binary search. For example, for a matrix of size n x m and we can consider it as a 1D 
+array of size n*m, then the first index would be 0 and last index would n*m-1. So, we need to do binary search from low = 0 to high = (n*m-1).
+
+How to find the element in 2D matrix corresponding to index = mid?
+
+Since each row of mat[][] will have m elements, so we can find the row of the element as (mid / m) and the column of the element as (mid % m). Then, we can 
+compare x with arr[mid/m][mid%m] for each mid and complete our binary search.
