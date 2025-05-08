@@ -1,0 +1,18 @@
+Table of Content
+
+[Naive Approach] Using Two Auxiliary Arrays - O(n*m) Time and O(n+m) Space
+[Expected Approach] Using First Row and Column - O(n*m) Time and O(1) Space
+[Naive Approach] Using Two Auxiliary Arrays - O(n*m) Time and O(n+m) Space
+The idea is to maintain two additional arrays, say rows[] and cols[] to store the rows and columns which contains at least one element equal to 0. So, first traverse the entire matrix and for each mat[i][j] = 0, mark rows[i] = true and cols[j] = true. Now in the second traversal, for each cell (i, j), if either rows[i] or cols[j] is marked as true, update mat[i][j] = 0 else continue to the next cell.
+
+[Expected Approach] Using First Row and Column - O(n*m) Time and O(1) Space
+In the previous approach we took two arrays to store the row's and column's status. Now instead of two auxiliary arrays, we can use the first row and first column of mat[][] to store which row elements and column elements are to be marked as zeroes.
+
+So if the first cell of a row is set to 0, then all cells of that row should be updated with 0. Similarly, if the first cell of a column is set to 0, then all cells of that column should be updated to 0. Since cell (0, 0) is first cell of the first row as well as the first column, so maintain another variable, say c0 to store the status of the first column and cell(0, 0) will store the status of the first row.
+
+Step-by-step algorithm:
+
+Traverse the matrix, and for each cell (i, j) such that mat[i][j] = 0, mark mat[i][0] and mat[0][j] as 0. Note: If i = 0, mark mat[0][0] as 0 and if j = 0, mark c0 as 0.
+Again traverse the matrix from (1, 1) to (n-1, m-1), and set mat[i][j] = 0 if either mat[i][0] = 0 or mat[0][j] = 0.
+Finally, update the first row and first column:
+If arr[0][0] = 0, set all elements in first row to 0.
