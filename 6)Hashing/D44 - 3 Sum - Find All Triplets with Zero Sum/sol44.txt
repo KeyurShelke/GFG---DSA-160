@@ -1,0 +1,20 @@
+Table of Content
+
+[Naive Approach] Using Three Nested Loops - O(n^3) Time and O(1) Space
+[Expected Approach] Using Hash Map - O(n^3) Time and O(n) Space
+
+[Naive Approach] Using Three Nested Loops - O(n^3) Time and O(1) Space
+The simplest approach is to generate all possible triplets using three nested loops and if the sum of any triplet is equal to zero then add it to the result. 
+
+Time Complexity: O(n3), As three nested loops are used.
+Auxiliary Space: O(1)
+
+[Expected Approach] Using Hash Map - O(n^3) Time and O(n) Space
+The idea is to use a hash map to store indices of each element and efficiently find triplets that sum to zero.
+We iterate through all pairs (j, k), compute the required third element as -(arr[j] + arr[k]), and check if it exists in the map with a valid index i < j.
+If found, we store {i, j, k} in the result. To ensure unique triplets, the map maintains only indices less than the current j.
+In the worst case, this approach also takes O(n^3) time but in the average case, it is much faster than Naive approach as we are iterating over only those triplets whose sum is equal to target.
+
+Time Complexity: O(n3), Since two nested loops are used and traversing through the map may take O(n) in worst case.
+Auxiliary Space: O(n), Since a HashMap is used to store all value index pairs.
+

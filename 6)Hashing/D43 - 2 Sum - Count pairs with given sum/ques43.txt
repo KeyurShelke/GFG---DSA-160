@@ -1,0 +1,22 @@
+2 Sum - Count pairs with given sum
+
+Given an array arr[] of n integers and a target value, the task is to find the number of pairs of integers in the array whose sum is equal to target.
+
+Examples:  
+
+Input: arr[] = {1, 5, 7, -1, 5}, target = 6
+Output:  3
+Explanation: Pairs with sum 6 are (1, 5), (7, -1) & (1, 5).         
+
+Input: arr[] = {1, 1, 1, 1}, target = 2
+Output:  6
+Explanation: Pairs with sum 2 are (1, 1), (1, 1), (1, 1), (1, 1), (1, 1) and (1, 1).
+
+Input: arr[] = {10, 12, 10, 15, -1}, target = 125
+Output:  0
+
+Table of Content
+
+[Naive Approach] By Generating all Possible Pairs - O(n^2) time and O(1) space
+[Better Approach] Using Two Pointers Technique - O(nlogn) Time and O(1) Space
+[Expected Approach] Using Hash Map or Dictionary - O(n) Time and O(n) Space
