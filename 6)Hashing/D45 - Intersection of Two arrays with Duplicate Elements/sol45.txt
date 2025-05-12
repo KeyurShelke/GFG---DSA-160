@@ -1,0 +1,36 @@
+Table of Content
+
+[Naive Approach] Using Triple Nested Loops - O(n*n*m) Time and O(1) Space
+[Better Approach] Using Nested Loops and Hash Set - O(n*m) Time and O(n) Space
+[Expected Approach 1] - Using Two Hash Sets - O(n+m) Time and O(n) Space
+[Expected Approach 2] Using One Hash Set - O(n+m) Time and O(n) Space
+
+[Naive Approach] Using Triple Nested Loops - O(n*n*m) Time and O(1) Space
+Initialize an empty array for result.
+Traverse through a[] and for every element check if it is in b[], then check if it is already in result or not. If in b[] and not in result, then add it to the result.
+Return result.
+
+[Better Approach] Using Nested Loops and Hash Set - O(n*m) Time and O(n) Space
+One obvious optimization is to use a Hash Set for result so that we can reduce the time complexity to O(n^2).
+
+Initialize an empty hash set for storing result array elements
+Traverse through a[] and for every element check if it is in b[], then check if it is already in result or not. If in b[] and not in the hash set, then add it to the hash set.
+Create a result array and copy items of the hash set to the result array and return the result array.
+[Expected Approach 1] - Using Two Hash Sets - O(n+m) Time and O(n) Space
+Initialize an empty array for result
+Create a hash set as (Set of a[] elements) and put all distinct items of a[] into it. For example, if array is {1, 2, 1, 3, 1}, as is going to store [1, 2, 3]
+Create an empty hash set for result rs (Set of result elements)
+Create an empty array res[] to store result
+Traverse through all items of b[]. If an item is in as and not in rs, then add it to res[] and rs
+Return res[]
+
+[Expected Approach 2] Using One Hash Set - O(n+m) Time and O(n) Space
+We optimize the above approach by avoiding creation of rs hash set. To make sure that duplicates are not added, we simply delete items from as (Set of a[] elements) rather than checking with rs.
+
+Related Articles:
+
+Intersection of Two Arrays with Distinct Elements
+Intersection of Two Sorted Arrays
+Intersection of Two Sorted Arrays with Distinct Elements
+Union and Intersection of Two Unsorted Arrays
+Union and Intersection of Two Sorted Arrays
