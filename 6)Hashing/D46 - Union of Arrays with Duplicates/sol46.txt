@@ -1,0 +1,32 @@
+Table of Content
+
+[Naive Approach] Using Nested Loops - O(n^2) Time and O(1) Space
+[Expected Approach] Using Hash Set - O(n) Time and O(n) Space
+
+[Naive Approach] Using Nested Loops - O(n^2) Time and O(1) Space
+The idea is to traverse both the arrays a[] and b[] and for each element, check if the element is present in the result or not. If not, then add this element to the result.
+
+Time Complexity: O((n + m)^2), where n is size of a[] and m is size of b[]
+
+Inserting all elements from first array will take O(n^2) time.
+In the worst case, there will be no common elements in a[] and b[]. So, while inserting elements from second array, the first element needs n comparisons, the second element needs (n + 1) comparisons and so on. So total comparisons will be n + (n + 1) + (n + 2) ... (n + m) = O(n*m + m^2) time.
+So, total time complexity = O((n + m)^2)
+Auxiliary Space: O(1)
+
+[Expected Approach] Using Hash Set - O(n) Time and O(n) Space
+The idea is to use a Hash Set, which helps in keeping only unique elements by removing duplicates. We first create an empty Hash Set and add elements from both arrays. The Hash Set ensures that no duplicates are stored. After adding all the elements, we can create the final union array by iterating through the Hash Set.
+
+Time Complexity: O(n + m), where n is the size of a[] and m is the size of b[]
+Auxiliary Space: O(n + m)
+
+Related Articles:
+
+Union and Intersection of Two Unsorted Arrays – Complete Tutorial
+Union and Intersection of Two Sorted Arrays – Complete Tutorial
+Union of Two Arrays with Distinct Elements
+Union of Two Sorted Arrays
+Union of Two Sorted Arrays with Distinct Elements
+
+
+
+
