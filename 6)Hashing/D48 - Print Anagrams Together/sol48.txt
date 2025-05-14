@@ -1,0 +1,20 @@
+Table of Content
+
+[Naive Approach] Using sorted words as keys - O(n*k*log(k)) Time and O(n*k) Space
+[Expected Approach] Using Frequency as keys - O(n*k) Time and O(n*k) Space
+
+[Naive Approach] Using sorted words as keys - O(n*k*log(k)) Time and O(n*k) Space
+The idea is that if we sort two strings which are anagrams of each other, then the sorted strings will always be the same. So, we can maintain a hash map with the sorted strings as keys and the index of the anagram group in the result array as the value.
+
+To know more about the implementation, please refer to Group Anagrams Together Using Sorting.
+
+[Expected Approach] Using Frequency as keys - O(n*k) Time and O(n*k) Space
+The idea is to that if two strings are anagrams of each other, then the frequency of all characters in both strings will always be the same. So, we can maintain a hash map with the count of characters as keys and the index of the anagram group in the result array as the value. For each word, we can first construct a frequency array of size 26 to store the frequency of each character in the word. Then, we can append the frequency of each character separated by a delimiter, say '$' to form the key for hash map.
+
+Note the MAX_CHAR is alphabet size of input characters which is typically a constant. If we have only lower case characters, then MAX_CHAR is 26 only. If we consider all ASCII characters, then MAX_CHAR is 256.
+
+Time Complexity: O(n*k), where n is the number of words and k is the maximum length of a word.
+Auxiliary Space: O(n*k)
+ 
+
+
