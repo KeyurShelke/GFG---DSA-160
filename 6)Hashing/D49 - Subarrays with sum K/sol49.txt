@@ -1,0 +1,7 @@
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+A simple solution is to traverse all the subarrays and calculate their sum. If the sum is equal to the given number k, then increment the count of subarrays.
+
+[Expected Approach] Using Hash Map and Prefix Sum - O(n) Time and O(n) Space
+If you take a closer look at this problem, this is mainly an extension of Subarray with given sum.
+
+The idea is to use a Hash Map to store the count of every prefix sum of the array. For each index i, with a current prefix sum currSum, we check if (currSum – k) exists in the map. If it does, it indicates the presence of a subarray ending at i with the given sum k. In such cases, we increment the result with the count of (currSum - k) stored in hash map.
