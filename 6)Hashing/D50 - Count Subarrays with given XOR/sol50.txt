@@ -1,0 +1,29 @@
+Table of Content
+
+[Naive Approach] Checking all Subarray - O(n^2) Time and O(1) Space
+[Efficient Approach] Using Hash Map and Prefix Sum - O(n) Time and O(n) Space
+
+[Naive Approach] Checking all Subarray - O(n^2) Time and O(1) Space
+A Simple Solution is to use two loops to go through all possible subarrays of arr[] and count the number of subarrays having XOR of their elements as k. 
+
+[Efficient Approach] Using Hash Map and Prefix Sum - O(n) Time and O(n) Space
+The idea is to use the properties of XOR. Let’s denote the XOR of all elements in the range [0, i] as A, the XOR of all elements in the range [i+1, j] as B, and the XOR of all elements in the range [0, j] as C.
+
+From the properties of XOR: C = A ⊕ B
+This implies: A = C ⊕ B
+
+Now if we know the value of C (the XOR of the prefix up to index j) and have B (the target XOR value k), we can determine A (the XOR of the prefix up to index i) using: A = C ⊕ B
+
+Using this relation, if a prefix sum A has already been seen earlier, it means there exists a subarray ending at j whose XOR is equal to k (B).
+
+Step by step Approach:
+
+Use a hash map to store the frequency of prefix XOR values encountered so far.
+Traverse through the array and for each element at index i:
+Update prefXOR = prefXOR ⊕ arr[i].
+Check if A = prefXOR ⊕ k exists in the hash map. If it does, add the value of the hash map entry to result as it gives the count of subarrays ending at the current index that have XOR equal to k.
+If prefXOR is equal to k, increment the result directly, as this indicates the subarray arr[0, i] has XOR equal to k.
+Update the hash map to include the current prefXOR value.
+
+
+
