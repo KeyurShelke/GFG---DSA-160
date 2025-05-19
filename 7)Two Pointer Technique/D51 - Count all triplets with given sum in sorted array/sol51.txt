@@ -1,0 +1,13 @@
+We have discussed two approaches, that works for both sorted and unsorted arrays, in the post 3 Sum - Count all triplets with given sum. Now in case the given array is already sorted, we can further optimize the space using two pointers technique.
+
+Using Two Pointers Technique
+The idea is to fix the first element of the triplet at index i and then using two pointers technique to count the other two elements. For each index i, initialize left pointer to i + 1 and right pointer to n - 1.
+
+For each triplet, calculate the sum as arr[i] + arr[left] + arr[right] and evaluate:
+
+If sum = target: A valid triplet is found. Additionally, handle duplicates by counting the frequencies of arr[left] and arr[right] and updating the result accordingly. Then move both pointers to the next distinct values.
+If sum < target: Increment the left pointer to explore larger values and increase the sum.
+If sum > target: Decrement the right pointer to explore smaller values and decrease the sum.
+
+Time Complexity: O(n^2). For each index i, we use two pointers that traverse at most n elements combined.
+Auxiliary Space: O(1)
