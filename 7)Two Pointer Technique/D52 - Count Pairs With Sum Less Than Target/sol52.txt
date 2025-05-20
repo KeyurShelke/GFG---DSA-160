@@ -1,0 +1,21 @@
+Table of Content
+
+[Naive Approach] - By Generating all the pairs- O(n^2) Time and O(1) Space
+[Better Approach] - Using Binary Search - O(2*nlogn) Time and O(1) Space
+[Expected Approach] - Using Two Pointers Technique - O(n*logn+n) Time and O(1) Space
+
+[Naive Approach] - By Generating all the pairs- O(n^2) Time and O(1) Space
+A simple approach is to generate all possible pairs using two nested for loops and count those pairs whose sum is less than given target.
+
+[Better Approach] - Using Binary Search - O(2*nlogn) Time and O(1) Space
+The idea is to first sort the array. For each element we will calculate the complement (target - arr[i]) required to make pair sum equal to the target. Then, find the first element in the array which is greater than or equal (lower bound) to the complement using binary search. All the elements which appear before that element will make a valid pair with current element having sum less than given target. We also need to handle the case where an element pairs with itself. Since, each pair is counted twice, total count divide by two will be our answer.
+
+[Expected Approach] - Using Two Pointers Technique - O(n*logn+n) Time and O(1) Space
+First sort the array, then use Two Pointers Technique to find the number of pairs with a sum less than the given target. Initialize two pointers, one at the beginning (left) and the other at the end (right) of the array. Now, compare the sum of elements at these pointers with the target:
+
+If sum < target:
+Pairs formed by the element at the left pointer with every element between left and right (inclusive) will have a sum less than the target. Therefore, we add (right - left) to the count and move the left pointer one step to the right to explore more pairs.
+If sum >= target:
+We move the right pointer one step to the left to reduce the sum.
+
+
