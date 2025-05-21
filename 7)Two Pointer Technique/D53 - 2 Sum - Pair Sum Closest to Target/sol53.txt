@@ -1,0 +1,26 @@
+Table of Content
+
+[Naive Approach] Explore all possible pairs - O(n^2) Time and O(1) Space
+[Better Approach] Binary Search - O(2*nlogn) Time and O(1) Space
+[Expected Approach] Two Pointer Technique - O(nlogn+n) Time and O(1) Space
+
+[Naive Approach] Explore all possible pairs - O(n^2) Time and O(1) Space
+A simple solution is to consider every pair and keep track of the closest pair (the absolute difference between pair sum and target is minimum). If two pairs are equally close to target then pick the one where the elements are farther apart (i.e., have the largest difference between them). Finally, print the closest pair.
+
+[Better Approach] Binary Search - O(2*nlogn) Time and O(1) Space
+The idea is to sort the array and use binary search to find the second element in a pair. First, iterate over the array and for each element arr[i], binary search on the remaining array for the element closest to its complement, that is (target - arr[i]). While searching, we can have three cases:
+
+arr[mid] == complement: we have found an element which can pair with arr[i] to give pair sum = target.
+arr[mid] < complement: we need to search for a greater element, so update lo = mid + 1.
+arr[mid] > complement: we need to search for a lesser element, so update hi = mid - 1.
+To know more about the implementation please refer to 2 Sum - Pair Sum Closest to Target using Binary Search.
+
+[Expected Approach] Two Pointer Technique - O(nlogn+n) Time and O(1) Space
+The idea is to sort the array and use Two Pointer Technique to find the pair with sum closest to target. Initialize a pointer left to the beginning of the array and another pointer right to the end of the array. Now, compare the sum at both the pointers to find the pair sum closest to target:
+
+If arr[left] + arr[right] < target: We need to increase the pair sum, so move left to higher value.
+If arr[left] + arr[right] > target: We need to decrease the pair sum, so move right to smaller value.
+If arr[left] + arr[right] == target: We have found a pair with sum = target, so we can return the pair.
+Note: In this approach, we don't need to separately handle the case when there is a tie between pairs and we need to select the one with maximum absolute difference. This is because we are selecting the first element of the pair in increasing order, so if we have a tie between two pairs, we can always choose the first pair.
+
+
