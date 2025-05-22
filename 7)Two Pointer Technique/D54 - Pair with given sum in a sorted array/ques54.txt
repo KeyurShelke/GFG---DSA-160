@@ -1,0 +1,23 @@
+Pair with given sum in a sorted array
+2 Sum - Count Pairs with given Sum in Sorted Array
+Given a sorted array arr[] and an integer target, the task is to find the number of pairs in the array whose sum is equal to target.
+
+Examples: 
+
+Input: arr[] = [-1, 1, 5, 5, 7], target = 6
+Output: 3
+Explanation: Pairs with sum 6 are (1, 5), (1, 5) and (-1, 7).         
+
+Input: arr[] = [1, 1, 1, 1], target = 2
+Output: 6
+Explanation: Pairs with sum 2 are (1, 1), (1, 1), (1, 1), (1, 1), (1, 1) and (1, 1).
+
+Input: arr[] = [-1, 10, 10, 12, 15], target = 125
+Output:  0
+
+In this post, we are counting pairs with given sum when the input array is sorted. To count the pairs when the input array is not sorted, refer to 2 Sum – Count pairs with given sum.
+
+Table of Content
+
+[Naive Approach] By Generating All Possible Pairs - O(n^2) time and O(1) space
+[Expected Approach] Using Two Pointer Technique - O(n) and O(1) Space

@@ -1,0 +1,18 @@
+Table of Content
+
+[Naive Approach] By Generating All Possible Pairs - O(n^2) time and O(1) space
+[Expected Approach] Using Two Pointer Technique - O(n) and O(1) Space
+[Naive Approach] By Generating All Possible Pairs - O(n^2) time and O(1) space
+The very basic approach is to generate all the possible pairs and check if any pair exists whose sum is equals to given target value, then increment the count variable.
+
+To know more about the implementation, please refer 2 Sum – Count pairs with given sum.
+
+[Expected Approach] Using Two Pointer Technique - O(n) and O(1) Space
+The idea is to use the two-pointer technique by maintaining two pointers, say left and right and initialize them to the first and last element of the array respectively. According to the sum of left and right pointers, we can have three cases:
+
+arr[left] + arr[right] < target: We need to increase the sum of pair, move the left pointer towards right.
+arr[left] + arr[right] > target: We need to decrease the sum of pair, move the right pointer towards left.
+arr[left] + arr[right] = target: We have found a pair whose sum is equal to target. We can find the product of the count of both the elements and add them to the result.
+
+
+
