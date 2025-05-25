@@ -1,0 +1,25 @@
+Table of Content
+
+[Naive Approach] Traversing all windows of size k - O(n * k) Time and O(1) Space
+[Expected Approach] Sliding Window Technique - O(n) Time and O(k) Space
+[Naive Approach] Traversing all windows of size k - O(n * k) Time and O(1) Space
+Traverse the given array considering every window of size k in it and keeping a count on the distinct elements of the window.
+
+Time Complexity: O(n * k)
+Auxiliary Space: O(1) 
+
+[Expected Approach] Sliding Window Technique - O(n) Time and O(k) Space
+The idea is to use Sliding Window Technique and count the number of distinct element in the current window using the count of previous window. Maintain a hash map or dictionary to store the frequency of elements of the current window and the count of distinct elements in the window will be equal to the size of the hash map.
+
+Store the frequency of first k elements in the hash map. Now start iterating from index = k,
+
+increase the frequency of arr[k] in the hash map.
+decrease the frequency of arr[i - k] in the hash map. If frequency of arr[i - k] becomes 0, remove arr[i] from the hash map.
+insert size of hash map into the resultant array.
+
+Time complexity: O(n), where n is the size of the input array.
+Auxiliary Space: O(k), as the size of the hash map or dictionary can be at most k.
+
+
+
+
