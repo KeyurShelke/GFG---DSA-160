@@ -1,0 +1,26 @@
+Table of Content
+
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+[Better Approach] Prefix Sum and Suffix Sum Array - O(n) Time and O(n) Space
+[Expected Approach] Running Prefix Sum and Suffix Sum - O(n) Time and O(1) Space
+
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+The most basic idea is to use nested loops.
+
+The outer loop iterates through all the indices one by one. Consider it as equilibrium index.
+The inner loop finds out whether index i is equilibrium index or not, by checking if left side sum = right side sum.
+
+[Better Approach] Prefix Sum and Suffix Sum Array - O(n) Time and O(n) Space
+The idea is to remove the need of inner loop. Instead of calculating the left side sum and right side sum each time, precompute the prefix sum array and suffix sum array, and simply access this in O(1) time.
+
+So for each index i, we can check if prefixSum[i - 1] = suffixSum[i + 1] but to avoid unnecessary boundary checks we can also check if prefixSum[i] = suffixSum[i].
+
+[Expected Approach] Running Prefix Sum and Suffix Sum - O(n) Time and O(1) Space
+Now the above prefix sum array and suffix sum array approach can be further optimized in terms of space, by using prefix sum and suffix sum variables. The idea is that instead of storing the prefix sum and suffix sum for each element in an array, we can simply use the fact that
+
+PrefixSum(arr[0 : pivot - 1]) + arr[pivot] + SuffixSum[pivot + 1: n - 1] = ArraySum
+
+so, SuffixSum[pivot + 1: n - 1] = ArraySum - PrefixSum(arr[0 : pivot - 1])
+
+Here, pivot refers to the index that we are currently checking for the equilibrium index.
+
