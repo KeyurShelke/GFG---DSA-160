@@ -1,0 +1,22 @@
+Longest Subarray With Equal Number of 0s and 1s
+Given an array arr[] containing only 0s and 1s, find the longest subarray which contains equal no of 0s and 1s.
+
+Examples: 
+
+Input: arr[] = [1, 0, 1, 1, 1, 0, 0]
+Output: 6
+Explanation: arr[1 ... 6] is the longest subarray with three 0s and three 1s.
+
+Input: arr[] = [0, 0, 1, 1, 0]
+Output: 4
+Explanation: arr[0 ... 3] or arr[1 ... 4] is the longest subarray with two 0s and two 1s.
+
+Input: arr[] = [0]
+Output: 0
+Explanation: There is no subarray with an equal number of 0s and 1s.
+
+Table of Content
+
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+[Expected Approach] Using Hashmap and Prefix Sum Technique - O(n) Time and O(n) Space
+

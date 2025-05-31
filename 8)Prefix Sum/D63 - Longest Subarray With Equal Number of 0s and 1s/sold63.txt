@@ -1,0 +1,18 @@
+Table of Content
+
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+[Expected Approach] Using Hashmap and Prefix Sum Technique - O(n) Time and O(n) Space
+\
+[Naive Approach] Using Nested Loop - O(n^2) Time and O(1) Space
+A simple approach is to generate all possible subarrays and check whether the subarray has equal number of 0s and 1s or not. To make this process easy we find cumulative sum of the subarrays taking 0s as -1 and 1s as +1. If the cumulative sum is equal to 0 for any subarray then update the current maximum length with the maximum of length of current subarray and its own value.
+
+[Expected Approach] Using Hash Map and Prefix Sum Technique - O(n) Time and O(n) Space
+If we consider every 0 as -1, then this problem become same as the longest subarray with 0 sum problem.
+
+We traverse the array and compute the prefix sum
+
+If current prefix sum == 0, it means that subarray from index (0) till present index has equal number of 0's and 1's.
+If we encounter a prefix sum value which we have already encountered before, which means that subarray from the previous index+1 till the present index has equal number of 0's and 1's as they give a cumulative sum of 0.
+In a nutshell this problem is equivalent to finding two indexes i & j in arr[], such that prefix sums till i and j are same, and (j - i) is maximum. To store the first occurrence of each unique cumulative sum value we use a hash map where if we get that value again we can find the subarray size and compare it with the maximum size found till now.
+
+
