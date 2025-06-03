@@ -1,0 +1,51 @@
+Table of Content
+
+[Expected Approach] Using Iterative Method - O(n) Time and O(1) Space
+[Alternate Approach - 1] Using Recursion - O(n) Time and O(n) Space
+[Alternate Approach - 2] Using Stack - O(n) Time and O(n) Space
+[Expected Approach] Using Iterative Method - O(n) Time and O(1) Space
+The idea is to reverse the links of all nodes using three pointers:
+
+prev: pointer to keep track of the previous node
+curr: pointer to keep track of the current node
+next: pointer to keep track of the next node
+Starting from the first node, initialize curr with the head of linked list and next with the next node of curr. Update the next pointer of curr with prev. Finally, move the three pointer by updating prev with curr and curr with next.
+
+Follow the steps below to solve the problem:
+
+Initialize three pointers prev as NULL, curr as head, and next as NULL.
+Iterate through the linked list. In a loop, do the following:
+Store the next node, next = curr -> next
+Update the next pointer of curr to prev, curr -> next = prev
+Update prev as curr and curr as next, prev = curr and curr = next
+
+Output
+Given Linked list: 1 2 3 4 5
+Reversed Linked List: 5 4 3 2 1
+[Alternate Approach - 1] Using Recursion - O(n) Time and O(n) Space
+The idea is to reach the last node of the linked list using recursion then start reversing the linked list from the last node.
+
+Follow the steps below to solve the problem:
+
+Divide the list in two parts - first node and rest of the linked list.
+Call reverse for the rest of the linked list.
+Link the rest linked list to first.
+Fix head pointer to NULL.
+
+Output
+Given Linked List: 1 2 3 4 5
+Reversed Linked List: 5 4 3 2 1
+[Alternate Approach - 2] Using Stack - O(n) Time and O(n) Space
+The idea is to traverse the linked list and push all nodes except the last node into the stack. Make the last node as the new head of the reversed linked list. Now, start popping the element and append each node to the reversed Linked List. Finally, return the head of the reversed linked list.
+
+Follow the steps below to solve the problem:
+
+Push all the nodes(values and address) except the last node in the stack.
+Once the nodes are pushed, update the Head pointer to the last node.
+Start popping the nodes and push them at the end of the linked list in the same order until the stack is empty.
+Update the next pointer of last node in the stack by NULL.
+
+Output
+Given Linked List: 1 2 3 4 5
+Reversed Linked List: 5 4 3 2 1
+

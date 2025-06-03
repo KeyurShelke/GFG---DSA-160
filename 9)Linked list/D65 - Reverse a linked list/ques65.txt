@@ -1,0 +1,17 @@
+Reverse a Linked List
+Given a linked list, the task is to reverse the linked list by changing the links between nodes.
+
+Examples: 
+
+Input: head: 1 -> 2 -> 3 -> 4 -> NULL
+Output: head: 4 -> 3 -> 2 -> 1 -> NULL
+
+Input: head: 1 -> 2 -> 3 -> 4 -> 5 -> NULL
+Output: head: 5 -> 4 -> 3 -> 2 -> 1 -> NULL
+
+Table of Content
+
+[Expected Approach] Using Iterative Method - O(n) Time and O(1) Space
+[Alternate Approach - 1] Using Recursion - O(n) Time and O(n) Space
+[Alternate Approach - 2] Using Stack - O(n) Time and O(n) Space
+
