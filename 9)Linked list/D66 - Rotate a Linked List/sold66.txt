@@ -1,0 +1,15 @@
+[Naive Approach] Shifting head node to the end k times - O(n * k) Time and O(1) Space
+To rotate a linked list to the left k places, we can repeatedly move the head node to the end of the linked list k times.
+
+Time Complexity: O(n * k), where n is the number of nodes in Linked List and k is the number of rotations.
+Auxiliary Space: O(1)
+
+[Expected Approach] By changing pointer of kth node - O(n) Time and O(1) Space
+The idea is to first convert the linked list to circular linked list by updating the next pointer of last node to the head of linked list. Then, traverse to the kth node and update the head of the linked list to the (k+1)th node. Finally, break the loop by updating the next pointer of kth node to NULL..
+
+How to handle large values of k?
+
+For a linked list of size n, if we rotate the linked list to the left by n places, then the linked list will remain unchanged and if we rotate the list to the left by (n + 1) places, then it is same as rotating the linked list to the left by 1 place. Similarly, if we rotate the linked list k (k >= n) places to the left, then it is same as rotating the linked list by (k % n) places. So, we can simply update k with k % n to handle large values of k.
+
+Time Complexity: O(n), where n is the number of nodes in linked list.
+Auxiliary Space: O(1)
