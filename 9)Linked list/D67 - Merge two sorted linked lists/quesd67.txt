@@ -1,0 +1,8 @@
+Merge two sorted linked lists
+Given two sorted linked lists consisting of n and m nodes respectively. The task is to merge both of the lists and return the head of the merged list.
+
+Table of Content
+
+[Naive Approach] By Using Array - O((n+m)*log(n+m)) Time and O(n+m) Space
+[Better Approach] Using Recursive Merge - O(n+m) Time and O(n+m) Space
+[Efficient Approach] Using Iterative Merge - O(n+m) Time and O(1) Space
