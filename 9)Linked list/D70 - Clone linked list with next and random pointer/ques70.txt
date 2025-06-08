@@ -1,0 +1,7 @@
+Given a linked list of size n where each node has two links: next pointer pointing to the next node and random pointer to any random node in the list. The task is to create a clone of this linked list.
+
+Table of Content
+
+[Naive Approach - 1] Using Hashing - O(2n) Time and O(2n) Space
+[Naive Approach - 2] Using Hashing and Recursion- O(n) Time and O(3n) Space
+[Expected Approach] By Inserting Nodes In-place - O(3n) Time and O(1) Space
