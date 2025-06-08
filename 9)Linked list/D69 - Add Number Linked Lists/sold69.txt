@@ -1,0 +1,29 @@
+Table of Content
+
+[Naive Approach] By creating a new list – O(m + n) Time and O(max(m, n)) Space
+[Expected Approach] By storing sum on the longer list - O(m + n) Time and O(1) Space
+[Other Approach] Using Recursion - O(m + n) Time and O(max(m, n)) Space
+[Naive Approach] By creating a new list – O(m + n) Time and O(max(m, n)) Space
+To sum two linked lists, start by creating an empty linked list, say result, for the sum. Reverse both original linked lists to start from the least significant digit.
+
+Use two pointers to traverse the reversed lists simultaneously. For each pair of nodes, compute their sum and if the sum exceeds 9, store the remainder(sum modulo 10) in the new node and forward the carry to the next pair of nodes. Append each new node to result.
+
+Continue until both lists are fully traversed, handling any remaining nodes from the longer list and carrying over any final carry. Finally, reverse the result linked list to get the sum of the two linked list.
+
+utput
+1 1 2 2 
+Time Complexity: O(m + n), where m and n are the sizes of input linked list.
+Auxiliary Space: O(max(m, n)), as we create a new linked list to store the sum of two linked lists.
+
+[Expected Approach] By storing sum on the longer list - O(m + n) Time and O(1) Space
+The idea is to iterate over both the linked list simultaneously and instead of creating a new linked list to store the result, we can store the result in the longer list itself. If we are left with some carry after traversing both the linked list, we can create a new node and append it at the end of the longer linked list.
+
+Output
+1 1 2 2 
+Time Complexity: O(m + n), where m and n are the sizes of input linked list.
+Auxiliary Space: O(1), as no extra linked list is used to store the sum.
+
+[Other Approach] Using Recursion - O(m + n) Time and O(max(m, n)) Space
+The idea is to use recursion to compute the sum. Recursively move to the end of the lists, calculate the sum of the last nodes (including any carry from previous additions), while backtracking add up the sums together.
+
+For a more detailed solution and code, check this article Add two numbers represented as Linked List using Recursion.

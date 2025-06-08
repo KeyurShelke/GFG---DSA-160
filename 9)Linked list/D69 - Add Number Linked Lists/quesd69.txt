@@ -1,0 +1,24 @@
+Add Two Numbers Represented as Linked List
+Given two numbers represented as two lists, the task is to return the sum of two lists.
+
+Note: There can be leading zeros in the input lists, but there should not be any leading zeros in the output list.
+
+Examples:
+
+Input: num1 = 4 -> 5, num2 = 3 -> 4 -> 5
+Output: 3 -> 9 -> 0 
+Explanation: Sum of 45 and 345 is 390.
+
+Input: num1 = 0 -> 0 -> 6 -> 3, num2 = 0 -> 7
+Output: 7 -> 0
+Explanation: Sum of 63 and 7 is 70.
+
+Input: num1 = 1 -> 2 -> 3, num2 = 9 -> 9 -> 9
+Output: 1 -> 1 -> 2 -> 2
+Explanation: Sum of 123 and 999 = 1122.
+
+Table of Content
+
+[Naive Approach] By creating a new list – O(m + n) Time and O(max(m, n)) Space
+[Expected Approach] By storing sum on the longer list - O(m + n) Time and O(1) Space
+[Other Approach] Using Recursion - O(m + n) Time and O(max(m, n)) Space
