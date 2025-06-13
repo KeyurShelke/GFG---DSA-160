@@ -1,0 +1,40 @@
+Print all Unique permutations of a given string.
+Given a string that may contain duplicates, the task is find all unique permutations of given string in any order.
+
+Examples: 
+
+Input: "ABC"
+Output: ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"]
+Explanation: Given string ABC has 6 unique permutations as "ABC", "ACB", "BAC", "BCA", "CAB" and "CBA".
+
+Input: "AAA"
+Output: ["AAA"]
+Explanation: No other unique permutations can be formed as all the characters are same.
+
+Table of Content
+
+[Naive Approach] Generating All Permutations
+[Expected Approach] Generating Only Unique Permutations
+[Naive Approach] Generating All Permutations
+The idea is to generate all possible permutations of a given string and store them in a hash set. The generated permutations were stored in hash set, to ensures that only unique permutations are retained as hashset does not allow duplicates. Once all permutations have been generated, we transfer the permutations from hash set to the result array.
+
+This method is particularly useful when dealing with input strings that contain duplicate characters. Instead of manually handling the duplicates during the permutation generation, the use of a unordered set simplifies the process by eliminating duplicates automatically.
+
+Output
+CBA BAC CAB BCA ABC ACB 
+Time Complexity: O(n*n!), where n is the size of the array.
+Auxiliary Space: O(n!), space used by hash set.
+
+[Expected Approach] Generating Only Unique Permutations
+This approach is similar to generating all possible permutation. Now in this approach, while generating the permutations, at each index during recursion, we only consider the unique available characters. To track the availability of characters we use hash map.
+
+Duplicate permutations are generated in the previous approach because it treats identical characters, like the two 'B's in "ABBC," as distinct due to their indices. For example, when placing a 'B' at an index, choosing the first or second 'B' results in the same permutation (e.g., "ABBC" or "ABBC" again), leading to duplicates.
+
+In this approach, we prune branches in the recursive tree that would generate duplicate permutations and place only unique available characters at each index.
+
+Output
+CBA CAB BCA BAC ACB ABC 
+Time Complexity: O(n*n!), In worst case all characters were unique, so it take time equal to generating all permutations.
+Auxiliary Space: O(n), used by temporary string and hash map.
+ 
+
