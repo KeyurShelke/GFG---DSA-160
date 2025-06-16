@@ -1,0 +1,45 @@
+Write program to calculate pow(b, e)
+Given two numbers b and e, the task is to implement a function to compute b^e.
+
+Examples: 
+
+Input: b = 3.00000, e = 5
+Output: 243.00000
+
+Input: b = 0.55000, e = 3
+Output: 0.16638
+
+Input: b = -0.67000, e = -7
+Output: -16.49971
+
+Table of Content
+
+[Naive Approach 1] Using Iteration - O(e) Time and O(1) Space
+[Naive Approach 2] Using Recursion - O(e) Time and O(e) Space
+[Expected Approach] Using Divide and Conquer - O(log e) Time and O(log e) Space
+Using Inbuilt Functions - O(log e) Time and O(1) Space
+[Naive Approach 1] Using Iteration - O(e) Time and O(1) Space
+The idea is to simply multiply b exactly e times using a iterative loop.
+
+Output
+243
+[Naive Approach 2] Using Recursion - O(e) Time and O(e) Space
+The idea is to recursively multiply b exactly e times. To do so, define a recursive function that return b, if e > 0 else returns 1.
+
+Output
+243
+[Expected Approach] Using Divide and Conquer - O(log e) Time and O(log e) Space
+The idea is to use Divide and Conquer and recursively bisect e in two equal parts. There are two possible cases:
+
+If e is even: power(b, e) = power(b, e / 2) * power(b, e / 2);
+If e is odd: power(b, e) = b * power(b, e / 2) * power(b, e / 2);
+
+Output
+243
+Using Inbuilt Functions - O(log e) Time and O(1) Space
+The idea is to use inbuilt functions provided by various languages to calculate b^e.
+
+Like in C++, pow(b, e) can be used to calculate b^e. Similarly, in Python, the exact same function can be used, or the **operator can be used to find the power.
+
+Output
+243
