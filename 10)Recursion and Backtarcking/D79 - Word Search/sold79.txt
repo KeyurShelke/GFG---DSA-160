@@ -1,0 +1,37 @@
+
+Word Search - Check if a word exists in a grid or not
+Given a 2-D grid of characters mat[][] and a string word, the task is to check if that word exist in the grid mat[][] or not. A word can be matched in 4 directions at any point. The 4 directions are horizontally left and right, vertically up and down. 
+
+Examples: 
+
+Input: mat[][] = [['T', 'E', 'E'],
+['S', 'G', 'K'],
+['T', 'E', 'L']]
+word = "GEEK"
+Output: true
+Explanation: Word "GEEK" can be found in the given grid as follows
+
+Input: mat[][] = [['T', 'E', 'U'],
+['S', 'G', 'K'],
+['T', 'E', 'L']]
+word = "GEEK"
+Output: false
+Explanation: Word "GEEK" cannot be found in the given grid.
+
+Using Backtracking
+The idea is to use backtracking to find a word in a grid by exploring different paths.
+
+We traverse through the entire grid, and whenever we find the first letter of the word, we start a recursive search from that cell.
+From the current matching cell, we check all four possible directions (down, right, up, left) to continue matching the remaining letters of the word.
+As we explore each direction, we temporarily replace the value with another value the current cell to mark it as visited to avoid using this cell twice within the same path. After exploring a path, we backtrack by placing the original value at the cell, allowing it to be reused in other paths.
+When all characters of the word were successfully matched, return true.
+Note: When we go out of bounds or hit an unmatched character, we backtrack to previous matched cell and try another direction.
+
+Output
+Yes
+Time Complexity: O(n * m * 3wLen) , where n and m are number of rows and columns of 2-D character array mat[][], and wLen is length of string word.
+
+In the backtracking function, we have four directions to explore. However, as we move forward, our choices decrease to three because we won't go back to the direction we just came from. We can visualize our recursive tree as a 3-ary tree with a height of wLen. Thus, the time complexity of the recursive function is O( 3wLen ).
+This recursive function can be called n * m times in the worst case, so the total time complexity is O(n * m * 3wLen).
+Auxiliary Space: O(wLen), which is the memory stack space used during recursion.
+

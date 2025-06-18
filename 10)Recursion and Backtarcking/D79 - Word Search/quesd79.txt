@@ -1,0 +1,18 @@
+You are given a two-dimensional mat[][] of size n*m containing English alphabets and a string word. Check if the word exists on the mat. The word can be constructed by using letters from adjacent cells, either horizontally or vertically. The same cell cannot be used more than once.
+
+Examples :
+
+Input: mat[][] = [['T', 'E', 'E'], ['S', 'G', 'K'], ['T', 'E', 'L']], word = "GEEK"
+Output: true
+
+Word Search - Check if a word exists in a grid or not
+Given a 2-D grid of characters mat[][] and a string word, the task is to check if that word exist in the grid mat[][] or not. A word can be matched in 4 directions at any point. The 4 directions are horizontally left and right, vertically up and down. 
+
+Examples: 
+
+Input: mat[][] = [['T', 'E', 'E'],
+['S', 'G', 'K'],
+['T', 'E', 'L']]
+word = "GEEK"
+Output: true
+Explanation: Word "GEEK" can be found in the given grid as follows
