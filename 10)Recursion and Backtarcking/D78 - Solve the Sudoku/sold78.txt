@@ -1,0 +1,46 @@
+Algorithm to Solve Sudoku | Sudoku Solver
+Given an incomplete Sudoku in the form of matrix mat[][] of order 9*9, the task is to complete the Sudoku.
+A sudoku solution must satisfy all of the following rules:
+
+Each of the digits 1-9 must occur exactly once in each row.
+Each of the digits 1-9 must occur exactly once in each column.
+Each of the digits 1-9 must occur exactly once in each of the 9, 3x3 sub-boxes of the grid.
+Note: Zeros in the mat[][] indicate blanks, which are to be filled with some number between 1 to 9. You can not replace the element in the cell which is not blank.
+
+Explanation: Each row, column and 3*3 box of the output matrix contains unique numbers.
+
+[Naive Approach] Using Backtracking
+The idea is to use backtracking and recursively generate all possible configurations of numbers from 1 to 9 to fill the empty cells of matrix mat[][]. To do so, for every unassigned cell, fill the cell with a number from 1 to 9 one by one. After filling the unassigned cell check if the matrix is safe or not. If safe, move to the next cell else backtrack for other cases.
+
+To check if it is safe to place value num in the cell mat[i][j], iterate through all the columns of row i, rows of column j and the 3*3 matrix containing cell (i, j) and check if they already has value num, if so return false, else return true.
+
+Output
+3 1 6 5 7 8 4 9 2 
+5 2 9 1 3 4 7 6 8 
+4 8 7 6 2 9 5 3 1 
+2 6 3 4 1 5 9 8 7 
+9 7 4 8 6 3 1 2 5 
+8 5 1 7 9 2 6 4 3 
+1 3 8 9 4 7 2 5 6 
+6 9 2 3 5 1 8 7 4 
+7 4 5 2 8 6 3 1 9 
+Time complexity: O(n*9(n*n)), For every unassigned index, there are 9 possible options and for each index, we are checking other columns, rows and boxes.
+Auxiliary Space: O(1)
+
+[Expected Approach] Using Bit Masking with Backtracking - O(9(n*n)) Time and O(n) Space
+In the above approach, isSafe() function which is used to check if it is safe to place number num in cell (i, j) searches for num in each row, col and box. The idea is to optimize this using Bit Masking. To do so, create three arrays rows[], cols[], boxs[] of size n to mark the used value in row, column and box respectively. The element row[i] marks the number already been used in row i, and so do cols[] and boxs[] for columns and boxes. To mark the number num of row i, set the bit num from left of row[i] and operate similarly for cols[] and boxs[]. Similarly, to unmark the value num, unset the bits set in current step.
+
+
+Output
+3 1 6 5 7 8 4 9 2 
+5 2 9 1 3 4 7 6 8 
+4 8 7 6 2 9 5 3 1 
+2 6 3 4 1 5 9 8 7 
+9 7 4 8 6 3 1 2 5 
+8 5 1 7 9 2 6 4 3 
+1 3 8 9 4 7 2 5 6 
+6 9 2 3 5 1 8 7 4 
+7 4 5 2 8 6 3 1 9 
+Time complexity: O(9(n*n))
+Auxiliary Space: O(n)
+
