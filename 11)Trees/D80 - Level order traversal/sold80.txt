@@ -1,0 +1,24 @@
+Table of Content
+
+How does Level Order Traversal work?
+[Naive Approach] Using Recursion - O(n) time and O(n) space
+[Expected Approach] Using Queue (Iterative) - O(n) time and O(n) space
+How does Level Order Traversal work?
+Level Order Traversal visits all nodes at a lower level before moving to a higher level. It can be implemented using:
+
+Recursion
+Queue (Iterative)
+[Naive Approach] Using Recursion - O(n) time and O(n) space
+The idea is to traverse the tree recursively, passing the current node and its level, starting with the root at level 0. For each visited node, its value is added to the result array, by considering the value of current level as an index in the result array.
+
+Output
+[5] [12, 13] [7, 14, 2] [17, 23, 27, 3, 8, 11] 
+[Expected Approach] Using Queue (Iterative) - O(n) time and O(n) space
+Looking at the examples, it's clear that tree nodes need to be traversed level by level from top to bottom. Since the tree structure allows us to access nodes starting from the root and moving downward, this process naturally follows a First-In-First-Out (FIFO) order. So we can use queue data structure to perform level order traversal.
+
+Output
+[5] [12, 13] [7, 14, 2] [17, 23, 27, 3, 8, 11] 
+Problems Based on Level Order Traversal
+Print level order traversal line by line
+Connect nodes at same level
+ZigZag Tree Traversal
