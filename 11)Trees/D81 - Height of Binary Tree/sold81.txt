@@ -1,0 +1,34 @@
+Table of Content
+
+[Approach 1] Using Recursion - O(n) Time and O(h) Space
+[Approach 2] Level Order Traversal - O(n) Time and O(n) Space
+[Approach 1] Using Recursion - O(n) Time and O(h) Space
+The idea is to recursively calculate the height of the left and the right subtrees of a node and then find height to the node as max of the heights of two children plus 1.
+
+Algorithm:
+
+If the tree is empty, return -1.
+Otherwise, do the following:
+Get the height of the left subtree recursively, i.e., call height(node->left).
+Get the height of the right subtree recursively, i.e., call height(node->right).
+Compute the maximum of the heights of the left and right subtrees and add 1 to it for the current node.
+height = max(height of left subtree, height of right subtree) + 1.
+Return the height.
+
+
+
+[Approach 2] Level Order Traversal - O(n) Time and O(n) Space
+If we take a closer look at the breadth first traversal, we can notice that after we process the last node of the current level, the queue contains all the nodes of next level. This is true from the root (or first level) So we get the size of the queue in a loop to count the nodes of every level.
+
+Algorithm:
+
+Initialize an empty queue q to store nodes of the tree and a variable depth to keep track of the number of levels.
+Push the root node into the queue q.
+While the queue is not empty:
+Store the number of nodes at the current level as levelSize (the size of the queue).
+For each node in the current level (loop from 0 to levelSize):
+Dequeue the front element from the queue (i.e., process the node).
+If the node has a left child, enqueue it.
+If the node has a right child, enqueue it.
+After processing all nodes at the current level, increment the depth.
+Return depth - 1 as the number of edges encountered will be one less than number of nodes.

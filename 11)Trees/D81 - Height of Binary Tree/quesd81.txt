@@ -1,0 +1,10 @@
+Maximum Depth of Binary Tree
+Given a binary tree, the task is to find the maximum depth of the tree. The maximum depth or height of the tree is the number of edges in the tree from the root to the deepest node.
+
+Output: 2
+Explanation: The longest path from the root (node 12) goes through node 8 to node 5, which has 2 edges.
+
+Table of Content
+
+[Approach 1] Using Recursion - O(n) Time and O(h) Space
+[Approach 2] Level Order Traversal - O(n) Time and O(n) Space
