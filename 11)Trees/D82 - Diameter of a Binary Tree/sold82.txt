@@ -1,0 +1,22 @@
+Table of Content
+
+[Naive Approach] Using Top Down Recursion - O(n^2) Time and O(h) Space
+[Expected Approach] Using Bottom Up Recursive - O(n) Time and O(h) Space
+[Naive Approach] Using Top Down Recursion - O(n^2) Time and O(h) Space
+The idea is to recursively traverse the tree. For each node, find the height of left subtree and right subtree and compare the diameter (sum of height of left subtree + height of right subtree) with the maximum diameter.
+
+For implementation refer: Diameter of a Binary Tree using Top Down Recursion
+
+[Expected Approach] Using Bottom Up Recursive - O(n) Time and O(h) Space
+The idea is to optimize the above approach by calculating the height in the same recursive function rather than calculating it separately.
+
+Step by step approach:
+
+Initialize a variable ans, which will store the diameter of the tree. (initially set to 0).
+Recursively traverse the binary tree. For each node, find the height of the left and right subtree. Then compare the sum of (height of left subtree + height of right subtree) with the ans variable. If it is greater than ans, then update the value of ans.
+
+
+
+Time Complexity: O(n), where n is the number of nodes in tree.
+Auxiliary Space: O(h) due to recursive calls.
+
