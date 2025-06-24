@@ -1,0 +1,12 @@
+Table of Content
+
+[Naive Approach] Using Pre-order traversal - O(n^2) Time and O(h) Space
+[Expected Approach] Using Pre-order traversal and Hash map - O(n) Time and O(n) Space
+[Naive Approach] Using Pre-order traversal - O(n^2) Time and O(h) Space
+The idea is to construct the tree using pre-order traversal. Take the first element of the pre-order array and create root node. Find the index of this node in the in-order array. Create the left subtree using the elements present on left side of root node in in-order array. Similarly create the right subtree using the elements present on the right side of the root node in in-order array.
+
+[Expected Approach] Using Pre-order traversal and Hash map - O(n) Time and O(n) Space
+The idea is similar to first approach, but instead of linearly searching the in-order array for each node we can use hashing. Map the values of in-order array to its indices. This will reduce the searching complexity from O(n) to O(1).
+
+Output
+0 1 2 3 4 5 
