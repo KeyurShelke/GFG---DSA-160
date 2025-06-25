@@ -1,0 +1,19 @@
+Approach:
+
+Using Morris Traversal, we can traverse the tree without using stack and recursion. The idea of Morris Traversal is based on Threaded Binary Tree. In this traversal, we first create links to Inorder successor and print the data using these links, and finally revert the changes to restore original tree. Although the tree is modified through the traversal, it is reverted back to its original shape after the completion. Unlike Stack based traversal, no extra space is required for this traversal.
+
+Step by step implementation:
+
+Initialize current as root and repeat the following steps, as long as the current node is not NULL.
+If the current node does not have a left child, print its data and move to the right, i.e., current = current->right.
+Else, find inorder predecessor of current (rightmost node in current left subtree or node whose right child is equal to current).
+If we found that right child of inorder predecessor is equal to current then,
+update its the right child as NULL and print current’s data.
+Go to the right, i.e. current = current->right.
+Else
+Make current as the right child of its inorder predecessor; and
+Go to current's left child, i.e., current = current->left.
+
+Time Complexity: O(n), if we take a closer look, we can notice that every edge of the tree is traversed at most three times.
+Auxiliary Space: O(1), as we are using only constant variables.
+ 

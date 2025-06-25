@@ -1,0 +1,12 @@
+Given a Binary Tree, your task is to return its In-Order Traversal.
+
+An inorder traversal first visits the left child (including its entire subtree), then visits the node, and finally visits the right child (including its entire subtree).
+
+Follow Up: Try solving this with O(1) auxiliary space.
+
+Examples:
+
+Input: root[] = [1, 2, 3, 4, 5] 
+
+Output: [4, 2, 5, 1, 3]
+Explanation: The in-order traversal of the given binary tree is [4, 2, 5, 1, 3].
