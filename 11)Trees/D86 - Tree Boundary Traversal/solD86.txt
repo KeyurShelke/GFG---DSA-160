@@ -1,0 +1,30 @@
+The boundary includes:
+
+left boundary (nodes on left excluding leaf nodes)
+leaves (consist of only the leaf nodes)
+right boundary (nodes on right excluding leaf nodes)
+The left boundary is defined as the path from the root to the left-most leaf node (excluding leaf node itself).
+The right boundary is defined as the path from the root to the right-most leaf node (excluding leaf node itself).
+
+Note: If the root doesn't have a left subtree or right subtree, then the root itself is the left or right boundary. 
+
+Table of Content
+
+[Approach - 1] Using Recursion - O(n) Time and O(h) Space
+[Approach - 2] Using Iteration and Morris Traversal - O(n) Time and O(1) Space
+[Approach - 1] Using Recursion - O(n) Time and O(h) Space
+The idea is to traverse the boundary of the binary tree in three parts:
+
+Collect Left Boundary Nodes: Collects all nodes from the root’s left child, excluding leaf nodes, until a leaf is reached.
+Collect Leaf Nodes: Using recursion traverse the tree and collect all leaf nodes in the result.
+Collect Right Boundary Nodes: Collects all nodes from the root’s right child, excluding leaf nodes, in reverse order.
+By combining these parts, we achieve the desired boundary traversal. Each part is collected using recursive functions for left boundary, leaf nodes, and right boundary traversal.
+
+
+[Approach - 2] Using Iteration and Morris Traversal - O(n) Time and O(1) Space
+The idea is to reduce the auxiliary space used by the memory stack in the above approach. This approach is similar to the previous one, but instead of recursion, we use iteration to find the left and right boundaries, and use Morris Traversal to find the leaf nodes.
+
+Output
+20 8 4 10 14 25 22 
+
+
