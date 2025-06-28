@@ -1,0 +1,27 @@
+Given a binary tree and an integer k, determine the number of downward-only paths where the 
+sum of the node values in the path equals k. A path can start and end at any node within 
+the tree but must always move downward (from parent to child).
+
+Input: k = 7   
+
+Output: 3
+Explanation: The following paths sum to k
+
+Table of Content
+
+[Naive Approach] By Exploring All Possible Paths - O(n^2) Time and O(h) Space
+[Expected Approach] Using Prefix Sum Technique - O(n) Time and O(n) Space
+[Naive Approach] By Exploring All Possible Paths - O(n^2) Time and O(h) Space
+The simplest approach to solve this problem is that, for each node in the tree, we consider it as the starting point of a path and explore all possible paths that go downward from this node. We calculate the sum of each path and check if it equals k.
+
+[Expected Approach] Using Prefix Sum Technique - O(n) Time and O(n) Space
+Prerequisite: The approach is similar to finding subarray with given sum.
+
+To solve this problem, we can use the concept of prefix sums with a hashmap to efficiently track the sum of paths in the binary tree. The prefix sum up to a node is the sum of all node values from the root to that node.
+
+We traverse the tree using recursion and by storing the prefix sums of current path from root in a hashmap, we can quickly find if there are any sub-paths that sum to the target value k by checking the difference between the current prefix sum and k.
+
+If the difference (current prefix sum - k) exists in the hashmap, it means there exists one or more paths, ending at the current node, that sums to k so we increment our count accordingly.
+
+K_Sum_Paths_00.webp
+
