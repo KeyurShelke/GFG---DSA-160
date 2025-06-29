@@ -1,0 +1,57 @@
+Given the root of a binary tree. Check whether it is a BST or not.
+Note: We are considering that BSTs can not contain duplicate Nodes.
+A BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+Examples:
+
+Input: root = [2, 1, 3, N, N, N, 5]
+
+Output: true 
+Explanation: The left subtree of every node contains smaller keys and right subtree of every node contains greater keys. Hence, the tree is a BST.
+
+
+Table of Content
+
+[Approach - 1] Using specified range of Min and Max Values - O(n) Time and O(h) Space
+[Approach - 2] Using Inorder Traversal - O(n) Time and O(h) Space
+[Approach - 3] Using Morris Traversal - O(n) Time and O(1) Space
+[Approach - 1] Using specified range of Min and Max Values - O(n) Time and O(h) Space
+The idea is to use a recursive helper function, isBSTUtil(node, min, max) to check whether a subtree (rooted at a given node) is a binary search tree (BST) within a specified range of minimum (min) and maximum (max) values. If it falls outside this range, it violates BST properties, so we return false.
+
+For the left subtree, we call isBSTUtil() with the updated range as the max is set to (node->data - 1 ) because all values in the left subtree must be smaller than the current node's value.
+For the right subtree, we call isBSTUtil() with the updated range as the min is set to (node->data + 1) because all values in the right subtree must be greater than the current node's value.
+Both recursive calls must return true for the entire subtree to be a valid BST.
+
+Output
+False
+Time Complexity: O(n), where n is the number of nodes, as each node is visited once.
+Auxiliary Space: O(h), where h is the height of the tree, due to recursive calls (worst case O(n) for a skewed tree, O(log n) for a balanced tree).
+
+[Approach - 2] Using Inorder Traversal - O(n) Time and O(h) Space
+The idea is to use inorder traversal of a binary search tree, in which the output values are sorted in ascending order. After generating the inorder traversal of the given binary tree, we can check if the values are sorted or not.
+
+Note: We can avoid the use of an Auxiliary Array. While doing In-Order traversal, we can keep track of previously visited value. If the value of the currently visited node is less than the previous value, then the tree is not BST.
+
+Output
+False
+Time Complexity: O(n), where n is the number of nodes, as each node is visited once in inorder traversal.
+Auxiliary Space: O(h), where h is the height of the tree, due to recursive calls (worst case O(n) for a skewed tree, O(log n) for a balanced tree).
+
+[Approach - 3] Using Morris Traversal - O(n) Time and O(1) Space
+The idea is to use Morris Traversal for checking if a binary tree is a Binary Search Tree (BST) without using extra space for storing the inorder traversal.
+
+Follow the steps below to solve the problem:
+
+Start with the root node and traverse the tree while maintaining a pointer to the current node.
+For each node, find its inorder predecessor (the rightmost node in its left subtree). Use this node to temporarily link back to the current node.
+If the left child exists, create a temporary thread from the inorder predecessor to the current node.
+If the left child does not exist, process the current node's data and move to its right child.
+Once you visit the current node, restore the tree by removing the temporary thread. Check the inorder property and proceed to the right child.
+Compare the current node’s value with the previously visited node’s value.
+Continue this process until all nodes are visited. If all nodes satisfy the BST property, then the tree is a BST.
+
+Output
+False
