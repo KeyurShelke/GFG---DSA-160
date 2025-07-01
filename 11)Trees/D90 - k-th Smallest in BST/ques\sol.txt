@@ -1,0 +1,19 @@
+Given a BST and an integer k, the task is to find the kth smallest element in the BST. If there is no kth smallest element present then return -1.
+
+Examples:
+
+Input: root = [2, 1, 3], k = 2
+
+Output: 2
+Explanation: 2 is the 2nd smallest element in the BST.
+
+Table of Content
+
+[Expected Approach] Using In-Order traversal - O(k) Time and O(h) Space
+[Alternate Approach] Using Augmented Tree - O(h) Time and O(h) Space
+[Expected Approach] Using In-Order traversal - O(k) Time and O(h) Space
+The idea is to traverse the binary search tree using in-order traversal while maintaining the count of nodes traversed. If the node count becomes equal to k, then return the node.
+
+[Alternate Approach] Using Augmented Tree - O(h) Time and O(h) Space
+The idea is to include a new data member ''lCount for each node. We can keep track of elements in the left subtree of every node while building the tree and storing it in this new data member.
+Assuming that the root is having 'lCount' nodes in its left subtree. If k is equal to lCount + 1, then root is k-th node. If k is less than lCount + 1, we will continue our search (recursion) for the kth smallest element in the left subtree of root. If k is greater than lCount + 1, we continue our search in the right subtree. Note that we need the count of elements in the left subtree only.
