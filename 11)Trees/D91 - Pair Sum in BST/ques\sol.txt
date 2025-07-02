@@ -1,0 +1,18 @@
+Given a Binary Search Tree(BST) and a target. Check whether there's a pair of Nodes in the BST with value summing up to the target. 
+
+Examples:
+
+Input: root = [7, 3, 8, 2, 4, N, 9], target = 12
+       bst
+Output: True
+Explanation: In the binary tree above, there are two nodes (8 and 4) that add up to 12.
+
+[Expected Approach 1] Using Hash Set - O(n) time and O(n) space
+The idea is that if we know one number in the pair, say x, we only need to check if the other number, target - x, exists in the tree. As we traverse the tree, we can store the values we've encountered in a HashSet. For each node, we check if target - node's value is in the hashset. If it is, we return true. If not, we add the current node's value to the set and continue traversing.
+
+Note: This approach works for binary trees as well.
+
+[Expected Approach 2] Using Inorder Traversal and Two Pointers - O(n) time and O(n) space
+The idea is to create an auxiliary array and store the Inorder traversal of BST in the array. The array will be sorted as Inorder traversal of BST always produces sorted array. Now we can apply Two pointer technique to find the pair of integers with sum equal to target.
+(Refer Two sum for details).
+
