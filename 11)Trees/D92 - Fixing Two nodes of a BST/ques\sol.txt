@@ -1,0 +1,44 @@
+Given the root of a Binary search tree(BST), where exactly two nodes were swapped by mistake. Your task is to fix (or correct) the BST by swapping them back. Do not change the structure of the tree.
+Note: It is guaranteed that the given input will form BST, except for 2 nodes that will be wrong. All changes must be reflected in the original Binary search tree(BST).
+ 
+Examples :
+Input: root = [10, 5, 8, 2, 20]
+     
+Output: 1
+
+Table of Content
+
+[Naive Approach] Inorder Traversal and Sorting - O(n * log n) Time and O(n) Space
+[Expected Approach] Using One Traversal - O(n) Time and O(h) Space
+[Naive Approach] Inorder Traversal and Sorting - O(n * log n) Time and O(n) Space
+The in-order traversal of a BST produces a sorted array. So a simple method is to store inorder traversal of the input tree in an auxiliary array. Sort the auxiliary array. Finally, insert the auxiliary array elements back to the BST, keeping the structure of the BST same. 
+
+We can solve this in O(n) time and with a single traversal of the given BST. 
+
+[Expected Approach] Using One Traversal - O(n) Time and O(h) Space
+Since Inorder traversal of BST is always a sorted array, the problem can be reduced to a problem where two elements of a sorted array are swapped. We do Inorder traversal of the tree and whenever we find nodes out of sorted order, we store those nodes.
+
+Two cases arise:
+
+The two are not adjacent. In this case we find two violations.
+The two swapped nodes are adjacent in Inorder. We find only one violation in this case.
+
+Illustration:
+
+1. The swapped nodes are not adjacent in the in-order traversal of the BST. 
+
+ For example, Nodes 5 and 25 are swapped in [3 5 7 8 10 15 20 25]. 
+ The inorder traversal of the given tree became [3 25 7 8 10 15 20 5].
+Observe carefully, during inorder traversal, node 7 is smaller than the previously visited node 25. Here save the context of node 25 (previous node). Again, find that node 5 is smaller than the previous node 20. This time, save the context of node 5 (the current node ). Finally, swap the two node's values.
+2. The swapped nodes are adjacent in the inorder traversal of BST.
+
+For example, Nodes 7 and 8 are swapped in [3 5 7 8 10 15 20 25]. 
+  The inorder traversal of the given tree is [3 5 8 7 10 15 20 25]. 
+Here only one point exists where a node value is smaller than the previous node value. e.g. node 7 is smaller than node 8. 
+We maintain three-pointers, first, middle, and last. When the first point where the current node value is smaller than the previous node value is found, update the first with the previous node & the middle with the current node. 
+When we find the second point where the current node value is smaller than the previous node value, we update the last with the current node.
+If the last node value is null, then two swapped nodes of BST are adjacent i.e. first and middle otherwise first and last.
+
+
+Output
+1 2 3 6 7 10 12 
