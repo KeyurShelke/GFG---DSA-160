@@ -1,0 +1,44 @@
+Given an array of points where each point is represented as points[i] = [xi, yi] on the X-Y plane and an integer k, return the k closest points to the origin (0, 0).
+
+The distance between two points on the X-Y plane is the Euclidean distance, defined as: 
+
+sqrt( (x2 - x1)2 + (y2 - y1)2 )
+
+Note: You can return the k closest points in any order, driver code will sort them before printing.
+
+Examples:
+
+Input: k = 2, points[] = [[1, 3], [-2, 2], [5, 8], [0, 1]]
+Output: [[-2, 2], [0, 1]]
+Explanation: The Euclidean distances from the origin are:
+Point (1, 3) = sqrt(10)
+Point (-2, 2) = sqrt(8)
+Point (5, 8) = sqrt(89)
+Point (0, 1) = sqrt(1)
+The two closest points to the origin are [-2, 2] and [0, 1].
+
+[Naive Approach] Using Sorting - O(n*log n) Time and O(1) Space
+The idea is that if the distance of point a from the origin is smaller than the distance of point b (i.e., dis(a) < dis(b)), then the square of the distance of point a (dis(a)^2) will also be smaller than the square of the distance of point b (dis(b)^2). By using this property, we will create a custom comparator that sorts the points based on their squared distances from the origin. After sorting the array in this way, we simply return the first k points from the sorted list, which will be the closest ones to the origin.
+
+[Expected Approach] Using Priority Queue (Max-Heap) - O(n*log k) Time and O(k) Space
+The idea is to use a priority queue (max-heap) to keep track of the k closest points to the origin based on their squared distances. After each iteration over the array, we update our queue so that the priority queue always contains the k closest points.
+
+Step by step implementation
+
+We iterate through each point in the array:
+If the max-heap size is less than k, we simply insert points[i] into the heap.
+If the heap size is k, either points[i] or the top element of the heap will not be among the k closest points. We compare points[i] with the top element:
+If the top element is closer to origin , we ignore points[i] and move to the next point.
+If points[i] is closer , we replace the top element of heap by popping it and inserting points[i] into the heap.
+By this we ensures that heap always contains k closest point.
+
+[Alternate Approach] Using Quick Select Algorithm
+The idea is to use the partitioning step of QuickSort to find the k Closest Points to the Origin. When sorting the Points in the ascending order, the partitioning step rearranges the points in a way that all points nearer to origin than a chosen pivot (usually the last element) are placed on its left, and all points farther to the origin than the pivot are placed on its right. And pivot point is placed in its correct sorted position.
+After each partition, we compare the number of elements in the left part of the array (which contains all elements greater than or equal to the pivot) with k:
+
+Number of points in the left == k, it means all points in the left part (including pivot) are the k Closest Points to the Origin.
+Number of points in the left > k, it means that k Closest Points exist in the left subarray only, so we recursively search in the left subarray.
+Number of points in the left < k, it means that the k Closest Points include the entire left part of the array along with some Points from the right part. Therefore we reduce k by the number of elements already covered on the left side and search in the right subarray.
+
+Time Complexity: O(n2) in worst case (O(n) on average).
+Auxiliary Space: O(n)
