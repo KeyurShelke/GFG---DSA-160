@@ -1,0 +1,54 @@
+Given a string s, composed of different combinations of '(' , ')', '{', '}', '[', ']', verify the validity of the arrangement.
+An input string is valid if:
+
+         1. Open brackets must be closed by the same type of brackets.
+         2. Open brackets must be closed in the correct order.
+
+Examples :
+
+Input: s = "[{()}]"
+Output: true
+Explanation: All the brackets are well-formed.
+Input: s = "[()()]{}"
+Output: true
+Explanation: All the brackets are well-formed.
+Input: s = "([]"
+Output: False
+Explanation: The expression is not balanced as there is a missing ')' at the end.
+Input: s = "([{]})"
+Output: False
+Explanation: The expression is not balanced as there is a closing ']' before the closing '}'.
+Constraints:
+1 ≤ s.size() ≤ 106
+s[i] ∈ {'{', '}', '(', ')', '[', ']'}
+
+Table of Content
+
+[Expected Approach 1] Using Stack - O(n) Time and O(n) Space
+[Expected Approach 2] Without using Stack - O(n) Time and O(1) Space
+[Expected Approach 1] Using Stack - O(n) Time and O(n) Space
+The idea is to put all the opening brackets in the stack. Whenever you hit a closing bracket, search if the top of the stack is the opening bracket of the same nature. If this holds then pop the stack and continue the iteration. In the end if the stack is empty, it means all brackets are balanced or well-formed. Otherwise, they are not balanced.
+
+Step-by-step approach:
+
+Declare a character stack (say temp).
+Now traverse the string s. 
+If the current character is an opening bracket ( '(' or '{'  or '[' ) then push it to stack.
+If the current character is a closing bracket ( ')' or '}' or ']' ) and the closing bracket matches with the opening bracket at the top of stack, then pop the opening bracket. Else s is not balanced.
+After complete traversal, if some starting brackets are left in the stack then the expression is not balanced, else balanced.
+
+[Expected Approach 2] Without using Stack - O(n) Time and O(1) Space
+Instead of using actual Stack, we can uses the input string s itself to simulate stack behavior. We can use a top variable to keep track of the "top" of this virtual stack. This approach makes use of the existing string to avoid the need for additional memory to store stack elements.
+
+Note: Strings are immutable in Java, Python, C#, and JavaScript. Therefore, we cannot modify them in place, making this approach unsuitable for these languages.
+
+Step-by-Step approach:
+
+Initialize top = -1 to represent an empty stack.
+Traverse over the given string and for each character:
+If top is -1 or the current character doesn’t match the top, increment top and store the character at s[top].
+If the current character matches s[top], decrement top to remove the last unmatched opening parenthesis.
+After processing, if top is -1, the string is balanced. Otherwise, it is unbalanced.
+
+
+
