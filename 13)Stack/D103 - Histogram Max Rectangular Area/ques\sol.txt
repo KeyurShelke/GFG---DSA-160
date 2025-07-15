@@ -1,0 +1,62 @@
+You are given a histogram represented by an array arr, where each element of the array denotes the height of the bars in the histogram. All bars have the same width of 1 unit.
+
+Your task is to find the largest rectangular area possible in the given histogram, where the rectangle can be formed using a number of contiguous bars.
+
+Examples:
+
+Input: arr[] = [60, 20, 50, 40, 10, 50, 60]
+ Largest-Rectangular-Area-in-a-Histogram
+Output: 100
+Explanation: We get the maximum by picking bars highlighted above in green (50, and 60). The area is computed (smallest height) * (no. of the picked bars) = 50 * 2 = 100.
+Input: arr[] = [3, 5, 1, 7, 5, 9]
+Output: 15
+Explanation:  We get the maximum by picking bars 7, 5 and 9. The area is computed (smallest height) * (no. of the picked bars) = 5 * 3 = 15.
+Input: arr[] = [3]
+Output: 3
+Explanation: In this example the largest area would be 3 of height 3 and width 1.
+Constraints:
+1 ≤ arr.size() ≤ 105
+0 ≤ arr[i] ≤ 104
+
+Table of Content
+
+[Naive Approach] By Finding Max Area of Rectangles all Heights - O(n^2) Time and O(1) Space
+[Expected Approach] Precomputing (Using Two Stack) - O(n) Time and O(n) Space
+[Further Optimized] Using Single Stack - O(n) Time and O(n) Space
+[Alternate Approach] Using Divide and Conquer - O(n Log n) Time
+[Naive Approach] By Finding Max Area of Rectangles all Heights - O(n^2) Time and O(1) Space
+The idea is to consider each bar as the minimum height and find the maximum area. We traverse toward left of it and add its height until we see a smaller element. We do the same thing for right side of it.
+
+So the area with current bar as minimum is going to be height of current bar multiplied by total width traversed on both left and right including the current bar. The area is the bar’s height multiplied by the total traversed width. Finally, we return the maximum of all such areas.
+
+[Expected Approach] Precomputing (Using Two Stack) - O(n) Time and O(n) Space
+The idea is based on the naive approach. Instead of linearly finding previous smaller and next smaller for every element, we find previous smaller and next smaller for the whole array in linear time.
+
+Build an array prevS[] in O(n) time using stack that holds index of previous smaller element for every item.
+Build another array nextS[] in O(n) time using stack that holds index of next smaller element for every item.
+Now do following for every element arr[i]. Consider arr[i] find width of the largest histogram with arr[i] being the smallest height. width = nextS[i] - prevS[i] - 1. Now find the area as arr[i] * width.
+Return the maximum of all values found in step 3.
+
+[Further Optimized] Using Single Stack - O(n) Time and O(n) Space
+This approach is mainly an optimization over the previous approach.
+
+When we compute next smaller element, we pop an item from the stack and mark current item as next smaller of it. One important observation here is the item below every item in stack is the previous smaller element. So we do not need to explicitly compute previous smaller.
+
+Below are the detailed steps of implementation.
+
+Create an empty stack.
+Start from the first bar, and do the following for every bar arr[i] where 'i' varies from 0 to n-1
+If the stack is empty or arr[i] is higher than the bar at top of the stack, then push 'i' to stack. 
+If this bar is smaller than the top of the stack, then keep removing the top of the stack while the top of the stack is greater. 
+Let the removed bar be arr[tp]. Calculate the area of the rectangle with arr[tp] as the smallest bar. 
+For arr[tp], the 'left index' is previous (previous to tp) item in stack and 'right index' is 'i' (current index).
+If the stack is not empty, then one by one remove all bars from the stack and do step (2.2 and 2.3) for every removed bar
+
+[Alternate Approach] Using Divide and Conquer - O(n Log n) Time
+The idea is to find the minimum value in the given array. Once we have index of the minimum value, the max area is maximum of following three values. 
+
+Maximum area in left side of minimum value (Not including the min value) 
+Maximum area in right side of minimum value (Not including the min value) 
+Number of bars multiplied by minimum value. 
+Please refer Largest Rectangular Area in a histogram Using Divide and Conquer for detailed implementation.
+

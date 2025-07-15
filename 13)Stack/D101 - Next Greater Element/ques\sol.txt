@@ -19,3 +19,16 @@ Constraints:
 1 ≤ arr.size() ≤ 106
 0 ≤ arr[i] ≤ 109
 
+Table of Content
+
+[Naive Approach] Using Nested Loops - O(n^2) Time and O(1) Space
+[Expected Approach] Using Stack - O(n) Time and O(n) Space
+[Naive Approach] Using Nested Loops - O(n^2) Time and O(1) Space
+The idea is to look at all the elements to its right and check if there's a larger element for each element in the array. If we find one, we store it as the next greater element. If no greater element is found, we store -1. This is done using two nested loops: the outer loop goes through each element, and the inner loop searches the rest of the array for a greater element.
+
+
+
+
+[Expected Approach] Using Stack - O(n) Time and O(n) Space
+The idea is to use stack to find the next greater element by using the Last-In-First-Out (LIFO) property. We traverse the array from right to left. For each element, we remove elements from the stack that are smaller than or equal to it, as they cannot be the next greater element. If the stack is not empty after this, the top element of the stack is the next greater element for the current element. We then push the current element onto the stack.
+
