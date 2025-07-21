@@ -18,3 +18,33 @@ Constraints:
 1 ≤ |s| ≤ 105 
 1 <= k <= 100
 
+Table of Content
+
+[Approach 1] Using Two Stacks - O(n) Time and O(n) Space
+[Approach 2] Using Single Stack - O(n) Time and O(n) Space
+[Alternate Approach] Without Using Stack - O(n) Time and O(n) Space
+[Approach 1] Using Two Stacks - O(n) Time and O(n) Space
+The idea is to use two stacks, one for integers and another for characters. 
+
+Now, traverse the string,
+
+Whenever we encounter any number, push it into the integer stack and in case of any alphabet (a to z) or open bracket ('['), push it on the character stack.
+Whenever any close bracket (']') is encountered, pop the characters from the character stack until open bracket ('[') is found in the stack. Also, pop the top element from the integer stack, say n. Now make a string repeating the popped character n number of time. Now, push all character of the string in the stack.
+After traversing whole string, integer stack will be empty and last string which will be formed will be the given result.
+
+[Approach 2] Using Single Stack - O(n) Time and O(n) Space
+In this approach, we use a single stack to store both characters and digits. Instead of maintaining a separate integer stack for storing repetition counts, we store the digits directly in the main stack. The key observation is that the number always appears before the opening bracket '['. This allows us to retrieve it later without needing an extra stack.
+
+Below are the detailed steps of implementation.
+
+Initialize an empty stack.
+Traverse the string:
+Push characters onto the stack until ']' is encountered.
+When ']' is found:
+Pop characters to form the substring until '[' is found, then remove '['.
+Extract the preceding number from the stack and convert it to an integer.
+Repeat the substring and push the expanded result back onto the stack.
+After traversal, pop all characters from the stack, reverse them, and return the final decoded string.
+
+[Alternate Approach] Without Using Stack - O(n) Time and O(n) Space
+The given problem can be solved by traversing the encoded string character by character and maintaining a result string. Whenever a closing bracket is encountered, we can extract the substring enclosed within the corresponding opening bracket, and the number of times it needs to be repeated, and append the resulting string to the current result. We can continue this process until we reach the end of the input string.
