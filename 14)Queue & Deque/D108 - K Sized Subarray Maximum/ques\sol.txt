@@ -31,3 +31,45 @@ Constraints:
 1 ≤ k ≤ arr.size()
 0 ≤ arr[i] ≤ 109
 
+Table of Content
+
+[Naive Approach] - Using Nested Loops - O(n * k) Time and O(1) Space
+[Better Approach] - Using Max-Heap - (n * log n) Time and O(n) Space
+[Expected Approach] - Using Deque - O(n) Time and O(k) Space
+[Naive Approach] - Using Nested Loops - O(n * k) Time and O(1) Space
+The idea is to run the nested loops, the outer loop will mark the starting point of the subarray of length k, and the inner loop will run from the starting index to index + k, and print the maximum element among these k elements. 
+
+Below is the implementation of the above approach:
+
+Time Complexity: O(n * k), as we are using nested loops, where the outer loop runs n times, and for each iteration of outer loop, inner loop runs k times.
+Auxiliary Space: O(1)
+
+[Better Approach] - Using Max-Heap - (n * log n) Time and O(n) Space
+The idea is to use priority queue or heap data structure to make sure that heap has largest item of the current window.
+
+Create a max heap of the first k items
+Now iterate one by one. While the next item to be added is greater than the heap top, remove the top. We mainly make sure that the greater items of the previous window are not there in a heap.
+
+Time Complexity: O(n log n), where n is the size of the array. Inserting an element in heap takes (log n) time and we are inserting all n elements, thus the time complexity will be O(n * log n).
+Auxiliary Space: O(n), where n is the size of the array, this method requires O(n) space in the worst case when the input array is an increasing array
+
+[Expected Approach] - Using Deque - O(n) Time and O(k) Space
+Create a Deque, dq of capacity k, that stores only useful elements of current window of k elements. An element is useful if it is in current window and is greater than all other elements on right side of it in current window. Process all array elements one by one and maintain dq to contain useful elements of current window and these useful elements are maintained in sorted order. The element at front of the dq is the largest and element at rear/back of dq is the smallest of current window.
+
+Step-by-Step Algorithm:
+
+Create a deque to store only useful elements of current window.
+Run a loop and insert the first k elements in the deque. Before inserting the element, check if the element at the back of the queue is smaller than the current element, if it is so remove the element from the back of the deque until all elements left in the deque are greater than the current element. Then insert the current element, at the back of the deque.
+Now, run a loop from k to the end of the array.
+Print the front element of the deque.
+Remove the element from the front of the queue if they are out of the current window.
+Insert the next element in the deque. Before inserting the element, check if the element at the back of the queue is smaller than the current element, if it is so remove the element from the back of the deque until all elements left in the deque are greater than the current element. Then insert the current element, at the back of the deque.
+Print the maximum element of the last window.
+Below is the implementation of the above approach:
+
+Time Complexity: O(n), It can be observed that every element of the array is added and removed at most once. So there are a total of 2n operations.
+Auxiliary Space: O(k), Elements stored in the dequeue take O(k) space.
+
+Below is an extension of this problem: 
+Sum of minimum and maximum elements of all subarrays of size k.
+

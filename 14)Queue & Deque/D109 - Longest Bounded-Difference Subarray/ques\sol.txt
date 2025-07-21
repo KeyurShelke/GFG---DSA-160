@@ -1,0 +1,56 @@
+Given an array of positive integers arr[] and a non-negative integer x, the task is to find the longest sub-array where the absolute difference between any two elements is not greater than x.
+If multiple such subarrays exist, return the one that starts at the smallest index.
+
+Examples: 
+
+Input: arr[] = [8, 4, 2, 6, 7], x = 4 
+Output: [4, 2, 6] 
+Explanation: The sub-array described by index [1..3], i.e. [4, 2, 6] contains no such difference of two elements which is greater than 4.
+Input: arr[] = [15, 10, 1, 2, 4, 7, 2], x = 5 
+Output: [2, 4, 7, 2] 
+Explanation: The sub-array described by indexes [3..6], i.e. [2, 4, 7, 2] contains no such difference of two elements which is greater than 5. 
+Constraints:
+1 <= arr.size() <= 105
+1 <= arr[i] <= 109
+0 <= x<= 109
+
+Table of Content
+
+[Naive Approach] Checking all subarrays - O(n^3) Time and O(1) Space:
+[Better Approach] Using Sliding Window and Sorted Map - O(n * log n) Time and O(n) Space:
+[Expected Approach] Using Dequeues - O(n) Time and O(n) Space
+[Naive Approach] Checking all subarrays - O(n^3) Time and O(1) Space:
+Simple solution is to consider all subarrays one by one, find the maximum and minimum element of that sub-array and check if their difference is not greater than X. Among all such sub-arrays print the longest sub-array.
+
+[Better Approach] Using Sliding Window and Sorted Map - O(n * log n) Time and O(n) Space:
+The idea is to use the Sliding Window Technique to consider a sub-array and use a Map data structure to find the maximum and minimum element in that subarray. 
+
+Maintain two pointers, start and end to mark the start and end of the sliding window. At first the start and end of the window points to the 0th index. In each iteration, the element at end is inserted in the Map and its count is incremented.
+
+If the difference between the maximum and minimum element <= X, then update the maximum length of the required sub-array and store the beginning of that sub-array.
+Otherwise, increment the start of the window till the difference between the maximum and minimum element is > X. When incrementing start, the size of the window decreases, remove the element at start from the Map if and only if the count of that element becomes zero.
+Finally, return the sub-array with the longest length, and the absolute difference between any two elements is not greater than the X.
+
+[Expected Approach] Using Dequeues - O(n) Time and O(n) Space
+The above approach can be further optimized, by using two Dequeues instead of Map data structure to store and access the minimum and maximum of the running subarray in O(1) time.
+
+Maintain a sliding window and keep track of the minimum and maximum element in the window using a miQueue and maxQueue respectively. Keep increasing the window on the right (end) till the difference between the maximum and minimum element does not exceed X.
+To Maintain a monotonically increasing min queue, Pop the elements from the back of minQueue till they are greater than the current element.
+To Maintain a monotonically decreasing max queue, Pop the elements from the back of maxQueue till they are smaller than the current element.
+Now, if the difference becomes greater than X,
+Store the window size as a possible subarray with absolute difference between any pair at most X.
+Then decrease the window by moving the start (left) pointer until the difference becomes less than X.
+Also pop the elements from the Monotonic Queue as the size of the window decreases.
+Find the longest window size from above step and print it.
+
+Time Complexity: O(n), where n is the size of the input array arr[].
+
+O(n) time to traverse the array using Sliding Window
+O(1) time to push or pop the elements from the Monotonic Queue
+Therefore overall time = O(n)
+Auxiliary Space: O(n), where:
+
+O(1) is the auxiliary space of the sliding window, since we are using two pointer
+n is the size of the max monotonic queue
+n is the size of the min monotonic queue
+Therefore overall auxiliary space = O(2n) = O(n)
