@@ -1,0 +1,68 @@
+Given an array arr[] of non-negative integers, the task is to find the length of the Longest Strictly Increasing Subsequence (LIS).
+
+A subsequence is strictly increasing if each element in the subsequence is strictly less than the next element.
+
+Examples:
+
+Input: arr[] = [5, 8, 3, 7, 9, 1]
+Output: 3
+Explanation: The longest strictly increasing subsequence could be [5, 7, 9], which has a length of 3.
+Input: arr[] = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+Output: 6
+Explanation: One of the possible longest strictly increasing subsequences is [0, 2, 6, 9, 13, 15], which has a length of 6.
+Input: arr[] = [3, 10, 2, 1, 20]
+Output: 3
+Explanation: The longest strictly increasing subsequence could be [3, 10, 20], which has a length of 3.
+Constraints:
+1 ≤ arr.size() ≤ 103
+0 ≤ arr[i] ≤ 106
+
+able of Content
+
+[Naive Approach] Using Recursion - Exponential Time and Linear Space
+[Better Approach - 1] Using Memoization - O(n^2) Time and O(n) Space
+[Better Approach - 2] Using DP (Bottom Up Tabulation) - O(n^2) Time and O(n) Space
+[Expected Approach] Using Binary Search - O(n Log n) Time and O(n) Space
+Problems based on LIS
+[Naive Approach] Using Recursion - Exponential Time and Linear Space
+The idea to do traverse the input array from left to right and find length of the Longest Increasing Subsequence (LIS) ending with every element arr[i]. Let the length found for arr[i] be L[i]. At the end we return maximum of all L[i] values. Now to compute L[i], we use recursion, we consider all smaller elements on left of arr[i], recursively compute LIS value for all the smaller elements on left, take the maximum of all and add 1 to it. If there is no smaller element on left of an element, we return 1.
+
+Let L(i) be the length of the LIS ending at index i such that arr[i] is the last element of the LIS. Then, L(i) can be recursively written as: 
+
+L(i) = 1 + max(L(prev) ) where 0 < prev < i and arr[prev] < arr[i]; or
+L(i) = 1, if no such prev exists.
+Formally, the length of LIS ending at index i, is 1 greater than the maximum of lengths of all LIS ending at some index prev such that arr[prev] < arr[i] where prev < i.
+
+After we fill the L array, we find LIS as maximum of all in L[]
+
+Overall LIS = max(L[i]) where 0 <= i < n
+
+We can see that the above recurrence relation follows the optimal substructure property. Follow the below illustration to see overlapping subproblems.
+
+[Better Approach - 1] Using Memoization - O(n^2) Time and O(n) Space
+If notice carefully, we can see that the above recursive function lisEndingAtIdx() also follows the overlapping subproblems property i.e., same substructure solved again and again in different recursion call paths. We can avoid this using the memoization approach. Since there is only one parameter that changes in recursive calls and the range of the parameter goes from 0 to n-1, so we us a 1D array of size n and initialize it as -1 to indicate that the values are not computed yet.
+
+[Better Approach - 2] Using DP (Bottom Up Tabulation) - O(n^2) Time and O(n) Space
+The tabulation approach for finding the Longest Increasing Subsequence (LIS) solves the problem iteratively in a bottom-up manner. The idea is to maintain a 1D array lis[], where lis[i] stores the length of the longest increasing subsequence that ends at index i. Initially, each element in lis[] is set to 1, as the smallest possible subsequence for any element is the element itself.
+
+The algorithm then iterates over each element of the array. For each element arr[i], it checks all previous elements arr[0] to arr[i-1]. If arr[i] is greater than arr[prev] (ensuring the subsequence is increasing), it updates lis[i] to the maximum of its current value or lis[prev] + 1, indicating that we can extend the subsequence ending at arr[prev] by including arr[i].
+
+Finally, the length of the longest increasing subsequence is the maximum value in the lis[] array.
+
+[Expected Approach] Using Binary Search - O(n Log n) Time and O(n) Space
+We can solve this in O(n Log n) time using Binary Search. The idea is to traverse the given sequence and maintain a separate list of sorted subsequence so far. For every new element, find its position in the sorted subsequence using Binary Search.
+
+Refer Longest Increasing Subsequence Size (N * logN) for details.
+
+Problems based on LIS
+LIS on Circular Array
+Printing LIS
+Count LISs
+Max Sum Subsequence
+Longest Arithmetic Subsequence
+Longest Bitonic Subsequence
+Longest Alternating Subsequence
+Longest Common Increasing Subsequence
+Building Bridges
+Box Stacking
+More Problems on LIS
