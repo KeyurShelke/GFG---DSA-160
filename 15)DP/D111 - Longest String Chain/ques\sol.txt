@@ -1,0 +1,80 @@
+You are given an array of words where each word consists of lowercase English letters.
+wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB. For example, "abc" is a predecessor of "abac", while "cba" is not a predecessor of "bcad".
+
+A word chain is a sequence of words [word1, word2, ..., wordk] with k >= 1, where word1 is a predecessor of word2, word2 is a predecessor of word3, and so on. A single word is trivially a word chain with k = 1.
+
+Return the length of the longest possible word chain with words chosen from the given list of words in any order.
+
+Examples:
+
+Input: words[] = ["ba", "b", "a", "bca", "bda", "bdca"]
+Output: 4
+Explanation: One of the longest word chains is ["a", "ba", "bda", "bdca"].
+Input: words[] = ["abc", "a", "ab"]
+Output: 3
+Explanation: The longest chain is {"a", "ab" "abc"}
+Input: words[] = ["abcd", "dbqca"]
+Output: 1
+Explanation: The trivial word chain ["abcd"] is one of the longest word chains.
+Constraint:
+1 <= words.length <= 104
+1 <= words[i].length <= 10
+ words[i] only consists of lowercase English letters.
+
+Given an array of words where each word consists of lowercase English letters, we need to find the longest word chain possible.
+
+A word wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB.
+For example, "abc" is a predecessor of "abac", while "cba" is not a predecessor of "bcad".
+
+A word chain is a sequence of words [word1, word2, ..., wordk] with k ≥ 1, where:
+
+word1 is a predecessor of word2
+word2 is a predecessor of word3, and so on.
+A single word is trivially a word chain with k = 1.
+
+The task is to return the length of the longest possible word chain with words chosen from the given list of words in any order.
+
+Examples:
+
+Input: words = ["ba", "b", "a", "bca", "bda", "bdca"]
+Output: 4
+Explanation: One of the longest word chains is ["a", "ba", "bda", "bdca"].
+
+Input: words = ["abcd", "dbqca"]
+Output: 1
+Explanation: The trivial word chain ["abcd"] is one of the longest word chains.
+
+[Naive Approach] Using Recursion - Exponential Time
+If we take a closer look, we can notice that this problem is a variation of Longest Increasing Subsequence Problem. For every word, we find the longest chain ending with it. At the end, we return the maximum of all longest chains.
+
+1. Consider every word w one by one
+2. Find the length of the longest chain where w is the last word (or longest word). We compute this using a recursive function longestEndCurr().
+3. Return the maximum of all values obtained in step 2.
+
+
+
+
+[Better Approach] Using DP(Tabulation) - O(nlogn + n²m) Time and O(n) Space
+The idea is to build the longest possible word chain by checking if a word can be formed by adding one letter to a shorter word. 
+
+First, we sort the words by length to ensure that we process shorter words first. We use a dp array, where dp[i] stores the longest chain ending at words[i]. 
+
+For each word, we check all previous words to see if they are its predecessor (by removing one character). If a valid predecessor is found, we update dp[i] accordingly. The maximum value in dp gives the longest string chain.
+
+Time Complexity: O(nlogn + n²m), as sorting takes O(n log n), and checking predecessors takes O(n^2 * m), where n is the number of words and m is the maximum word length.
+Auxiliary Space: O(n), as the dp array stores one value per word, requiring O(n) space.
+
+[Expected Approach] DP + Hashing- O(nlogn + n*m²) Time and O(n*m) Space
+Using dynamic programming, we store the longest chain length for each word in a hash table. For each word, we generate possible predecessors by removing one character and check if they exist in the table. If a valid predecessor is found, we update the chain length, ensuring we track the longest possible chain efficiently.
+
+Steps to implement the above idea:
+
+Sort the words by length to process shorter words first.
+Use a DP table (array or map) to store the longest chain length for each word.
+Iterate through each word and initialize its chain length to 1.
+Generate predecessors by removing one character at a time.
+Check if the predecessor exists in the DP table and update the chain length.
+Track the maximum chain length found and return the result.
+
+Time Complexity: O(nlogn + n*m²), where n is the number of words and m is the maximum word length (sorting takes O(n * log n), and checking predecessors takes O(n*m²).
+Auxiliary Space: O(n*m), as we store n words in the DP table, each of length up to m.
