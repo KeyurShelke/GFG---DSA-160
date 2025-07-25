@@ -1,0 +1,58 @@
+Given a string s, return the length of the longest palindromic subsequence.
+
+A subsequence is a sequence that can be derived from the given sequence by deleting some or no elements without changing the order of the remaining elements.
+
+A palindromic sequence is a sequence that reads the same forward and backward.
+
+Examples:
+
+Input: s = "bbabcbcab"
+Output: 7
+Explanation: Subsequence "babcbab" is the longest subsequence which is also a palindrome.
+Input: s = "abcd"
+Output: 1
+Explanation: "a", "b", "c" and "d" are palindromic and all have a length 1.
+Input: s = "agbdba"
+Output: 5
+Explanation: The longest palindromic subsequence is "abdba", which has a length of 5. The characters in this subsequence are taken from the original string "agbdba", and they maintain the order of the string while forming a palindrome.
+Constraints:
+1 ≤ s.size() ≤ 1000
+
+
+Table of Content
+
+[Naive Approach] - Using Recursion - O(2^n) Time and O(1) Space
+[Better Approach 1] Using Memoization - O(n^2) Time and O(n^2) Space
+[Better Approach 2] Using Tabulation - O(n^2) Time and O(n^2) Space
+[Expected Approach] Using Tabulation - O(n^2) Time and O(n) Space
+[Alternate Approach] Using Longest Common Subsequence - O(n^2) Time and O(n) Space
+[Naive Approach] - Using Recursion - O(2^n) Time and O(1) Space
+The idea is to recursively generate all possible subsequences of the given string s and find the longest palindromic subsequence. To do so, create two counters low and high and set them to point to first and last character of string s. Start matching the characters from both the ends of the string. For each case, there are two possibilities: 
+
+If characters are matching, increment the value low and decrement the value high by 1 and recur to find the LPS of new substring. And return the value result + 2.
+Else make two recursive calls for (low + 1, hi) and (lo, hi-1).  And return the max of 2 calls.
+
+[Better Approach 1] Using Memoization - O(n^2) Time and O(n^2) Space
+In the above approach, lps() function is calculating the same substring multiple times. The idea is to use memoization to store the result of subproblems thus avoiding repetition. To do so, create a 2d array memo[][] of order n*n, where memo[i][j] stores the length of LPS of substring s[i] to s[j]. At each step, check if the substring is already calculated, if so return the stored value else operate as in above approach.
+
+
+[Better Approach 2] Using Tabulation - O(n^2) Time and O(n^2) Space
+The above approach can be implemented using tabulation to minimize the auxiliary space required for recursive stack. The idea is create a 2d array dp[][] of order n*n, where element dp[i][j] stores the length of LPS of substring s[i] to s[j]. Start from the smaller substring and try to build answers for longer ones. At each step there are two possibilities:
+
+if s[i] == s[j], then dp[i][j] = dp[i+1][j-1] + 2
+else, dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+dp[0][n-1] stores the length of the longest palindromic subsequence of string s.
+
+[Expected Approach] Using Tabulation - O(n^2) Time and O(n) Space
+In the above approach, for calculating the LPS of substrings starting from index i, only the LPS of substrings starting from index i+1 are required. Thus instead of creating 2d array, idea is to create two arrays of size, curr[] and prev[], where curr[j] stores the lps of substring from s[i] to s[j], while prev[j] stores the lps of substring from s[i+1] to s[j]. Else everything will be similar to above approach.
+
+
+[Alternate Approach] Using Longest Common Subsequence - O(n^2) Time and O(n) Space
+The idea is to reverse the given string s and find the length of the longest common subsequence of original and reversed string. 
+
+
+
+
+
+
+
