@@ -1,0 +1,51 @@
+Given a string s, the task is to count all palindromic substrings of length more than one.
+
+Examples:
+
+Input: s = "abaab"
+Output: 3
+Explanation: Palindromic substrings with length greater than 1, are "aba", "aa", and "baab".
+
+Input: s = "aaa"
+Output: 3
+Explanation: Palindromic substrings with length greater than 1, are "aa" , "aa" , "aaa" .
+
+Input: s = "abbaeae"
+Output: 4
+Explanation: Palindromic substrings with length greater than 1, are "bb" , "abba" , "aea", "eae".
+
+Table of Content
+
+[Naive Approach] By Generating All Possible Substrings - O(n^3) Time and O(1) Space
+Using Memoization - O(n^2) Time and O(n^2) Space
+Using Bottom-Up DP (Tabulation) - O(n^2) Time and O(n^2) Space
+Using Center Expansion - O(n^2) Time and O(1) Space
+[Naive Approach] By Generating All Possible Substrings - O(n^3) Time and O(1) Space
+The idea is to generate all possible substrings using two nested loops and for every substring check if it is palindrome or not.
+
+[Better Approach 1] Using Memoization - O(n^2) Time and O(n^2) Space
+If we notice carefully, we can observe that this recursive solution holds the following two properties of Dynamic Programming:
+
+1. Optimal Substructure: The solution for the problem isPalindrome(i, j) depends on the optimal solution of the subproblem isPalindrome(i + 1, j - 1). By solving the smaller substructures, we can efficiently find if the entire substring is a palindrome or not.
+
+2. Overlapping Subproblems: We can see that we are computing the same subproblems multiple times, isPalindrome(i + 2, j - 2) will be computed in isPalindrome(i, j) as well as isPalindrome(i + 1, j - 1). This redundancy leads to overlapping subproblems.
+
+There are two parameters(i and j) that change in the recursive solution and then can go from 0 to n. So we create a 2D array of size n x n for memoization.
+We initialize this array as -1 to indicate nothing is computed initially. We first check if the value is -1, then only we make recursive calls.
+If the substring from i to j is a palindrome, we store memo[i][j] = 1, otherwise 0.
+
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n^2) Time and O(n^2) Space
+We create a dp array of size n x n. However, we cannot simply fill the dp table from i = 0 to n-1 and j from i to n-1. To compute the value for (i, j), we need the value from (i+1, j-1). Similar to Matrix Chain Multiplication, we need to fill the table diagonally using a gap variable. 
+
+1. Base Cases:  
+
+A single character string is always palindrome, i.e. dp[i][i] = true.
+Strings having two characters are palindrome, if both the characters are same. i.e. dp[i][i+1] = true if s[i] == s[i+1].
+2. Any substring s[i...j] will be palindrome if:
+
+If first and last characters of string are same
+Remaining substring (excluding first and last character) is palindrome. I.e. dp[i+1][j-1] = true. 
+
+[Expected Approach] Using Center Expansion - O(n^2) Time and O(1) Space
+We can further optimize this problem using the center expansion technique. We have used this idea in Longest Palindromic Substring also. In this approach, we consider every character in the string as the center for odd-length palindromes and as one of the two centers for even-length palindromes. We then expand the substring outwards, checking the elements at both ends. For a complete implementation of this approach, refer this article - Count All Palindrome Sub-Strings using Center Expansion.
+
