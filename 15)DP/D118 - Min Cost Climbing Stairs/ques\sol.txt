@@ -1,0 +1,37 @@
+Given an array of integers cost[] where cost[i] is the cost of the ith step on a staircase. Once the cost is paid, you can either climb one or two steps. Return the minimum cost to reach the top of the floor.
+Assume 0-based Indexing. You can either start from the step with index 0, or the step with index 1.
+
+Input: cost[] = [10, 15, 20]
+Output: 15
+Explanation: Cheapest option is to start at cost[1], pay that cost, and go to the top.
+
+Table of Content
+
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+[Better Approach 1] Using Top-Down DP (Memoization) – O(n) Time and O(n) Space
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n) Time and O(n) Space
+[Expected Approach] Using Space Optimized DP – O(n) Time and O(1) Space
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+This problem is an extension of problem: Climbing Stairs to reach at the top. 
+
+There are n stairs, and a person is allowed to climb 1 or 2 stairs. If a person is standing at i-th stair, the person can move to i+1, i+2, stair. A recursive function can be formed where at current index i the function is recursively called for i+1, i+2 th stair. 
+There is another way of forming the recursive function. To reach a stair i, a person has to jump either from i-1, or i-2 th stair.
+
+minCost(n) = cost[i] + min(minCost(n-1) , minCost(n-2))
+
+[Better Approach 1] Using Top-Down DP (Memoization) – O(n) Time and O(n) Space
+If we notice carefully, we can observe that the above recursive solution holds the following two properties of Dynamic Programming:
+
+1. Optimal Substructure: Minimum cost to reach the nth stair, i.e., minCost(n), depends on the optimal solutions of the subproblems minCost(n-1) , and minCost(n-2). By choosing the minimum of these optimal substructures, we can efficiently calculate the minimum cost to reach the nth stair.
+
+2. Overlapping Subproblems: While applying a recursive approach in this problem, we notice that certain subproblems are computed multiple times. For example, when calculating minCost(4), we recursively calculate minCost(3) and minCost(2) which in turn will recursively compute minCost(2) again. This redundancy leads to overlapping subproblems.
+
+There is only one parameter that changes in the recursive solution and it can go from 0 to n. So we create a 1D array of size n+1 for memoization.
+We initialize this array as -1 to indicate nothing is computed initially.
+Now we modify our recursive solution to first check if the value is -1, then only make recursive calls. This way, we avoid re-computations of the same subproblems.
+
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n) Time and O(n) Space
+The idea is to create a1-D array, fill values for first two stairs and compute the values from 2 to n using the previous two results. For i = 2 to n, do dp[i] = cost[i] +  min(dp[i-1] + dp[i-2]). 
+
+[Expected Approach] Using Space Optimized DP – O(n) Time and O(1) Space
+The idea is to store only the previous two computed values. We can observe that for a given stair, only the result of last two stairs are needed. So only store these two values and update them after each step.
