@@ -1,0 +1,68 @@
+Given n items, each with a specific weight and value, and a knapsack with a capacity of W, the task is to put the items in the knapsack such that the sum of weights of the items <= W and the sum of values associated with them is maximized. 
+
+Note: You can either place an item entirely in the bag or leave it out entirely. Also, each item is available in single quantity.
+
+Examples :
+
+Input: W = 4, val[] = [1, 2, 3], wt[] = [4, 5, 1] 
+Output: 3
+Explanation: Choose the last item, which weighs 1 unit and has a value of 3.
+Input: W = 3, val[] = [1, 2, 3], wt[] = [4, 5, 6] 
+Output: 0
+Explanation: Every item has a weight exceeding the knapsack's capacity (3).
+Input: W = 5, val[] = [10, 40, 30, 50], wt[] = [5, 4, 2, 3] 
+Output: 80
+Explanation: Choose the third item (value 30, weight 2) and the last item (value 50, weight 3) for a total value of 80.
+Constraints:
+2 ≤ val.size() = wt.size() ≤ 103
+1 ≤ W ≤ 103
+1 ≤ val[i] ≤ 103
+1 ≤ wt[i] ≤ 103
+
+Given n items where each item has some weight and profit associated with it and also given a bag with capacity W, [i.e., the bag can hold at most W weight in it]. The task is to put the items into the bag such that the sum of profits associated with them is the maximum possible. 
+
+Note: The constraint here is we can either put an item completely into the bag or cannot put it at all [It is not possible to put a part of an item into the bag].
+
+Input:  W = 4, profit[] = [1, 2, 3], weight[] = [4, 5, 1]
+Output: 3
+Explanation: There are two items which have weight less than or equal to 4. If we select the item with weight 4, the possible profit is 1. And if we select the item with weight 1, the possible profit is 3. So the maximum possible profit is 3. Note that we cannot put both the items with weight 4 and 1 together as the capacity of the bag is 4.
+
+Input: W = 3, profit[] = [1, 2, 3], weight[] = [4, 5, 6]
+Output: 0
+
+Table of Content
+
+[Naive Approach] Using Recursion O(2^n) Time and O(n) Space
+[Better Approach 1] Using Top-Down DP (Memoization)- O(n x W) Time and Space
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n x W) Time and Space
+[Expected Approach] Using Bottom-Up DP (Space-Optimized) - O(n x W) Time and O(W) Space
+Problems based on 0-1 Knapsack
+[Naive Approach] Using Recursion O(2^n) Time and O(n) Space
+A simple solution is to consider all subsets of items and calculate the total weight and value of all subsets. Consider the only subsets whose total weight is smaller than W. From all such subsets, pick the subset with maximum value.
+
+Optimal Substructure: To consider all subsets of items, there can be two cases for every item. 
+
+Case 1: The item is included in the optimal subset.
+Case 2: The item is not included in the optimal set.
+Follow the below steps to solve the problem:
+
+The maximum value obtained from 'n' items is the max of the following two values. 
+
+Case 1 (pick the nth item): Value of the nth item + maximum value obtained by remaining (n-1) items and remaining weight i.e. (W-weight of the nth item).
+Case 2 (don't pick the nth item): Maximum value obtained by (n-1) items and W weight.
+If the weight of the 'nth' item is greater than 'W', then the nth item cannot be included and Case 2 is the only possibility.
+
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n x W) Time and Space
+There are two parameters that change in the recursive solution and these parameters go from 0 to n and 0 to W. So we create a 2D dp[][] array of size (n+1) x (W+1), such that dp[i][j] stores the maximum value we can get using i items such that the knapsack capacity is j.
+
+We first fill the known entries when m is 0 or n is 0.
+Then we fill the remaining entries using the recursive formula.
+For each item i and knapsack capacity j, we decide whether to pick the item or not.
+
+If we don't pick the item: dp[i][j] remains same as the previous item, that is dp[i - 1][j].
+If we pick the item: dp[i][j] is updated to val[i] + dp[i - 1][j - wt[i]].
+
+
+
+[Expected Approach] Using Bottom-Up DP (Space-Optimized) - O(n x W) Time and O(W) Space
+For calculating the current row of the dp[] array we require only previous row, but if we start traversing the rows from right to left then it can be done with a single row only
