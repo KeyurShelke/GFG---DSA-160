@@ -1,0 +1,78 @@
+You are given an array coins[], where each element represents a coin of a different denomination, and a target value sum. You have an unlimited supply of each coin type {coins1, coins2, ..., coinsm}.
+
+Your task is to determine the minimum number of coins needed to obtain the target sum. If it is not possible to form the sum using the given coins, return -1.
+
+Examples:
+
+Input: coins[] = [25, 10, 5], sum = 30
+Output: 2
+Explanation: Minimum 2 coins needed, 25 and 5  
+Input: coins[] = [9, 6, 5, 1], sum = 19
+Output: 3
+Explanation: 19 = 9 + 9 + 1
+Input: coins[] = [5, 1], sum = 0
+Output: 0
+Explanation: For 0 sum, we do not need a coin
+Input: coins[] = [4, 6, 2], sum = 5
+Output: -1
+Explanation: Not possible to make the given sum.
+ 
+Constraints:
+1 ≤ sum * coins.size() ≤ 106
+0 <= sum <= 104
+1 <= coins[i] <= 104
+1 <= coins.size() <= 103
+
+Table of Content
+
+[Naive Approach ] Using Recursion – O(n^sum) Time and O(sum) Space
+[Better Approach 1] Using Top-Down DP (Memoization) - O(n*sum) Time and O(n*sum) Space
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n*sum) Time and O(n*sum) Space
+[Expected Approach] Using Space Optimized DP – O(n*sum) Time and O(sum) Space
+[Naive Approach ] Using Recursion – O(n^sum) Time and O(sum) Space
+This problem is a variation of the problem Coin Change Problem. Here instead of finding the total number of possible solutions, we need to find the solution with the minimum number of coins.
+
+The idea is to find the minimum number of coins required to reach the target sum by trying each coin denomination in the coins[] array. Starting from the target sum, for each coin coins[i], we can either include it or exclude it. If we include it, we subtract its value from sum and recursively try to make the remaining amount with the same coin denominations. If we exclude it, we move to the next coin in the list. 
+
+Mathematically the recurrence relation will look like the following:
+
+minCoins(i, sum, coins) = min(1 + minCoins(i, sum-coins[i], coins), minCoins(i+1, sum, coins))
+
+Base cases:
+
+minCoins(i, sum, coins) = 0, if sum = 0.
+minCoins(i, sum, coins) = INTEGER MAX, if sum < 0 or i == size of coins.
+
+[Better Approach 1] Using Top-Down DP (Memoization) - O(n*sum) Time and O(n*sum) Space
+If we notice carefully, we can observe that the above recursive solution holds the following two properties of Dynamic Programming:
+
+1. Optimal Substructure: 
+
+Minimum number of ways to make sum at index i, i.e., minCoins(i, sum, coins), depends on the optimal solutions of the subproblems minCoins(i, sum-coins[i], coins) , and minCoins(i+1, sum, coins). By comparing these optimal substructures, we can efficiently calculate the minimum number of coins to make target sum at index i.
+
+2. Overlapping Subproblems: 
+
+While applying a recursive approach in this problem, we notice that certain subproblems are computed multiple times. 
+
+There are only are two parameters: i and sum that changes in the recursive solution. So we create a 2D matrix of size n*(sum+1) for memoization.
+We initialize this matrix as -1 to indicate nothing is computed initially.
+Now we modify our recursive solution to first check if the value is -1, then only make recursive calls. This way, we avoid re-computations of the same subproblems.
+
+
+
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n*sum) Time and O(n*sum) Space
+ The idea is to fill the DP table based on previous values. For each coin, we either include it or exclude it to compute the minimum number of coins needed for each sum. The table is filled in an iterative manner from i = n-1 to i = 0 and for each sum from 1 to sum. 
+
+The dynamic programming relation is as follows: 
+
+if (sum-coins[i]) is greater than 0, then dp[i][sum] = min(1+dp[i][sum-coins[i]], dp[i+1][sum])
+else dp[i][sum] = dp[i+1][sum].
+
+
+
+[Expected Approach] Using Space Optimized DP – O(n*sum) Time and O(sum) Space
+In previous approach of dynamic programming we have derive the relation between states as given below:
+
+if (sum-coins[i]) is greater than 0, then dp[i][sum] = min(1+dp[i][sum-coins[i]], dp[i+1][sum])
+else dp[i][sum] = dp[i+1][sum].
+If we observe that for calculating current dp[i][sum] state we only need previous row dp[i-1][sum] or current row dp[i][sum-coins[i]]. There is no need to store all the previous states just one previous state is used to compute result.
