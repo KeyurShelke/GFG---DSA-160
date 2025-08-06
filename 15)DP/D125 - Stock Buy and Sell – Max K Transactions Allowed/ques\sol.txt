@@ -1,0 +1,92 @@
+In the stock market, a person buys a stock and sells it on some future date. You are given an array prices[] representing stock prices on different days and a positive integer k, find out the maximum profit a person can make in at-most k transactions.
+
+A transaction consists of buying and subsequently selling a stock and new transaction can start only when the previous transaction has been completed.
+
+Examples :
+
+Input: prices[] = [10, 22, 5, 80], k = 2
+Output: 87
+Explaination:
+1st transaction: Buy at 10 and sell at 22. 
+2nd transaction : Buy at 5 and sell at 80.
+Total Profit will be 12 + 75 = 87.
+Input: prices[] = [20, 580, 420, 900], k = 3
+Output: 1040
+Explaination: 
+1st transaction: Buy at 20 and sell at 580. 
+2nd transaction : Buy at 420 and sell at 900.
+Total Profit will be 560 + 480 = 1040.
+Input: prices[] = [100, 90, 80, 50, 25],  k = 1
+Output: 0
+Explaination: Selling price is decreasing continuously
+leading to loss. So seller cannot have any profit.
+
+Table of Content
+
+[Navie Approach] Using Recursion - O(2^n) time and O(n) space
+[Better Approach-1] Using Memoization - O(n*k) time and O(n*k) space
+[Better Approach-2] Using Bottom Up DP - O(n*k) time and O(n*k) space
+[Expected Approach] Space Optimized - O(n*k) time and O(k) space
+There are multiple variations of this problem. If only one buy and sell transaction is allowed, we can use the maximum difference between two elements approach. For at most two transactions, we can either follow the approach discussed here or use the given methods specifically for k=2. If unlimited transactions are permitted, we can adopt the strategy outlined here.
+
+[Naive Approach] Using Recursion - O(2^n) time and O(n) space
+To solve this problem, we need to analyze the possible decisions we can make on each day. Given a day i, we have three choices:
+
+Buy a stock (if we haven't already bought one).
+Sell a stock (if we previously bought one).
+Do nothing and move to the next day without buying or selling.
+The complexity of the problem arises because, for each day i, we must track both the number of remaining transactions and the state of our previous trade (whether we have bought or sold). To efficiently represent this, we define three states:
+
+i → The current day (index in the prices array).
+k → The number of transactions remaining.
+buy → A flag indicating whether we are in a buying state (1) or a selling state (0).
+Recurrence Relation:
+
+If we can buy on day i: profit(i, k, 1) =  profit(i + 1, k, 0) - prices[i]
+If we can sell on day i:  profit(i, k, 0) = profit(i + 1, k - 1, 1) + prices[i]
+If we do nothing: profit(i, k, buy) = profit(i + 1, k, buy)
+Return 0 if no transactions are left (k <= 0) or all days are processed (i >= n), otherwise return the maximum profit from the three cases.
+
+Time Complexity: O(2n), exponential time
+Auxiliary Space: O(n), due to recursion stack
+
+[Better Approach-1] Using Memoization - O(n*k) time and O(n*k) space
+The above approach involves multiple overlapping subproblems, leading to redundant computations. To optimize this, we can use memoization, which stores previously computed results and avoids recalculating them.
+
+To achieve this, we maintain a 3D memoization array (memo) where:
+
+memo[i][k][buy] stores the maximum profit achievable starting from day i, with k transactions remaining, and the current state (buy or sell).
+By storing results for each unique combination of (i, k, buy), we ensure that once a state is computed, it doesn't need to be recalculated, significantly improving efficiency.
+
+Time Complexity: O(n*k)
+Auxiliary Space: O(n*k)
+
+[Better Approach-2] Using Bottom Up DP - O(n*k) time and O(n*k) space
+The above solution can be further optimized using an iterative dynamic programming approach. Let dp[i][l][buy] represent the maximum profit achievable starting from day i, with l transactions remaining, and a state indicating whether we can buy or sell:
+
+buy = 1 → We are allowed to buy.
+buy = 0 → We are allowed to sell.
+Recurrence Relation:
+
+Buy state (buy = 1): dp[i][l][1] = max(dp[i+1][l][0] – prices[i], dp[i+1][l][1])
+Sell state (buy = 0): dp[i][l][0] = max(prices[i] + dp[i+1][l-1][1], dp[i+1][l][0])
+This iterative approach helps eliminate redundant recursive calls and improves efficiency.
+
+Time Complexity: O(n*k)
+Auxiliary Space: O(n*k)
+
+[Expected Approach] Space Optimized - O(n*k) time and O(k) space
+Since for any day i, the calculations for dp[i][l][buy] only depend on dp[i+1][][] (the next day), we don’t need to store results for all previous days. Instead, we can reduce the DP table to just two 2D arrays:
+
+curr[l][buy] → Represents the profit on the current day for l transactions remaining and whether we are in a buy or sell state.
+next[l][buy] → Represents the profit for the next day.
+This iterative approach optimizes space complexity, reducing it from O(k * n) to O(k) by only storing results for the current and next day instead of maintaining a full k × n DP table.
+
+Optimized Recurrence Relation:
+
+Buy state: curr[l][1] = max(-prices[i] + next[l][0], next[l][1])
+Sell state: curr[l][0] = max(prices[i] + next[l-1][1], next[l][0])
+
+
+
+
