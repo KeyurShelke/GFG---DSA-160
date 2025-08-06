@@ -1,0 +1,45 @@
+[Naive Approach] - O(n^2) Time and O(1) Space
+We strongly recommend you to refer Stock Buy and Sell with At-Most one Transaction.  We mainly use the idea of the one transaction efficient solution here.
+
+Step-by-step approach:
+
+Traverse the prices[] from left to right and keep track of the minimum price seen so far in a variable minSoFar.
+If the current price is more than minSoFar, we keep this transaction as first transaction and call the one-transaction-solution for the subarray after the current index to find the profit for second transaction.
+Else, we update the minSoFar.
+At the end, we return maximum of all values obtained in step 2.
+
+[Better Approach] - Using Postfix Profit Array - O(n) Time and O(n) Space
+The idea is to split the problem into two parts: find the best single transaction up to each point from the end, then find the best pair of transactions by combining the best profit from the first transaction and the best profit from the second transaction.
+
+Step by step approach:
+
+First, traverse the prices array from right to left to find the maximum profit for a single transaction ending at each position.
+Store these maximum profits in an array where profit[i] represents the maximum profit possible from a single transaction if buying at or after position i.
+Next, traverse the array from left to right to find the minimum price seen so far at each position.
+For each position, calculate the total profit by adding the profit from a single transaction before the current position and the profit from a single transaction after the current position.
+Keep track of the maximum combined profit and return it as the final result.
+
+[Expected Approach 1] - Using Dynamic Programming - O(n) Time and O(1) Space
+The solution is based on Stock Buy and Sell –  At-most k Transactions Allowed. 
+
+The idea is to use dynamic programming with state variables representing the current day, number of transactions remaining, and buy/sell state to find the maximum profit possible from at most 2 transactions.
+
+Step by step approach:
+
+Create two 2D arrays where dp[k][j] represents the maximum profit with k transactions remaining and j indicating buy/sell state.
+Process the prices array from the last day to the first day, calculating maximum profit for each state.
+For each day and transaction count, choose the better option between making a transaction or skipping it.
+After processing each day, move current state to next state for the next iteration.
+The final answer is curr[2][1], representing the maximum profit starting from day 0 with 2 transactions.
+stock_buy_and_sell_max_2_transactions_allowed_1.webp
+
+[Expected Approach 2] - Using State Machine - O(n) Time and O(1) Space
+This solution is mainly a simplified version of the above DP solution. Instead of creating arrays, we use 4 variables.
+
+The idea is to initialize four variables for taking care of the firstBuy, firstSell, secondBuy, secondSell. Set first buy and second buy as INT_MIN and first and second sell as 0. This is to ensure to get profit from transactions. Iterate through the array and return the second sell as it will store maximum profit.
+
+If we choose to rest, we remain in same state
+If we buy/sell, we spend/earn some money (price of the stock on that day) and go to next state.
+
+
+
