@@ -1,0 +1,41 @@
+Stickler the thief wants to loot money from a society having n houses in a single line. He is a weird person and follows a certain rule when looting the houses. According to the rule, he will never loot two consecutive houses. At the same time, he wants to maximize the amount he loots. The thief knows which house has what amount of money but is unable to come up with an optimal looting strategy. He asks for your help to find the maximum money he can get if he strictly follows the rule. ith house has arr[i] amount of money present in it.
+
+Examples: 
+
+Input: arr[] = [6, 5, 5, 7, 4]
+Output: 15
+Explanation: Maximum amount he can get by looting 1st, 3rd and 5th house. Which is 6+5+4=15.
+
+Input: arr[] = [1, 5, 3]
+Output: 5
+Explanation: Loot only 2nd house and get maximum amount of 5.
+
+Input: arr[] = [4, 4, 4, 4]
+Output: 8
+Explanation: The optimal choice is to loot every alternate house. Looting the 1st and 3rd houses, or the 2nd and 4th, both give a maximum total of 4 + 4 = 8.
+
+Table of Content
+
+[Naive Approach] Using Recursion- O(2^n) Time and O(n) Space
+[Better Approach 1] Using Memoization - O(n) Time and O(n) Space
+[Better Approach 2] Using Tabulation - O(n) Time and O(n) Space
+[Expected Approach ] Using Space-Optimized DP - O(n) Time and O(1) Space
+[Naive Approach] Using Recursion- O(2^n) Time and O(n) Space
+The idea is to explore all the possibilities for each house using Recursion. We can start from the last house and for each house, we have two choices:
+
+Rob the current house and skip the house just before it.
+Skip the current house and move to the next house.
+So, the recurrence relation will be: 
+
+maxLootRec(n) = max(arr[n - 1] + maxLootRec(n - 2), maxLootRec(n - 1)), 
+where maxLootRec(n) returns the maximum amount of money which can be stolen if n houses are left.
+
+[Better Approach 2] Using Tabulation - O(n) Time and O(n) Space
+The idea is to build the solution in bottom-up manner. We create a dp[] array of size n+1 where dp[i] represents the maximum value that can be collected with first i houses. We first fill the known values, dp[0] and dp[1] and then fill the remaining values using the formula: dp[i] = max(arr[i] + dp[i - 2], dp[i - 1]). The final result will be stored at dp[n].
+
+[Expected Approach ] Using Space-Optimized DP - O(n) Time and O(1) Space
+On observing the dp[] array in the previous approach, it can be seen that the answer at the current index depends only on the last two values. In other words, dp[i] depends only on dp[i - 1] and dp[i - 2]. So, instead of storing the result in an array, we can simply use two variables to store the last and second last result.
+
+[Expected Approach ] Using Space-Optimized DP - O(n) Time and O(1) Space
+On observing the dp[] array in the previous approach, it can be seen that the answer at the current index depends only on the last two values. In other words, dp[i] depends only on dp[i - 1] and dp[i - 2]. So, instead of storing the result in an array, we can simply use two variables to store the last and second last result.
+
