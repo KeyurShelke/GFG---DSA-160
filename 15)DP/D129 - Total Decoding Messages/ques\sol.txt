@@ -1,0 +1,75 @@
+Let 1 maps to 'A', 2 maps to 'B', ..., 26 to 'Z'. Given a digit sequence, count the number of possible decodings of the given digit sequence. 
+
+Consider the input string "123". There are three valid ways to decode it:
+
+"ABC": The grouping is (1, 2, 3) → 'A', 'B', 'C'
+"AW": The grouping is (1, 23) → 'A', 'W'
+"LC": The grouping is (12, 3) → 'L', 'C'
+Note: Groupings that contain invalid codes (e.g., "0" by itself or numbers greater than "26") are not allowed.
+For instance, the string "230" is invalid because "0" cannot stand alone, and "30" is greater than "26", so it cannot represent any letter. The task is to find the total number of valid ways to decode a given string.
+
+Examples: 
+
+Input: digits = "121"
+Output: 3
+Explanation: The possible decodings are "ABA", "AU", "LA"
+
+Input: digits = "1234"
+Output: 3
+Explanation: The possible decodings are "ABCD", "LCD", "AWD"
+
+Table of Content
+
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+[Better Approach 1] Using Top-Down DP (Memoization) - O(n) Time and O(n) Space
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n) Time and O(n) Space
+[Expected Approach] Using Space Optimised DP  - O(n) Time and O(1) Space
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+For the recursive approach to count decoding ways, there will be two cases:
+
+If the current digit is not '0', the problem reduces to solving for the remaining digits starting from the next index.
+If the two digits form a valid number between 10 and 26, the problem reduces to solving for the digits starting two positions ahead.
+The recurrence relation will look like this:
+
+decodeHelper(digits, index) = decodeHelper(digits, index + 1) + decodeHelper(digits, index + 2)
+Base Case: if index >= digits.length()
+
+decodeHelper(digits, index) = 1 
+
+[Better Approach 1] Using Top-Down DP (Memoization) - O(n) Time and O(n) Space
+1. Optimal Substructure: The solution to the problem can be broken down into smaller subproblems:
+
+Mathematically, the recurrence relations are:
+
+if digits[index] != '0': 
+     decodeHelper(digits, index) = decodeHelper(digits, index + 1) 
+
+if digits[index] and digits[index + 1] form a valid number :  
+     decodeHelper(digits, index) += decodeHelper(digits, index + 2) 
+
+2. Overlapping Subproblems: The same subproblems are recalculated multiple times, like computing the number of decodings from index i repeatedly. This overlap can be avoided using memoization to store already computed results.
+
+memo[index] = decodeHelper(digits, index + 1) if digits[index] != '0'
+memo[index] += decodeHelper(digits, index + 2) if digits[index] and digits[index + 1]
+
+[Better Approach 2] Using Bottom-Up DP (Tabulation) - O(n) Time and O(n) Space
+The approach here is similar to the recursive method, but instead of breaking down the problem recursively, we solve it iteratively in a bottom-up manner using dynamic programming. We will create a 1D array dp of size (n + 1), where dp[i], represents the number of ways to decode the substring starting from index i of the string digits[].
+
+Dynamic Programming Relation:
+
+If the current digit is not '0', it can be decoded as a single digit, so we update the dp[i] as:
+
+dp[i] = dp[i + 1]
+If the next two digits form a valid number between 10 and 26, then we also consider decoding the current and next digit together:
+
+dp[i] += dp[i + 2]
+Base Case: dp[n] = 1, where an empty string has one valid decoding.
+
+[Expected Approach] Using Space Optimised DP  - O(n) Time and O(1) Space
+In previous approach of dynamic programming we have derive the relation between states as given below:
+
+dp[i] = dp[i + 1]
+dp[i] = dp[i]+ dp[i + 2]
+If we observe that for calculating current dp[i] state we only need previous two values dp[i+1] and dp[i]+dp[i+2]. There is no need to store all the previous states.
+
+step-1.webp
