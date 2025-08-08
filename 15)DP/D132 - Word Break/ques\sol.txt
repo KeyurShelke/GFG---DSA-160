@@ -1,0 +1,58 @@
+Given a string s and y a dictionary of n words dictionary, check if s can be segmented into a sequence of valid words from the dictionary, separated by spaces.
+
+Examples:
+
+Input:  s = "ilike", dictionary[] = ["i", "like", "gfg"]
+Output: true
+Explanation: The string can be segmented as "i like".
+
+Input:  s = "ilikegfg", dictionary[] = ["i", "like", "man", "india", "gfg"]
+Output: true
+Explanation: The string can be segmented as "i like gfg".
+
+Input: "ilikemangoes", dictionary = ["i", "like", "gfg"]
+Output: false
+Explanation: The string cannot be segmented.
+
+Table of Content
+
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+[Expected Approach - 1] Using Top-Down DP - O(n^2) Time and O(n+m) Spacce
+[Expected Approach - 2] Using Bottom Up DP - O(n*m*k) time and O(n) space
+[Naive Approach] Using Recursion - O(2^n) Time and O(n) Space
+The idea is to consider each prefix and search for it in dictionary. If the prefix is present in dictionary, we recur for rest of the string (or suffix). If the recursive call for suffix returns true, we return true, otherwise we try next prefix. If we have tried all prefixes and none of them resulted in a solution, we return false.
+
+[Expected Approach - 1] Using Top-Down DP - O(n^2) Time and O(n+m) Space
+The idea is to use dynamic programming in the recursive solution to avoid recomputing same subproblems. To further improve the time complexity, store the words of the dictionary in a set to improve the time complexity of looking for a word in dictionary from O(m) to O(1).
+
+If we notice carefully, we can observe that the above recursive solution holds the following two properties of Dynamic Programming:
+
+1. Optimal Substructure: 
+
+To check if the string can be segmented starting from index i, i.e., wordBreakRec(i), depends on the solutions of the subproblems wordBreakRec(j) where j lies between i and n. Return true if s[i:j] is present in dictionary and wordBreakRec(j) returns true.
+
+2. Overlapping Subproblems: 
+
+While applying a recursive approach in this problem, we notice that certain subproblems are computed multiple times. For example, for wordBreakRec(0), wordBreakRec(1) and wordBreakRec(2) is called. wordBreakRec(1) will again call wordBreakRec(2). 
+
+There is only one parameter: i that changes in the recursive solution. So we create a 1D array of size n for memoization.
+We initialize this array as -1 to indicate nothing is computed initially.
+Now we modify our recursive solution to first check if the value is -1, then only make recursive calls. This way, we avoid re-computations of the same subproblems.
+
+[Expected Approach - 2] Using Bottom Up DP - O(n*m*k) time and O(n) space
+ The idea is to use bottom-up dynamic programming to determine if a string can be segmented into dictionary words. Create a boolean array d[] where each position dp[i] represents whether the substring from 0 to that position can be broken into dictionary words.
+
+Step by step approach:
+
+Start from the beginning of the string and mark it as valid (base case). i.e., dp[0] = true
+For each position, check if any dictionary word ends at that position and leads to an already valid position.
+If such a word exists, mark the current position as valid, i.e., dp[i] = true
+At the end return the last entry of dp[]
+
+Time Complexity: O(n * m * k), where n is the length of string and m is the number of dictionary words and k is the length of maximum sized string in dictionary.
+Space Complexity: O(n)
+
+Related Articles:
+
+Word Break Problem | (Trie solution)
+Word Break Problem using Backtracking
