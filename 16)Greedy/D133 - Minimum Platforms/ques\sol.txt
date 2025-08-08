@@ -1,0 +1,58 @@
+Given two arrays, arr[] and dep[], that represent the arrival and departure times of trains respectively, the task is to find the minimum number of platforms required so that no train waits.
+
+Examples: 
+
+Input: arr[] = [900, 940, 950, 1100, 1500, 1800], dep[] = [910, 1200, 1120, 1130, 1900, 2000]
+Output: 3 
+Explanation: There are three trains during the time 9:40 to 12:00. So we need a minimum of 3 platforms.
+
+Input: arr[] = [1,  5], dep[] = [3, 7] 
+Output: 1 
+Explanation:  All train times are mutually exclusive. So we need only one platform
+
+Table of Content
+
+[Naive Approach] Using Two Nested Loops - O(n^2) time and O(1) space
+[Expected Approach 1] Using Sorting and Two Pointers - O(n log(n)) time and O(1) space
+[Expected Approach 2] Using Sweep line algorithm
+[Naive Approach] Using Two Nested Loops - O(n^2) time and O(1) space
+The idea is to iterate through each train and for that train, check how many other trains have overlappingtimings with it - where current train's arrival time falls between the other train's arrival and departure times. We keep track of this count for each train and continuously update our answer with the maximum count found.
+
+[Expected Approach 1] Using Sorting and Two Pointers - O(n log(n)) time and O(1) space
+This approach uses sorting and two-pointer to reduce the complexity. First, we sort the arrival and departure times of all trains. Then, using two pointers, we traverse through both arrays. 
+
+Step by Step implementation:
+
+Sort the arrival and departure times so we can process train timings in order.
+Initialize two pointers:
+One for tracking arrivals (i = 0).
+One for tracking departures (j = 0).
+Iterate through the arrival times:
+If the current train arrives before or at the departure of an earlier train, allocate a new platform (cnt++).
+Otherwise, if the arrival time is greater than the departure time, it means a train has left, freeing up a platform (cnt--), and move the departure pointer forward (j++).
+Update the maximum number of platforms required after each step.
+Continue this process until all trains are processed.
+
+
+
+[Expected Approach 2] Using Sweep line algorithm
+The Sweep Line Algorithm is an efficient technique for solving interval-based problems. It works by treating each train's arrival and departure times as events on a timeline. By processing these events in chronological order, we can track the number of trains at the station at any moment, which directly indicates the number of platforms required at that time. The maximum number of overlapping trains during this process determines the minimum number of platforms needed.
+
+Step by Step implementation:
+
+Create an array v[] of size greater than the maximum departure time. This array will help track the number of platforms needed at each time.
+Mark arrivals and departures:
+For each arrival time, increment v[arrival_time] by 1, indicating that a platform is needed.
+For each departure time, decrement v[departure_time + 1] by 1, indicating that a platform is freed as the train has left.
+Iterate through v[] and compute the cumulative sum.
+The running sum keeps track of the number of trains present at any given time.
+The maximum value encountered represents the minimum number of platforms required.
+
+
+
+Time Complexity: O(n + k), where n is the number of trains and k is the maximum value present in the arrays.
+Auxiliary space: O(k), where k is the maximum value present in both the arrays.
+
+
+
+
