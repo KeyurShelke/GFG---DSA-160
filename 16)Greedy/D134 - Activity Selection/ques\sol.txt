@@ -1,0 +1,65 @@
+Given n activities with start times in start[] and finish times in finish[], find the maximum number of activities a single person can perform without overlap. A person can only do one activity at a time.
+
+Examples:  
+
+Input: start[]  =  [1, 3, 0, 5, 8, 5], finish[] =  [2, 4, 6, 7, 9, 9]
+Output: 4
+Explanation: A person can perform at most four activities. The maximum set of activities that can be performed is {0, 1, 3, 4} (these are the indexes in the start[] and finish[] arrays).
+
+Input: start[]  =  [10, 12, 20], finish[] =  [20, 25, 30]
+Output: 1
+Explanation: A person can perform at most one activity.
+
+Table of Content
+
+[Naive Approach] Generate All Subsets - O(n^2 * 2^n) Time and O(n) Space
+How does Greedy Choice work for Activities sorted according to finish time? 
+[Expected Approach 1] - Using Sorting - O(n * log(n)) Time and O(n) Space
+[Expected Approach 2] - Using Priority Queue - O(n * log(n)) Time and O(n) Space
+[Naive Approach] Generate All Subsets - O(n^2 * 2^n) Time and O(n) Space
+Generates all possible subsets of activities, where each subset represents a potential selection. For each subset, we check if the activities are mutually non-overlapping by comparing their time intervals pairwise. If a subset is valid and contains more activities than our current maximum, we update the maximum count. In the end, we get the size of the largest valid subset.
+
+How does Greedy Choice work for Activities sorted according to finish time? 
+Let the set of activities be S={1,2,3,…,n} sorted by their finish times. The greedy strategy always selects activity 1 first (the one with the earliest finish time).
+
+Why does activity 1 always lead to an optimal solution?
+
+We can prove this by contradiction: suppose there exists another optimal solution B whose first selected activity is k≠1 Since the activities in B are non-overlapping and k is the earliest finishing activity in B, it follows that:
+
+finish(k) ≥ finish(1)
+
+Now, we can construct a new solution A by replacing k with activity 1 in B:
+
+Let  A = (B∖{k}) ∪ {1}
+
+This means: we form set A by taking all activities in B except k, and adding activity 1 instead.
+
+Because activity 1 finishes no later than k, replacing k with 1 does not create any overlaps. Thus, A is also a valid solution with the same size as B, but it starts with activity 1.
+
+This shows that there always exists an optimal solution that begins with the activity that finishes earliest (activity 1).
+
+[Expected Approach 1] - Using Sorting - O(n * log(n)) Time and O(n) Space
+The greedy strategy is to always pick the next activity that has the earliest finish time among the remaining activities and starts after the previously selected activity finishes. By sorting the activities based on their finish times, we ensure that at each step, we select the activity with the minimum finishing time available.
+
+Step By Step Implementations:
+
+Sort the activities according to their finishing time 
+Select the first activity from the sorted array 
+Do the following for the remaining activities in the sorted array
+If the start time of this activity is greater than or equal to the finish time of the previously selected activity then select this activity
+
+[Expected Approach 2] - Using Priority Queue - O(n * log(n)) Time and O(n) Space
+We can use Min-Heap to get the activity with minimum finish time. Min-Heap can be implemented using priority-queue
+
+Step By Step Implementations:
+
+Create a priority queue (min-heap) and push all activities into it, prioritized by their finish times.
+Pop the top activity from the priority queue and add it to the answer vector. Set finish to the finish time of this activity.
+While the priority queue is not empty, do the following:
+Take the top activity from the priority queue.
+If the start time of this activity is greater than or equal to finish, add it to the answer vector and update finish to this activity’s finish time.
+Otherwise, ignore the activity.
+After processing all activities, print the selected activities stored in the answer vector.
+
+
+
