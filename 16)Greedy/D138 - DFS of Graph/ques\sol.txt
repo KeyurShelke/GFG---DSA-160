@@ -1,0 +1,41 @@
+In Depth First Search (or DFS) for a graph, we traverse all adjacent vertices one by one. When we traverse an adjacent vertex, we completely finish the traversal of all vertices reachable through that adjacent vertex. This is similar to a tree, where we first completely traverse the left subtree and then move to the right subtree. The key difference is that, unlike trees, graphs may contain cycles (a node may be visited more than once). To avoid processing a node multiple times, we use a boolean visited array.
+
+Example:
+
+Note : There can be multiple DFS traversals of a graph according to the order in which we pick adjacent vertices. Here we pick vertices as per the insertion order.
+
+Input: adj =  [[1, 2], [0, 2], [0, 1, 3, 4], [2], [2]]
+
+Output: [0 1 2 3 4]
+Explanation:  The source vertex s is 0. We visit it first, then we visit an adjacent. 
+Start at 0: Mark as visited. Output: 0
+Move to 1: Mark as visited. Output: 1 
+Move to 2: Mark as visited. Output: 2 
+Move to 3: Mark as visited. Output: 3 (backtrack to 2)
+Move to 4: Mark as visited. Output: 4 (backtrack to 2, then backtrack to 1, then to 0)
+
+Not that there can be more than one DFS Traversals of a Graph. For example, after 1, we may pick adjacent 2 instead of 0 and get a different DFS. Here we pick in the insertion order.
+
+Table of Content
+
+DFS from a Given Source of Undirected Graph:
+DFS for Complete Traversal of Disconnected Undirected Graph
+DFS from a Given Source of Undirected Graph:
+The algorithm starts from a given source and explores all reachable vertices from the given source. It is similar to Preorder Tree Traversal where we visit the root, then recur for its children. In a graph, there might be loops. So we use an extra visited array to make sure that we do not process a vertex again.
+
+Let us understand the working of Depth First Search with the help of the following Illustration: for the source as 0.
+
+DFS-for-a-Graph-2.webp
+
+Time complexity: O(V + E), where V is the number of vertices and E is the number of edges in the graph.
+Auxiliary Space: O(V + E), since an extra visited array of size V is required, And stack size for recursive calls to dfsRec function.
+
+Please refer Complexity Analysis of Depth First Search for details.
+
+DFS for Complete Traversal of Disconnected Undirected Graph
+The above implementation takes a source as an input and prints only those vertices that are reachable from the source and would not print all vertices in case of disconnected graph. Let us now talk about the algorithm that prints all vertices without any source and the graph maybe disconnected. 
+
+Time complexity: O(V + E). Note that the time complexity is same here because we visit every vertex at most once and every edge is traversed at most once (in directed) and twice in undirected.
+Auxiliary Space: O(V + E), since an extra visited array of size V is required, And stack size for recursive calls to dfsRec function.
+
+Related Articles:
