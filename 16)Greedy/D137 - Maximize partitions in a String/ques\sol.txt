@@ -1,0 +1,50 @@
+Given a string s consisting of lowercase English letters, partition s into the maximum number of substrings such that no two substrings share a common character. Return the total number of such substrings.
+
+Examples:
+
+Input: s = "acbbcc" 
+Output: 2
+Explanation: "a" and "cbbcc" are two substrings that do not share any characters between them.
+
+Input: str = “aaa” 
+Output: 1 
+Explanation: 
+Since the string consists of a single character, no partition can be performed. 
+
+Input: s = "ababcbacadefegdehijhklij" 
+Output: 3
+Explanation: "ababcbaca", "defegde" and "hijhklij" are three substrings that do not share any characters between them..
+
+Table of Content
+
+[Naive Approach] Check Character Repetition at Every Point - O(n^2) Time and O(1) Space
+[Expected Approach 1] Using Greedy approach and array - O(n) Time and O(1) Space
+[Expected Approach 2] By merging intervals - O(n) Time and O(1) Space.
+[Naive Approach] Check Character Repetition at Every Point - O(n^2) Time and O(1) Space
+We run two nested loops. The outer loop traverses through all indexes and keeps track of all the visited characters. The inner loop checks if the any future character matches with the visited characters. If no future character matches, we increment the partition count.
+
+
+
+
+[Expected Approach 1] Using Greedy approach and array - O(n) Time and O(1) Space
+The idea is to first initialize an array last of size 26 (to represent all lowercase English letters) with -1, which is used to store the last occurrence index of each character in the string. 
+
+Once we get last occurrence of each character, we traverse through the string again and keep track of the farthest last index so far. At any point, if current character's index is equal to the farthest index of last index so far, it means after this index, no previously see character would appear, so we have a partition just after the current index.
+
+To implement the above logic, we initialize two variables: 
+
+cnt to count the number of partitions 
+a to track the farthest last occurrence of any character in the current substring.
+Iterates through the string again, updating a to reflect the maximum last occurrence index encountered so far. If a matches the current index i, it means the substring can be closed at this position, forming a valid partition. The partition count (cnt) is then incremented.
+
+This process continues until the end of the string is reached, return cnt(maximum number of partition).
+
+
+
+
+[Expected Approach 2] By merging intervals - O(n) Time and O(1) Space.
+The main idea is to track first and last occurrence of character and treat them as intervals (first occ, last occ). 
+
+Once we have these intervals, we need to merge overlapping ones. If two intervals overlap, it means that the characters in those intervals must be part of the same substring. The merging process ensures that we are not splitting a character across multiple partitions.
+
+After merging all overlapping intervals, the number of separate intervals left gives the desired result.
