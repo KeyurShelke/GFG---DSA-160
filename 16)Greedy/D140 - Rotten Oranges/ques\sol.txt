@@ -1,0 +1,78 @@
+Given a matrix of dimension mxn, where each cell in the matrix can have values 0, 1 or 2 which has the following meaning:  
+
+0: Empty cell
+1: Cells have fresh oranges
+2: Cells have rotten oranges
+The task is to find the minimum time required so that all the oranges become rotten. A rotten orange at index (i,j) can rot other fresh oranges which are its neighbors (up, down, left, and right).
+
+Note : If it is impossible to rot every orange then simply return -1.
+
+Examples: 
+
+Input:  arr[][] = [[2, 1, 0, 2, 1], [1, 0, 1, 2, 1], [1, 0, 0, 2, 1]];
+Output: 2
+Explanation: At 0th time frame:
+[2, 1, 0, 2, 1]
+[1, 0, 1, 2, 1]
+[1, 0, 0, 2, 1]
+At 1st time frame:
+[2, 2, 0, 2, 2]
+[2, 0, 2, 2, 2]
+[1, 0, 0, 2, 2]
+At 2nd time frame:
+[2, 2, 0, 2, 2]
+[2, 0, 2, 2, 2]
+[2, 0, 0, 2, 2]
+
+Input:  arr[][] = [[2, 1, 0, 2, 1], [0, 0, 1, 2, 1], [1, 0, 0, 2, 1]]
+Output: -1
+Explanation: At 0th time frame:
+[2, 1, 0, 2, 1]
+[0, 0, 1, 2, 1]
+[1, 0, 0, 2, 1]
+At 1st time frame:
+[2, 2, 0, 2, 2]
+[0, 0, 2, 2, 2]
+[1, 0, 0, 2, 2]
+At 2nd time frame:
+[2, 2, 0, 2, 2]
+[0, 0, 2, 2, 2]
+[1, 0, 0, 2, 2]
+The 1 at the bottom left corner of the matrix is never rotten.
+
+Table of Content
+
+[Naive Approach] - Using Iteration - O((n x m) ^ 2) Time and O(1) Space
+[Better Approach] - Using Depth First Search - O(n x m) Time and O(1) Space
+[Expected Approach] - Using Breadth First Search - O(n x m) Time and O(n x m) Space
+[Naive Approach] - Using Iteration - O((n x m) ^ 2) Time and O(1) Space
+The idea is iteratively change the cells with fresh orange connected to that of rotten orange until either there is no cell with fresh orange or it is not possible to reach the fresh orange.
+
+Steps:
+
+Traverse through all oranges in multiple rounds.
+In every round, rot the oranges to the adjacent position of oranges that were rotten in the last round.
+For the first round we consider all initially rotten oranges.
+At last check if there is any fresh orange remaining, if so print -1, else print the elapsed time.
+
+
+
+[Better Approach] - Using Depth First Search - O(n x m) Time and O(1) Space
+The idea is to perform DFS from each rotten orange and find the minimum time required to rot all the fresh oranges. 
+
+Steps:
+
+Traverse through all the cells of matrix mat[][], if cell mat[i][j] == 2, i.e. it has a rotten orange, perform DFS to rot all the connected fresh oranges.
+In each recursive call, check for all 4-directionally connected cells, if any cell contains a fresh orange or the time required to rot it is less than previously stored value, move to that cell.
+At last check if there is any fresh orange remaining, if so print -1, else print the maximum elapsed time.
+
+
+
+[Expected Approach] - Using Breadth First Search - O(n x m) Time and O(n x m) Space
+The idea is to use Breadth First Search to find the minimum time required. 
+
+Steps:
+
+Create a queue to store all the cells that initially contains rotten orange.
+Now, run a loop until queue is not empty and in each iteration dequeue the top most element, storing the time and indices of cell. Now check all 4-directionally connected cell, if any cell contains a fresh orange, change its state and push the indices in queue and increment the time by 1.
+After the queue is empty, check if there is any fresh orange remaining, if so print -1, else print the maximum elapsed time.
