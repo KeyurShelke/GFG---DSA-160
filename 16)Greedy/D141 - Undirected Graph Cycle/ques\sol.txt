@@ -1,0 +1,36 @@
+Given an undirected graph, the task is to check if there is a cycle in the given graph.
+
+Examples:
+
+Input: V = 4, edges[][]= [[0, 1], [0, 2], [1, 2], [2, 3]]
+
+Output: true
+Explanation: The diagram clearly shows a cycle 0 → 2 → 1  → 0
+
+Table of Content
+
+Using Breadth First Search - O(V+E) time and O(V) space
+Using Depth First Search - O(V+E) time and O(V) space
+Using Breadth First Search - O(V+E) Time and O(V) Space
+BFS is useful for cycle detection in an undirected graph because it explores level by level, ensuring that each node is visited in the shortest possible way. It efficiently detects cycles using a visited array and a queue while avoiding unnecessary recursive calls, making it more memory-efficient than DFS for large graphs.
+
+During BFS traversal, we maintain a visited array and a queue. We process nodes by popping them one by one from the queue, marking them as visited, and pushing their unvisited adjacent nodes into the queue. A cycle is detected if we encounter a node that has already been visited before being dequeued, meaning it has been reached through a different path. This approach ensures that we efficiently detect cycles while maintaining optimal performance.
+
+Please refer Detect cycle in an undirected graph using BFS for complete implementation.
+
+Using Depth First Search - O(V+E) Time and O(V) Space
+Depth First Traversal can be used to detect a cycle in an undirected Graph. If we encounter a visited vertex again, then we say, there is a cycle. But there is a catch in this algorithm, we need to make sure that we do not consider every edge as a cycle because in an undirected graph, an edge from 1 to 2 also means an edge from 2 to 1. To handle this, we keep track of the parent node (the node from which we came to the current node) in the DFS traversal and ignore the parent node from the visited condition.
+
+Follow the below steps to implement the above approach:
+
+Iterate over all the nodes of the graph and Keep a visited array visited[] to track the visited nodes.
+If the current node is not visited, run a Depth First Traversal on the given subgraph connected to the current node and pass the parent of the current node as -1. Recursively, perform the following steps:
+Set visited[root] as 1.
+Iterate over all adjacent nodes of the current node in the adjacency list 
+If it is not visited then run DFS on that node and return true if it returns true.
+Else if the adjacent node is visited and not the parent of the current node then return true.
+Return false.
+
+Time Complexity: O(V+E) because DFS visits each vertex once (O(V)) and traverses all edges once (O(E))
+Auxiliary space: O(V) for the visited array and O(V) for the recursive call stack.
+
