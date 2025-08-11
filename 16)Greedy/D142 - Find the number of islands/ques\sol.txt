@@ -1,0 +1,42 @@
+Given a grid of size n*m (n is the number of rows and m is the number of columns in the grid) consisting of 'W's (Water) and 'L's (Land). Find the number of islands.
+
+Note: An island is either surrounded by water or the boundary of a grid and is formed by connecting adjacent lands horizontally or vertically or diagonally i.e., in all 8 directions.
+
+Examples:
+
+Input: grid[][] = [['L', 'L', 'W', 'W', 'W'], ['W', 'L', 'W', 'W', 'L'], ['L', 'W', 'W', 'L', 'L'], ['W', 'W', 'W', 'W', 'W'], ['L', 'W', 'L', 'L', 'W']]
+Output: 4
+Explanation:
+The image below shows all the 4 islands in the grid.
+
+Table of Content
+
+Background
+[Approach 1] Using DFS and Additional Matrix - O(n*m) Time and O(n*m) Space
+[Approach 2] Using Space Optimized DFS - O(n*m) Time and O(1) Space
+[Approach 3] Using Breadth First Search - O(n*m) time and O(n*m) space
+[Approach 4] Using Disjoint Set - O(n*m) time and O(n*m) space
+Background
+This is a variation of the standard problem: "Counting the number of connected components in an undirected graph".  Let us understand what is a connected component. A connected component of an undirected graph is a subgraph in which every two vertices are connected to each other by a path(s), and which is connected to no other vertices outside the subgraph.
+
+[Approach 1] Using DFS and Additional Matrix - O(n*m) Time and O(n*m) Space
+The idea is to keep an additional matrix to keep track of the visited nodes in the given matrix, and perform dfs to find the total number of islands
+
+Steps
+
+Initialize count = 0 and boolean matrix, visited[][] to false.
+For each cell of the input matrix check if the value of the current cell is L and is not visited , call for the dfs for all its 8 neighboring cells.
+If the neighbor is safe to visit and is not visited already Call dfs recursively and Increment count by 1
+Return count as the final answer.
+
+[Approach 2] Using Space Optimized DFS - O(n*m) Time and O(1) Space
+If we are allowed to modify the original matrix, we can avoid an additional visited matrix. Whenever we visit a cell in matrix, we change its value to W  so that it is not visited again
+
+[Approach 3] Using Breadth First Search - O(n*m) time and O(n*m) space
+We can solve this problem using BFS as well. The idea is going to be same. We use a visited matrix to keep track if the visited cells and apply the standard queue based BFS algorithm to count islands. We increment the count whenever we see an unvisited vertex after the previous call. The time complexity and auxiliary space are going to be same as DFS. However this implementation would be faster as we do not have recursion overhead. 
+
+Please refer Islands in a graph using BFS for details.
+
+[Approach 4] Using Disjoint Set - O(n*m) time and O(n*m) space
+This solution is very intuitive if you have studied disjoint set data structures. We mainly create disjoint sets of all islands and the number of disjoint sets at the end is our answer.
+
