@@ -1,0 +1,72 @@
+Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge u-v, vertex u comes before v in the ordering.
+
+Note: Topological Sorting for a graph is not possible if the graph is not a DAG.
+
+Example:
+
+Input: V = 6, edges = [[2, 3], [3, 1], [4, 0], [4, 1], [5, 0], [5, 2]]
+
+Output: 5 4 2 3 1 0
+Explanation: The first vertex in topological sorting is always a vertex with an in-degree of 0 (a vertex with no incoming edges).  A topological sorting of the following graph is "5 4 2 3 1 0". There can be more than one topological sorting for a graph. Another topological sorting of the following graph is "4 5 2 3 1 0". 
+
+Table of Content
+
+Topological Sorting vs Depth First Traversal (DFS): 
+Topological Sorting in Directed Acyclic Graphs (DAGs)
+Algorithm for Topological Sorting using DFS:
+Topological Sorting Using BFS:
+Advantages of Topological Sort:
+Disadvantages of Topological Sort:
+Applications of Topological Sort:
+Topological Sorting vs Depth First Traversal (DFS): 
+In DFS, we print a vertex and then recursively call DFS for its adjacent vertices. In topological sorting, we need to print a vertex before its adjacent vertices. 
+
+For example, In the above given graph, the vertex '5' should be printed before vertex '0', but unlike DFS, the vertex '4' should also be printed before vertex '0'. So Topological sorting is different from DFS. For example, a DFS of the shown graph is "5 2 3 1 0 4", but it is not a topological sorting.
+
+Topological Sorting in Directed Acyclic Graphs (DAGs)
+DAGs are a special type of graphs in which each edge is directed such that no cycle exists in the graph, before understanding why Topological sort only exists for DAGs, lets first answer two questions:
+
+Why Topological Sort is not possible for graphs with undirected edges?
+This is due to the fact that undirected edge between two vertices u and v means, there is an edge from u to v as well as from v to u. Because of this both the nodes u and v depend upon each other and none of them can appear before the other in the topological ordering without creating a contradiction.
+
+Why Topological Sort is not possible for graphs having cycles?
+Imagine a graph with 3 vertices and edges = {1 to 2 , 2 to 3, 3 to 1} forming a cycle. Now if we try to topologically sort this graph starting from any vertex, it will always create a contradiction to our definition. All the vertices in a cycle are indirectly dependent on each other hence topological sorting fails.
+
+Topological order may not be Unique:
+Topological sorting is a dependency problem in which completion of one task depends upon the completion of several other tasks whose order can vary. Let us understand this concept via an example:
+
+Algorithm for Topological Sorting using DFS:
+Here’s a step-by-step algorithm for topological sorting using Depth First Search (DFS):
+
+Create a graph with n vertices and m-directed edges.
+Initialize a stack and a visited array of size n.
+For each unvisited vertex in the graph, do the following:
+Call the DFS function with the vertex as the parameter.
+In the DFS function, mark the vertex as visited and recursively call the DFS function for all unvisited neighbors of the vertex.
+Once all the neighbors have been visited, push the vertex onto the stack.
+After all, vertices have been visited, pop elements from the stack and append them to the output list until the stack is empty.
+The resulting list is the topologically sorted order of the graph.
+
+Time Complexity: O(V+E). The above algorithm is simply DFS with an extra stack. So time complexity is the same as DFS.
+Auxiliary space: O(V). due to creation of the stack.
+
+We do not count the adjacency list in auxiliary space as it is necessary for representing the input graph.
+
+Topological Sorting Using BFS:
+The BFS based algorithm for Topological Sort is called Kahn's Algorithm. The Kahn's algorithm has same time complexity as the DFS based algorithm discussed above.
+
+Advantages of Topological Sort:
+Helps in scheduling tasks or events based on dependencies.
+Detects cycles in a directed graph.
+Efficient for solving problems with precedence constraints.
+Disadvantages of Topological Sort:
+Only applicable to directed acyclic graphs (DAGs), not suitable for cyclic graphs.
+May not be unique, multiple valid topological orderings can exist.
+Applications of Topological Sort:
+Task scheduling and project management.
+In software deployment tools like Makefile.
+Dependency resolution in package management systems.
+Determining the order of compilation in software build systems.
+Deadlock detection in operating systems.
+Course scheduling in universities.
+It is used to find shortest paths in weighted directed acyclic graphs
