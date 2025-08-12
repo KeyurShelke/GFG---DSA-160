@@ -1,0 +1,30 @@
+Given an undirected graph with V vertices numbered from 0 to V-1 and E edges, represented by 2d array edges[][], where edges[i]=[u,v] represents the edge between the vertices u and v. Determine whether a specific edge between two vertices (c, d) is a bridge.
+
+Note:
+
+An edge is called a bridge if removing it increases the number of connected components of the graph.
+if there’s only one path between c and d (which is the edge itself), then that edge is a bridge.
+Examples :
+
+Input: V = 4, edges[][] = [[0, 1], [1, 2], [2, 3]], c = 1, d = 2
+
+Output: true
+Explanation: From the graph, we can clearly see that blocking the edge 1-2 will result in disconnection of the graph.
+Hence, it is a Bridge.
+
+Approach: Using DFS - O(V + E) Time and O(V) Space
+The idea is to temporarily remove the edge (c, d) from the graph and check if it increases the number of connected components.
+ If removing the edge results in c and d no longer being connected — meaning there is no path between them — then the edge (c, d) is a bridge, as its removal disconnects the graph.
+On the other hand, if  c and d are still connected through other paths, then the edge is not a bridge.
+
+Step by Step implementation:
+
+Remove the edge (c, d) from the graph.
+Check if nodes c and d are still connected.
+If they are not connected, it means the edge (c, d) was the only path between them, so it's a bridge.
+If they are still connected through other paths, then the edge is not a bridge.
+
+
+
+Time Complexity: O(V + E) since DFS visits each vertex once O(V) and traverses all edges once O(E).
+Auxiliary Space: O(V) for the visited array and recursive call stack (excluding adjacency list storage). We do not count the adjacency list in auxiliary space as it is necessary for representing the input graph.
