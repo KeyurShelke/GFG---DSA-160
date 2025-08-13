@@ -1,0 +1,63 @@
+You are given an undirected graph with V vertices and E edges. The graph is represented as a 2D array edges[][], where each element edges[i] = [u, v] indicates an undirected edge between vertices u and v.
+Your task is to return all the articulation points (or cut vertices) in the graph.
+An articulation point is a vertex whose removal, along with all its connected edges, increases the number of connected components in the graph.
+
+Note: The graph may be disconnected, i.e., it may consist of more than one connected component.
+If no such point exists, return {-1}.
+
+Examples :
+
+Input: V = 5, edges[][] = [[0, 1], [1, 4], [4, 3], [4, 2], [2, 3]]
+
+Output: [1, 4]
+
+Table of Content
+
+[Naive Approach] Using DFS - O(V * (V + E)) Time and O(V) Space
+[Expected Approach] - Using Tarjan's Algorithm - O(V + E) Time and O(V) Space
+[Naive Approach] Using DFS - O(V * (V + E)) Time and O(V) Space
+Condition for particular node to be an articulation point: 
+
+A node is an articulation point if, after removing it, you need more than one DFS traversal to visit all of its neighbors. This means that at least two of its neighbors (children) end up in different disconnected components, and cannot reach each other without this node.
+
+Step by Step implementations:
+
+Iterate over all nodes i (possible articulation candidates).
+For each node i, pretend it’s removed from the graph by marking it as already visited, so DFS will skip it.
+For each unvisited neighbor of i, start DFS
+Count how many separate DFS calls are needed (stored in comp) to visit all neighbor.
+If comp > 1, it means i connects multiple components , thus i is an articulation point.
+After checking all nodes, return the list of articulation points, or {-1} if none found.
+
+Time Complexity: O(V * ( V + E )) where V is number of vertices, and E is number of edges. We are performing DFS operation which have O(V + E) time complexity, for each of the vertex. Thus the overall time taken will be O(V * ( V + E )).
+Auxiliary Space: O(V), For storing the visited[] array.
+
+[Expected Approach] Using Tarjan's Algorithm - O(V + E) Time and O(V) Space
+The idea is to use DFS (Depth First Search). In DFS, follow vertices in a tree form called the DFS tree. In the DFS tree, a vertex u is the parent of another vertex v, if v is discovered by u. 
+
+In DFS tree, a vertex u is an articulation point if one of the following two conditions is true. 
+
+u is the root of the DFS tree and it has at least two children. 
+u is not the root of the DFS tree and it has a child v such that no vertex in the subtree rooted with v has a back edge to one of the ancestors in DFS tree of u.
+
+Step by Step implementation:
+
+Maintain these arrays and integers and perform a DFS traversal.
+disc[]: Discovery time of each vertex during DFS.
+low[]: The lowest discovery time reachable from the subtree rooted at that vertex (via tree or back edges).
+parent: To keep track of each node’s parent in the DFS tree.
+visited[]: To mark visited nodes.
+Root Node Case:
+For the root node of DFS (i.e., parent[u] == -1), check how many child DFS calls it makes.
+If the root has two or more children, it is an articulation point
+For any non-root node u, check all its adjacent nodes:
+If v is an unvisited child:
+Recur for v, and after returning update low[u] = min(low[u], low[v])
+If low[v] >= disc[u], then u is an articulation point because v and its subtree cannot reach any ancestor of u, so removing u would disconnect v.
+Back Edge Case
+If v is already visited and is not the parent of u then It’s a back edge. Update low[u] = min(low[u], disc[v])
+This helps bubble up the lowest reachable ancestor through a back edge.
+After DFS traversal completes, all nodes marked as articulation points are stored in result array
+
+
+
