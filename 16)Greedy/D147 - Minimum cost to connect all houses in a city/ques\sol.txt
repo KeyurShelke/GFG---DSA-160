@@ -1,0 +1,40 @@
+Given a 2D array houses[][], consisting of n 2D coordinates {x, y} where each coordinate represents the location of each house, the task is to find the minimum cost to connect all the houses of the city.
+
+The cost of connecting two houses is the Manhattan Distance between the two points (xi, yi) and (xj, yj) i.e., |xi – xj| + |yi – yj|, where |p| denotes the absolute value of p.
+
+Examples :
+
+Input: n = 5 houses[][] = [[0, 7], [0, 9], [20, 7], [30, 7], [40, 70]]
+Output: 105
+Explanation:
+Connect house 1 (0, 7) and house 2 (0, 9) with cost = 2
+Connect house 1 (0, 7) and house 3 (20, 7) with cost = 20
+Connect house 3 (20, 7) with house 4 (30, 7) with cost = 10 
+At last, connect house 4 (30, 7) with house 5 (40, 70) with cost 73.
+All the houses are connected now.
+The overall minimum cost is 2 + 10 + 20 + 73 = 105.
+
+able of Content
+
+[Approach 1] Using Prim’s Algorithm - Time O(n^2*log(n)) and Space O(n^2)
+[Approach 2] Using Kruskal's Algorithm - Time O(n^2*log(n)) and Space O(n^2)
+[Approach 1] Using Prim’s Algorithm - Time O(n^2*log(n)) and Space O(n^2)
+We can think of each house as a node in a graph, and the Manhattan distance between any two houses as the weight of the edge connecting those two nodes. With this interpretation, the problem of connecting all houses with the minimum total cost becomes equivalent to finding a Minimum Spanning Tree (MST) of a complete graph.
+
+Step by Step implementations:
+
+Start with any house (we start with house 0).
+Push all distances from this house to other houses into a min-heap (priority queue).
+At every step: Pick the house with the smallest connection cost that hasn't been visited.
+Add that cost to the total cost and mark the house as visited.
+Push distances from this new house to all unvisited houses into the heap.
+Repeat until all houses are visited and return the total cost.
+
+[Approach 2] Using Kruskal's Algorithm - Time O(n^2*log(n)) and Space O(n^2)
+To solve the problem, we model it as a weighted graph, where each house is a node, and the edge weight between any two houses is the Manhattan distance (i.e., the cost to connect them).
+
+We generate all possible edges between houses and store their corresponding weights. Then, we use Kruskal’s algorithm to find the Minimum Spanning Tree (MST) of this graph. To efficiently detect and avoid cycles while building the MST, we use a Disjoint Set Union (DSU) data structure with path compression and union by rank.
+
+Time Complexity: O(n²*log(n)), This includes generating all possible edges between n houses O(n²), sorting them for Kruskal's algorithm O(n²*log(n)), and performing efficient union-find operations O(n*log(n)) due to path compression.
+Space Complexity: O(n²), to store all the edges.
+
