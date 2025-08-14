@@ -1,0 +1,58 @@
+You are given a 2D grid image[][] of size n*m, where each image[i][j] represents the color of a pixel in the image. Also provided a coordinate(sr, sc) representing the starting pixel (row and column) and a new color value newColor.
+
+Your task is to perform a flood fill starting from the pixel (sr, sc), changing its color to newColor and the color of all the connected pixels that have the same original color. Two pixels are considered connected if they are adjacent horizontally or vertically (not diagonally) and have the same original color.
+
+Examples:
+
+Input: image[][] = [[1, 1, 1, 0], [0, 1, 1, 1], [1, 0, 1, 1]], sr = 1, sc = 2, newColor = 2
+
+Output: [[2, 2, 2, 0], [0, 2, 2, 2], [1, 0, 2, 2]]
+
+Explanation: Starting from pixel (1, 2) with value 1, flood fill updates all connected pixels (up, down, left, right) with value 1 to 2, resulting in [[2, 2, 2, 0], [0, 2, 2, 2], [1, 0, 2, 2]].
+Input: image[][] = [[1, 1, 1], [1, 1, 0], [1, 0, 1]], sr = 1, sc = 1, newColor = 2
+Output: [[2, 2, 2], [2, 2, 0], [2, 0, 1]]
+Explanation: From the center of the image (with position (sr, sc) = (1, 1)), all pixels connected by a path of the same color as the starting pixel are colored with the new color.Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
+Input: image[][] = [[0, 1, 0], [0, 1, 0]], sr = 0, sc = 1, newColor = 0
+Output: [[0, 0, 0], [0, 0, 0]]
+Explanation: Starting from pixel (0, 1) with value 1, flood fill changes all 4-directionally connected pixels with value 1 to 0, resulting in [[0, 0, 0], [0, 0, 0]]
+
+Explanation: Starting from pixel (1, 2) with value 1, flood fill updates all connected pixels (up, down, left, right) with value 1 to 2, resulting in [[2, 2, 2, 0], [0, 2, 2, 2], [1, 0, 2, 2]].
+
+Input: image = [[0, 1, 0], [0, 1, 0]], sr = 0, sc = 1, newColor = 0
+Output: [[0, 0, 0], [0, 0, 0]]
+Explanation: Starting from pixel (1, 2) with value 1, flood fill updates all connected pixels (up, down, left, right) with value 1 to 0, resulting in [[0, 0, 0], [0, 0, 0]].
+
+[Approach 1] Using Depth-First Search - O(m * n) Time and O(m * n) Space
+The idea is to use Depth-First Search (DFS) to explore and update all connected pixels that share the same original color (color of image[sr][sc]). Starting from the given pixel, DFS recursively checks its adjacent pixels in all four directions—up, down, left, and right. If an adjacent pixel matches the original color, it is updated to the new color, and the DFS continues from that pixel. If not, the algorithm backtracks. This process continues until all connected pixels of the same color are filled with the new color, effectively updating the entire connected component.
+
+Step-by-Step Implementation :
+
+Store the original color at the starting pixel (sr, sc) as this will help in identifying which connected pixels need to be changed..
+Define a DFS function that takes the current pixel's row and column as parameters.
+In the DFS function, if the current pixel is out of bounds or doesn't match the original color, return (backtrack); otherwise, update its color to newColor and continue the recursion.
+Recursively call DFS for all four adjacent directions:
+Up: (row - 1, col), Down: (row + 1, col), Left: (row, col - 1), Right: (row, col + 1)
+Start DFS from the starting pixel (sr, sc).
+Once DFS completes, return the updated image.
+
+Time Complexity: O(m * n), where m and n are the dimensions of the image, as each pixel is visited once.
+Space Complexity: O(m * n), due to the recursion stack in the worst case of all pixels being connected.
+
+[Approach 2] Using Breadth-First Search - O(m * n) Time and O(m * n) Space
+The idea is to use Breadth-First Search (BFS) to change all connected pixels with the original color (color of image[sr][sc]) to a new color (newColor). BFS uses a queue to explore all reachable pixels level by level (horizontally and vertically). For each pixel, it checks its adjacent pixels, and if they match the original color, it changes their color and adds them to the queue for further exploration. This process ensures that all connected pixels are filled with the new color.
+
+The BFS approach would work better in general as it does not require overhead of recursion.
+
+Step-by-Step Implementation :
+
+Save the color of the starting pixel image[sr][sc] in a variable. This helps us identify which pixels need to be changed.
+Use a queue (FIFO) to keep track of pixels that need to be processed. Start by adding the starting pixel (sr, sc) to the queue.
+Start BFS traversl, While the queue is not empty, remove the front pixel, update its color to newColor, and check all four adjacent pixels, if they're within bounds and match the original color, add them to the queue for further processing.
+Repeat until the queue is empty, Continue the above process until all connected pixels with the original color have been visited and updated.
+After the BFS traversal, return the updated image with the filled region.
+
+Time Complexity: O(m * n),as all pixels are visited once in bfs.
+Space Complexity: O(m * n), because the queue can hold all pixels in the worst-case scenario.
+
+
+
