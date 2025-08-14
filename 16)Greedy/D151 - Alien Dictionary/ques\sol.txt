@@ -1,0 +1,63 @@
+A new alien language uses the English alphabet, but the order of letters is unknown. You are given a list of words[] from the alien language’s dictionary, where the words are claimed to be sorted lexicographically according to the language’s rules.
+
+Your task is to determine the correct order of letters in this alien language based on the given words. If the order is valid, return a string containing the unique letters in lexicographically increasing order as per the new language's rules. If there are multiple valid orders, return any one of them.
+
+However, if the given arrangement of words is inconsistent with any possible letter ordering, return an empty string ("").
+
+A string a is lexicographically smaller than a string b if, at the first position where they differ, the character in a appears earlier in the alien language than the corresponding character in b. If all characters in the shorter word match the beginning of the longer word, the shorter word is considered smaller.
+
+Note: Your implementation will be tested using a driver code. It will print true if your returned order correctly follows the alien language’s lexicographic rules; otherwise, it will print false.
+
+Examples:
+
+Input: words[] = ["baa", "abcd", "abca", "cab", "cad"]
+Output: true
+Explanation: A possible corrct order of letters in the alien dictionary is "bdac".
+The pair "baa" and "abcd" suggests 'b' appears before 'a' in the alien dictionary.
+The pair "abcd" and "abca" suggests 'd' appears before 'a' in the alien dictionary.
+The pair "abca" and "cab" suggests 'a' appears before 'c' in the alien dictionary.
+The pair "cab" and "cad" suggests 'b' appears before 'd' in the alien dictionary.
+So, 'b' → 'd' → 'a' → 'c' is a valid ordering.
+Input: words[] = ["caa", "aaa", "aab"]
+Output: true
+Explanation: A possible corrct order of letters in the alien dictionary is "cab".
+The pair "caa" and "aaa" suggests 'c' appears before 'a'.
+The pair "aaa" and "aab" suggests 'a' appear before 'b' in the alien dictionary. 
+So, 'c' → 'a' → 'b' is a valid ordering.
+Input: words[] = ["ab", "cd", "ef", "ad"]
+Output: ""
+Explanation: No valid ordering of letters is possible.
+The pair "ab" and "ef" suggests "a" appears before "e".
+The pair "ef" and "ad" suggests "e" appears before "a", which contradicts the ordering rules.
+
+Table of Content
+
+[Approach 1] Using Kahn's algorithm
+[Approach 2] Using Depth-First Search
+[Approach 1] Using Kahn's algorithm
+Kahn’s Algorithm is ideal for this problem because we are required to determine the order of characters in an alien language based on a sorted dictionary. This naturally forms a Directed Acyclic Graph (DAG) where an edge u -> v means character u comes before character v.
+
+Kahn's Algorithm is a BFS-based topological sort, which efficiently determines a valid linear order of nodes (characters) in a DAG. It’s particularly useful here because it handles dependencies using in-degrees, making it simple to identify characters with no prerequisites and process them in correct order. It also easily detects cycles, if a valid topological sort is not possible (e.g., cyclic dependency), it returns early.
+
+Step-by-Step Implementation
+
+Initialize an adjacency list graph[26], in-degree array inDegree[26], and existence tracker exists[26].
+Mark characters that appear in the input words using the exists array.
+Compare each adjacent pair of words to find the first differing character.
+Add a directed edge from the first different character of the first word to the second word’s, and increment in-degree of the latter.
+Check for invalid prefix cases where a longer word appears before its prefix (e.g., "abc" before "ab").
+Push all characters with in-degree 0 into a queue as starting nodes for BFS.
+Pop from the queue, add to result, and reduce in-degree of neighbors.
+Enqueue neighbors whose in-degree becomes 0 after reduction.
+Detect cycles by checking if all existing characters were processed (length of result).
+Return the result string if no cycle is detected; otherwise, return an empty string.
+
+
+
+Time Complexity: O(n * m) , where n is size of array arr[], m is the size of each string arr[i]
+Auxiliary Space: O(1)
+
+[Approach 2] Using Depth-First Search
+DFS (Depth-First Search) helps us find the correct order of letters in the alien language. By looking at how the words are ordered in the alien dictionary, we can figure out which letter should come before another. DFS is useful here because it lets us go through the letters step by step, following these rules, and helps us build the final order correctly. 
+
+DFS works well because it can detect cycles in the graph (which would make a valid ordering impossible) and enables us to build the correct order of characters as we traverse the graph. Once we visit all dependencies of a character (all the characters it must come before), we can add it to the result. The DFS ensures we are not violating any character order constraints while visiting nodes and is an effective way to perform a topological sort.
