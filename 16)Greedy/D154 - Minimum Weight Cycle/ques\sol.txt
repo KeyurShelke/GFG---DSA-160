@@ -1,0 +1,48 @@
+Given an undirected, weighted graph with V vertices numbered from 0 to V-1, and E edges represented as a 2D array edges[][], where each element edges[i] = [u, v, w] denotes an edge between nodes u and v with weight w, and all edge weights are positive integers, your task is to find the minimum weight cycle in the graph.
+
+Note: A cycle in a graph is a path that starts and ends at the same vertex without repeating any edges or vertices (except the starting/ending vertex).
+The minimum weight cycle is the one among all possible cycles that has the smallest total sum of edge weights
+
+Examples:
+
+Input: V = 5, edges = [[0, 1, 2], [1, 2, 2], [1, 3, 1], [1, 4, 1], [0, 4, 3], [2, 3, 4]]
+
+3
+ 
+Output: 6 
+Explaination:
+
+4
+ 
+The minimum-weighted cycle is  0 → 1 → 4 → 0 with a total weight of 6(2 + 1 + 3)
+
+Table of Content
+
+[Naive Approach] Find all cycle weight
+[Expected Approach] : Using Dijkstra's algorithm - O(E * (V + E) log V) Time and O(V+E) Space
+[Naive Approach] Find all cycle weight
+Find all cycles in the graph using DFS, and while exploring each cycle, keep track of its total weight. Update and maintain the minimum weight found across all such cycles.
+
+
+
+
+Time Complexity: O(2V)The time complexity is exponential in the worst case (e.g. O(2V)) due to the large number of simple cycles, but in typical cases, especially for sparse graphs, it may behave closer to O(V×(V + E))
+Space Complexity: O(V+E), as dominated by the storage for the graph (adjacency list) and the DFS auxiliary structures (visited array, path, weights, and recursion stack).
+
+[Expected Approach] : Using Dijkstra's algorithm - O(E * (V + E) log V) Time and O(V+E) Space
+To find the shortest cycle in the graph, we iterate over each edge (u,v,w)and temporarily remove it. The idea is that any edge might be part of the minimum weight cycle, so we check if a cycle can still be formed without it.
+
+We then use Dijkstra's algorithm (or any shortest path algorithm) to find the shortest path from u to v while excluding the removed edge. If such a path exists, adding the removed edge back completes a cycle. The total weight of this cycle is the sum of the shortest path and the weight of the removed edge.
+
+By repeating this process for every edge, we ensure that all possible cycles are considered, and we avoid redundant checks. Among all valid cycles found, we track and return the one with the minimum total weight. This method is both efficient and systematic for identifying the shortest cycle in a weighted, undirected graph.
+
+Step by step Implementation: 
+
+First, construct the adjacency list representation of the graph based on the provided edges.
+Iterate through each edge in the graph and temporarily exclude it during the calculations.
+For each excluded edge, use Dijkstra's algorithm to compute the shortest path between the source and destination nodes.
+After calculating the shortest distance, if it's not infinity, it means a path exists between the source and destination even without the excluded edge, forming a potential cycle.
+Repeat the process for all edges and track the minimum cycle weight by adding the excluded edge's weight to the shortest path found
+
+Time Complexity: O(E * (V + E) log V) for iterating over each edge and running Dijkstra's algorithm, which involves creating a new adjacency list and recalculating shortest paths multiple times.
+Space Complexity: O(V + E) for the adjacency list, temporary edge storage, and Dijkstra's algorithm data structures like the distance array and priority queue.
