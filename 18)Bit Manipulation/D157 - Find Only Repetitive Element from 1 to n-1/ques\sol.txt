@@ -1,0 +1,55 @@
+Given an array arr[] of size n filled with numbers from 1 to n-1 in random order. The array has only one repetitive element. The task is to find the repetitive element.
+
+Examples:
+
+Input: arr[] = [1, 3, 2, 3, 4]
+Output: 3
+Explanation: The number 3 is the only repeating element.
+
+Input: arr[] = [1, 5, 1, 2, 3, 4]
+Output: 1
+Explanation: The number 1 is the only repeating element.
+
+Table of Content
+
+[Naive Approach] Using Nested Loop- O(n^2) Time and O(1) Space
+[Better Approach 1] Sorting - O(n Log n) Time and O(1) Space
+[Better Approach 2] Hash Set - O(n) Time and O(n) Space
+[Expected Approach 1] Sum Formula - O(n) Time and O(1) Space
+[Expected Approach 2] Using XOR - O(n) Time and O(1) Space
+[Expected Approach 3] Using Elements as Indexes - O(n) Time and O(1) Space
+[Expected Approach 4] Floyd's Cycle Detection - O(n) Time and O(1) Space
+[Naive Approach] Using Nested Loop- O(n^2) Time and O(1) Space
+The idea is to use two nested loops. The outer loop traverses through all elements and the inner loop check if the element picked by the outer loop appears anywhere else.
+
+[Better Approach 1] Sorting - O(n Log n) Time and O(1) Space
+The idea is to sort the given input array and traverse it. If value of the ith element is equal to i+1, then the current element is repetitive as value of elements is between 1 and N-1 and every element appears only once except one element.
+
+
+
+
+[Better Approach 2] Hash Set - O(n) Time and O(n) Space
+Use a HastSet to store elements visited. If an already visited element appears again, return it.
+
+
+
+
+[Expected Approach 1] Sum Formula - O(n) Time and O(1) Space
+We know sum of first n-1 natural numbers is (N - 1)*N/2. We compute sum of array elements and subtract natural number sum from it to find the only missing element.
+
+[Expected Approach 2] Using XOR - O(n) Time and O(1) Space
+The idea is based on the facts that x ^ x = 0 and if x ^ y = z then x ^ z = y. To find the duplicate element first find XOR of elements from 1 to n-1 and elements of array. XOR of these two would be our result.
+
+[Expected Approach 3] Using Elements as Indexes - O(n) Time and O(1) Space
+As there are only positive numbers, so visit the index equal to the current element and make it negative. If an index value is already negative, then it means that current element is repeated.
+
+
+
+
+[Expected Approach 4] Floyd's Cycle Detection - O(n) Time and O(1) Space
+Floyd's Cycle Detection Algorithm is used to detect whether the list or array has cycle or duplicate elements or not. In this approach, there are two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only step each time and they meet the same item when slow==fast. In fact, they meet in a circle, the duplicate number must be the entry point of the circle when visiting the array from array[0]. 
+
+Next we just need to find the entry point. We use a point (we can use the fast one before) to visit from the beginning with one step each time, do the same job to slow. When fast == slow, they meet at the entry point of the circle. 
+
+Note: Please refer remove loop from a linked list for proof of this method
+
