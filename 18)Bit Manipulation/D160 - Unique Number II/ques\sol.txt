@@ -1,0 +1,54 @@
+Given an array arr[] containing 2*n + 2 positive numbers, out of which 2*n numbers exist in pairs whereas only two number occur exactly once and are distinct. Find the other two numbers. Return the answer in increasing order.
+
+Examples:
+
+Input: arr[] = [1, 2, 3, 2, 1, 4]
+Output: [3, 4] 
+Explanation: 3 and 4 occur exactly once.
+Input: arr[] = [2, 1, 3, 2]
+Output: [1, 3]
+Explanation: 1 and 3 occur exactly once.
+Input: arr[] = [2, 1, 3, 3]
+Output: [1, 2]
+Explanation: 1 and 2 occur exactly once.
+
+Table of Content
+
+[Naive Approach] Nested Loop Frequency Counting - O(n^2) Time and O(1) Space
+[Better Approach 1] Using Sorting - O(n logn) time and O(1) space
+[Better Approach 2] Using HashMap - O(n) time and O(n) space
+[Expected Approach] Using Bit Manipulation - O(n) time and O(1) space
+[Naive Approach] Nested Loop Frequency Counting - O(n^2) Time and O(1) Space
+This approach iterates through the array and counts the frequency of each element using a nested loop. For each element, the inner loop counts how many times it appears in the array. If an element appears exactly once, it is returned as the result. This method ensures that the correct element is identified but is inefficient due to the nested loop, finally return them in sorted order.
+
+[Better Approach 1] Using Sorting - O(n logn) time and O(1) space
+This approach first sorts the array to group identical elements next to each other. Then, it iterates through the sorted array, checking for pairs of identical elements and skipping them. If an element is unique (appears only once), it is added to the result. This method ensures that the two unique elements are found and returned efficiently after sorting.
+
+[Better Approach 2] Using HashMap - O(n) time and O(n) space
+This approach uses an unordered map (freq) to track the frequency of elements in the array. After building the frequency map, it collects elements that occur exactly once and returns them in ascending order.
+
+
+
+
+[Expected Approach] Using Bit Manipulation - O(n) time and O(1) space
+The key idea is that by XOR-ing all elements in the array, we eliminate the effect of all numbers that appear twice (since a ^ a = 0), leaving us with x ^ y, the XOR of the two unique elements. We then find any set bit (typically the rightmost set bit) in this result to determine a position where these two numbers differ. Using this bit, we split the numbers into two groups, XOR each group separately, and get the two unique numbers.
+
+To find the rightmost set bit in xorVal, we use the expression xorVal & (-xorVal). This is a common bit manipulation trick that isolates the lowest (rightmost) bit that is set to 1. It works because in two's complement, -xorVal is the bitwise inverse of xorVal plus one, which flips all bits after the rightmost 1, thus leaving only that 1 bit in the AND operation. This bit tells us a position where the two numbers (say, x and y) differ , one has a 1 at this position, and the other has a 0.
+
+This trick is particularly efficient and often used in problems involving two unique elements among duplicates. However, if we don’t specifically need the rightmost set bit, we can alternatively find any set bit by scanning bit positions, or using other logical operations
+
+Illustration:
+
+Given the array [2, 4, 7, 9, 2, 4], XOR all elements to get 14. The rightmost set bit of 14 is at position 1. Divide the array into two groups based on this bit:
+
+Group 1 (bit set at position 1): [2, 7, 2]
+Group 2 (bit not set): [4, 9, 4]
+XOR the elements in each group:
+
+Group 1: 2 ^ 7 ^ 2 = 7
+Group 2: 4 ^ 9 ^ 4 = 9
+The two non-repeating elements are 7 and 9.
+
+
+
+
